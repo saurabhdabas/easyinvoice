@@ -79,3 +79,39 @@ body {
   cursor: pointer;
   background-color: #FCA222;
 }
+/**************************************Dashboard*******************************************/
+
+.dashboard__header{
+  background-color: #FC7A21;
+  display:grid;
+  grid-template-columns: repeat(12,1fr);
+  align-items: center;
+  color:#F7F7F7;
+  height:80px;
+}
+.dashboard__header img{
+  border-radius: 10%;
+}
+.dashboard__brand{
+  display:flex;
+  grid-column: 1/3;
+  align-items: center
+}
+.dashboard__button{
+  display: flex;
+  color: #F7F7F7;
+  align-items: center;
+  justify-content: space-evenly;
+  text-decoration: none;
+  grid-column: 12/12;
+  border:2px solid #FC7A21;
+  border-radius: 5px;
+  background-color: #FC7A21;
+  margin-right:5px;
+}
+.dashboard__button:hover{
+  color:black;
+  background-color: #f3f3f3;
+}
+
+
