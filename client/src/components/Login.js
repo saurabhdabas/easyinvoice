@@ -13,7 +13,7 @@ const Login = () => {
     axios.post('http://localhost:8080/user-data',{data:inputs})
     .then((response)=>{console.log("response:",response)})
     .catch((err)=>console.log(err))
-    
+
     setInputs({email:'',password:''})
   }
 
@@ -37,11 +37,17 @@ const Login = () => {
         <form className='login__form' onSubmit={handleSubmission}>
           <h1 className='login__form-title'>Log in</h1>
           <div className='login__email'>
-            <label htmlFor='email'><h3>Email</h3></label>
+            <span>
+              <label htmlFor='email'><h3>Email</h3></label>
+              <img src='/email.png' alt='email-logo' width='20' height='20'/>
+            </span>
             <input id='email' type='email' name='email' value={inputs.email} onChange={(event)=>setInputs({...inputs,email:event.target.value})} placeholder='joe@gmail.com'/>
           </div>
           <div className='login__password'>
-            <label htmlFor='password'><h3>Password</h3></label>
+            <span>
+              <label htmlFor='password'><h3>Password</h3></label>
+              <img src='/key.png' alt='email-logo' width='20' height='20'/>
+            </span>
             <input id='password' type='password' name='password' value={inputs.password} onChange={(event)=>setInputs({...inputs,password:event.target.value})} placeholder='Enter your password'/>
           </div>
           <button className='login__submit-btn' type='submit' name='submit-button'>Login</button>
