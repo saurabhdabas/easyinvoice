@@ -1,23 +1,30 @@
 import React,{useState,useEffect} from 'react';
+import axios from 'axios';
 
 const Login = () => {
   const [inputs,setInputs]=useState({email:'',password:''});
   const [tagline,setTagline]=useState('');
   const [finalTagline,setFinalTagline]=useState('We make invoicing easy for you!');
   const [index, setIndex] = useState(0);
+ 
+  const handleSubmission = (event) => {
+    event.preventDefault();
+
+    axios.post('http://localhost:8080/user-data',{data:inputs})
+    .then((response)=>{console.log("response:",response)})
+    .catch((err)=>console.log(err))
+    
+    setInputs({email:'',password:''})
+  }
 
   useEffect(() => {
     if (index < finalTagline.length) {
       setTimeout(() => {
         setTagline(tagline + finalTagline[index])
         setIndex(index + 1)
-      }, 70)
+      }, 40)
     }
   }, [index])
-
-  const handleSubmit = () => {
-    console.log("submitted");
-  }
 
   return (
     <div className='login'>
@@ -27,17 +34,17 @@ const Login = () => {
         <h2>{tagline}</h2>
       </div>
       <div className='login__credentials-wrapper'>
-        <form className='login__form' onSubmit={(event)=>event.preventDefault()}>
+        <form className='login__form' onSubmit={handleSubmission}>
           <h1 className='login__form-title'>Log in</h1>
           <div className='login__email'>
             <label htmlFor='email'><h3>Email</h3></label>
-            <input id='email' type='text' name='email' value={inputs.email} onChange={(event)=>setInputs({...inputs,email:event.target.value})} placeholder='joe@gmail.com'/>
+            <input id='email' type='email' name='email' value={inputs.email} onChange={(event)=>setInputs({...inputs,email:event.target.value})} placeholder='joe@gmail.com'/>
           </div>
           <div className='login__password'>
             <label htmlFor='password'><h3>Password</h3></label>
-            <input id='password' type='text' name='password' value={inputs.password} onChange={(event)=>setInputs({...inputs,password:event.target.value})} placeholder='Enter your password'/>
+            <input id='password' type='password' name='password' value={inputs.password} onChange={(event)=>setInputs({...inputs,password:event.target.value})} placeholder='Enter your password'/>
           </div>
-          <button className='login__submit-btn' name='submit-button' onClick={handleSubmit}>Login</button>
+          <button className='login__submit-btn' type='submit' name='submit-button'>Login</button>
         </form>
       </div>
     </div>
