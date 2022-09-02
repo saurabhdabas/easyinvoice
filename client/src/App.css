@@ -53,10 +53,16 @@ body {
   height:40px;
   font:inherit;
   border-radius:5px;
+  background-color:#F7F7F7;
+}
+.login__email input:hover,.login__password input:hover{
+  outline:none;
+  border:2px solid #FC7A21;
 }
 .login__email input:focus,.login__password input:focus{
   outline:none;
-  border:2px solid #FC7A21;
+  border:none;
+  border-bottom: 3px solid #FC7A21;
 }
 .login__submit-btn{
   width: 408px;
