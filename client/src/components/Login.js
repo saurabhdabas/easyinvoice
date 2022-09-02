@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
+
 
 const Login = () => {
   const [inputs,setInputs]=useState({email:'',password:''});
@@ -7,14 +9,18 @@ const Login = () => {
   const [finalTagline,setFinalTagline]=useState('We make invoicing easy for you!');
   const [index, setIndex] = useState(0);
  
+  let navigate = useNavigate();
   const handleSubmission = (event) => {
     event.preventDefault();
 
     axios.post('http://localhost:8080/user-data',{data:inputs})
-    .then((response)=>{console.log("response:",response)})
+    .then((response)=>{
+      setInputs({email:'',password:''});
+      localStorage.setItem('token',response.data.token);
+      navigate('/dashboard');
+      })
     .catch((err)=>console.log(err))
 
-    setInputs({email:'',password:''})
   }
 
   useEffect(() => {
@@ -46,7 +52,7 @@ const Login = () => {
           <div className='login__password'>
             <span>
               <label htmlFor='password'><h3>Password</h3></label>
-              <img src='/key.png' alt='email-logo' width='20' height='20'/>
+              <img src='/key.png' alt='password-logo' width='20' height='20'/>
             </span>
             <input id='password' type='password' name='password' value={inputs.password} onChange={(event)=>setInputs({...inputs,password:event.target.value})} placeholder='Enter your password'/>
           </div>
