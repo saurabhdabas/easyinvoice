@@ -1,0 +1,70 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+  margin:0;
+}
+
+/********************Login***************************/
+.login {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  justify-items: center;
+  min-height: 100vh;
+}
+.login__brand-wrapper{
+  min-width: 50vw;
+  min-height: 100vh;
+  align-self: center;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  color: #f1f1f1;;
+  background-color:#FC7A21;
+  
+}
+.login__brand-wrapper h3{
+  margin: 1px 0;
+}
+.login__credentials-wrapper{
+  display: grid;
+  min-width: 50vw;
+  grid-template-rows: repeat(4,1fr);
+}
+.login__form-title{
+  margin:0;
+}
+.login__form{
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: repeat(4,0.5fr);
+  grid-row: 2/span 2;
+}
+.login__email,.login__password{
+  display:grid;
+  grid-template-rows:repeat(2,1fr);
+}
+.login__email input, .login__password input{
+  width:400px;
+  height:40px;
+  font:inherit;
+  border-radius:5px;
+}
+.login__email input:focus,.login__password input:focus{
+  outline:none;
+  border:2px solid #FC7A21;
+}
+.login__submit-btn{
+  width: 408px;
+  height:45px;
+  padding: 1px 2px;
+  font: inherit;
+  font-size: large;
+  font-weight: bold;
+  background-color: #FC7A21;
+  border:none;
+  border-radius:5px;
+}
+.login__submit-btn:hover{
+  cursor: pointer;
+  background-color: #f08f4e;
+}
