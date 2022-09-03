@@ -79,9 +79,9 @@ body {
   cursor: pointer;
   background-color: #FCA222;
 }
-/**************************************Dashboard*******************************************/
+/**************************************header*******************************************/
 
-.dashboard__header{
+.header__header{
   background-color: #FC7A21;
   display:grid;
   grid-template-columns: repeat(12,1fr);
@@ -89,15 +89,15 @@ body {
   color:#F7F7F7;
   height:80px;
 }
-.dashboard__header img{
+.header__header img{
   border-radius: 10%;
 }
-.dashboard__brand{
+.header__brand{
   display:flex;
   grid-column: 1/3;
   align-items: center
 }
-.dashboard__button{
+.header__button{
   display: flex;
   color: #F7F7F7;
   align-items: center;
@@ -109,36 +109,39 @@ body {
   background-color: #FC7A21;
   margin-right:5px;
 }
-.dashboard__button:hover{
+.header__button:hover{
   color:black;
   background-color: #f3f3f3;
 }
-.dashboard__search{
+.header__search{
   grid-column: 4/10;
   height:50px;
   background-color: #F7F7F7;
   border-radius: 5px;
 }
-.dashboard__search-wrapper{
+.header__search-wrapper{
   display:flex;
   align-items: center;
   justify-content: space-between;
   margin:3px;
 }
-.dashboard__datalist,.dashboard__search-input{
+.header__search-wrapper img{
+  margin-right:5px;
+}
+.header__datalist,.header__search-input{
   font-family: 'Quicksand',sans-serif;
   width:49%;
   height:38px
 }
-.dashboard__datalist::placeholder,.dashboard__search-input::placeholder{
+.header__datalist::placeholder,.header__search-input::placeholder{
   font-size:medium;
   padding: 2px;
 }
-.dashboard__datalist:hover,.dashboard__search-input:hover{
+.header__datalist:hover,.header__search-input:hover{
   outline:none;
   border:2px solid #000;
 }
-.dashboard__datalist:focus,.dashboard__search-input:focus{
+.header__datalist:focus,.header__search-input:focus{
   outline:none;
   border:none;
   border-bottom:3px solid #FC7A21;
