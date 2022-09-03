@@ -14,7 +14,7 @@ const Header = () => {
       <header className='header__header'>
         <span className='header__brand'>
           <img src='./bill.png' alt='brand-logo' width='50' height='50'/>
-          <h3>Easy Invoice</h3>
+          <h2>Easy Invoice</h2>
         </span>
         <span className='header__search'>
           <div className='header__search-wrapper'>
