@@ -113,5 +113,35 @@ body {
   color:black;
   background-color: #f3f3f3;
 }
+.dashboard__search{
+  grid-column: 4/10;
+  height:50px;
+  background-color: #F7F7F7;
+  border-radius: 5px;
+}
+.dashboard__search-wrapper{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  margin:3px;
+}
+.dashboard__datalist,.dashboard__search-input{
+  font-family: 'Quicksand',sans-serif;
+  width:49%;
+  height:38px
+}
+.dashboard__datalist::placeholder,.dashboard__search-input::placeholder{
+  font-size:medium;
+  padding: 2px;
+}
+.dashboard__datalist:hover,.dashboard__search-input:hover{
+  outline:none;
+  border:2px solid #000;
+}
+.dashboard__datalist:focus,.dashboard__search-input:focus{
+  outline:none;
+  border:none;
+  border-bottom:3px solid #FC7A21;
+}
 
 
