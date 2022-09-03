@@ -10,8 +10,10 @@ const Home = () => {
   return (
     <div>
       <Header/>
-      <SideNavigation state={state} setState={setState}/>
-      {display(state[0])}
+      <div className='main'>
+        <SideNavigation state={state} setState={setState}/>
+        {display(state[0])}
+      </div>
     </div>
   )
 }
