@@ -91,7 +91,7 @@ const Dashboard = () => {
       </div>
       <h2 className='dashboard__message'>You have 20 Unpaid Invoices</h2>
       <div className='dashboard__table-wrapper'>
-          <h2>Recent Invoices</h2>
+          <h2>Unpaid Invoices</h2>
           <table className='dashboard__unpaid-invoices'>
             <tr>
               <th>#</th>
