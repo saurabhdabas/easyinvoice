@@ -19,7 +19,7 @@ const Header = () => {
         <span className='header__search'>
           <div className='header__search-wrapper'>
             <img src='./search.png' alt='search-icon' width='25' height='25'/>
-            <input className='header__datalist' name="category" list="categories" placeholder="Category" value={category} onChange={(event)=>setCategory(event.target.value)}/>
+            <input className='header__datalist' name="category" list="categories" placeholder="Select a Category" value={category} onChange={(event)=>setCategory(event.target.value)}/>
             <datalist id="categories">
               <option value="Customers"/>
               <option value="Invoices"/>
