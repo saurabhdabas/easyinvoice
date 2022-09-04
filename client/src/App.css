@@ -284,10 +284,10 @@ td > button:hover{
 .customers__AddCustomer{
   display:flex;
   flex-direction: column;
-  width:500px;
+  width:300px;
   height:200px;
   position:absolute;
-  left:30%;
+  left:37%;
   top:35%;
   background-color: #F7F7F7;
   border-radius: 5px;
@@ -348,4 +348,70 @@ td > button:hover{
 .customer-info__submit-btn:hover{
   color:#F7F7F7;
   background-color: #2287E3;
+}
+
+/*************************************customer*******************************************/
+.customer{
+  display:grid;
+  /* grid-template-rows: 1fr 0.25fr 0.25fr; */
+  width:300px;
+  height:200px;
+  border:2px solid #bdb9b7;
+  border-radius: 5px;
+}
+.customer__header{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #37C68E;
+  border-top-left-radius: 5px;
+  border-top-right-radius:5px;
+}
+.customer__main,.customer__footer{
+  padding:5px;
+  background-color: #F7F7F7;
+}
+.customer__logo,.customer__name{
+  padding:5px;
+}
+.customer__logo > h2{
+  color:#000000;
+  margin:0;
+  background-color: #F7F7F7;
+  padding:10px 20px;
+  border-radius: 50px;
+}
+.customer__name h2,.customer__name h3{
+  margin:0
+}
+.customer__taxnumber p{
+  margin:0;
+}
+.customer__footer button{
+  font: inherit;
+  color:#2287E3;
+  border:2px solid #bdb9b7;
+  border-radius:5px;
+  cursor: pointer;
+}
+.customer__edit:hover{
+  color:#FFFFFF;
+  background-color: #37C68E;
+}
+.customer__delete:hover{
+  color:#FFFFFF;
+  background-color: #F1483E;
+}
+.customer__taxnumber{
+  display:flex;
+  justify-content: space-between;
+}
+.customer__address{
+  display:flex;
+  justify-content: space-between;
+}
+.customer__footer{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
 }
