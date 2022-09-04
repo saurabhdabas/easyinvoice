@@ -8,7 +8,7 @@ const AddCustomer = ({setIndex}) => {
   }
   
   return (
-    <div className='Customers__AddCustomer'>
+    <div className='customers__AddCustomer'>
       <img src='./plus.png' alt='add-icon' width='50' height='50' onClick={handleClick}/>
       <h2>Add a customer</h2>
     </div>
