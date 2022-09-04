@@ -7,7 +7,7 @@ const CustomerInfoForm = () => {
     country:'',
     street:'',
     city:'',
-    state:'',
+    province:'',
     zipcode:'',
     company:'',
     taxnumber:''
@@ -71,10 +71,10 @@ const CustomerInfoForm = () => {
         </div>
         <div className='customer-info__input'>
           <span>
-            <label htmlFor='state'><h3>State</h3></label>
-            <img src='/state.png' alt='state-logo' width='20' height='20'/>
+            <label htmlFor='province'><h3>Province</h3></label>
+            <img src='/state.png' alt='province-logo' width='20' height='20'/>
           </span>
-          <input id='state' type='text' name='state' value={inputs.state} onChange={(event)=>setInputs({...inputs,state:event.target.value})} placeholder='Enter your state'/>
+          <input id='province' type='text' name='province' value={inputs.province} onChange={(event)=>setInputs({...inputs,province:event.target.value})} placeholder='Enter your province'/>
         </div>
         <div className='customer-info__input'>
           <span>
