@@ -131,7 +131,7 @@ body {
   margin:3px;
 }
 .header__search-wrapper img{
-  margin-right:8px;
+  margin:0 8px;
 }
 .header__datalist,.header__search-input{
   font-family: 'Quicksand',sans-serif;
@@ -139,6 +139,8 @@ body {
   height:38px;
   margin:0 2px;
   background-color:#F7F7F7;
+  border:none;
+  border-bottom:3px solid #2287E3;
 }
 .header__datalist::placeholder,.header__search-input::placeholder{
   font-size:medium;
@@ -146,12 +148,12 @@ body {
 }
 .header__datalist:hover,.header__search-input:hover{
   outline:none;
-  border:2px solid #000;
+  border-bottom:3px solid #000;
 }
 .header__datalist:focus,.header__search-input:focus{
   outline:none;
   border:none;
-  border-bottom:3px solid #2287E3;
+  border-bottom:3px solid #FCC727;
 }
 /*************************Main***************************************/
 
@@ -159,7 +161,7 @@ body {
   display:grid;
   grid-template-columns: repeat(16,1fr);
 }
-.main > div.dashboard{
+.main > div.dashboard,.main > div.customers{
   height:90vh;
   overflow-y: scroll;
 }
@@ -274,3 +276,76 @@ td > button:hover{
   background-color: #2287E3;
 }
 
+/*************************************Customers*******************************************/
+.customers{
+  grid-column: 4/17;
+  position:relative;
+}
+.customers__AddCustomer{
+  display:flex;
+  flex-direction: column;
+  width:500px;
+  height:200px;
+  position:absolute;
+  left:30%;
+  top:35%;
+  background-color: #F7F7F7;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  cursor:pointer;
+}
+/*************************************CustomerInfoForm*******************************************/
+.customer-info{
+  margin:50px;
+}
+.customer-info__form-title{
+  margin:21px 0;
+}
+.customer-info__form{
+  display:grid;
+  grid-template-rows: repeat(4,1fr);
+  grid-template-columns: repeat(2,1fr);
+  grid-gap:50px
+}
+.customer-info__input{
+  display:grid
+}
+.customer-info__input > span{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.customer-info__input > input{
+  font-family: 'Quicksand',sans-serif;
+  height:38px;
+  margin:0 2px;
+  padding:5px;
+  background-color:#F7F7F7;
+  border:none;
+  border-bottom:3px solid #FFFFFF;
+}
+.customer-info__input > input:focus{
+  font-family: 'Quicksand',sans-serif;
+  height:38px;
+  margin:0 2px;
+  background-color:#F7F7F7;
+  outline:none;
+  border:none;
+  border-bottom:3px solid #2287E3;
+}
+.customer-info__submit-btn{
+  background: none;
+  font: inherit;
+  color:#2287E3;
+  border:2px solid #bdb9b7;
+  border-radius:5px;
+  cursor: pointer;
+  padding:10px 40px;
+  margin:50px 530px 0 530px;
+
+}
+.customer-info__submit-btn:hover{
+  color:#F7F7F7;
+  background-color: #2287E3;
+}
