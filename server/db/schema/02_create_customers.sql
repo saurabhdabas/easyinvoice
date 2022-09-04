@@ -1,0 +1,15 @@
+-- schema/02_create_customers.sql
+DROP TABLE IF EXISTS customers CASCADE;
+-- CREATE CUSTOMERS
+CREATE TABLE customers (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  country VARCHAR(255) NOT NULL,
+  street VARCHAR(255) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  province VARCHAR(255) NOT NULL,
+  zipcode VARCHAR(255) NOT NULL,
+  company VARCHAR(255) NOT NULL,
+  taxnumber VARCHAR(255) NOT NULL
+);
