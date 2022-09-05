@@ -265,7 +265,7 @@ td > button {
   background: none;
   font: inherit;
   color:#2287E3;
-  border:2px solid #bdb9b7;
+  border:2px solid #2287E3;
   border-radius:5px;
   cursor: pointer;
   padding:5px;
@@ -286,19 +286,33 @@ td > button:hover{
 }
 .customers__AddCustomer{
   display:flex;
+  color:#2287E3;
   flex-direction: column;
   width:300px;
   height:200px;
-  background-color: #F7F7F7;
-  border:2px solid #bdb9b7;
+  background-color: #D4E2F2;
+  border:2px solid #2287E3;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   cursor:pointer;
 }
 /*************************************CustomerInfoForm*******************************************/
+.form{
+  display:flex
+}
+.form > div{
+  width:50vw;
+  margin:auto 0;
+}
 .customer-info{
-  margin:0 30px;
+  padding:20px 50px;
+  background-color: #D4E2F2;
+  width:60vw;
+  border-top: 3px solid #2287E3;
+}
+.customer-info > div{
+  width:50vw;
 }
 .customer-info__form-title{
   margin:21px 0;
@@ -307,7 +321,7 @@ td > button:hover{
   display:grid;
   grid-template-rows: repeat(4,1fr);
   grid-template-columns: repeat(2,1fr);
-  grid-gap:50px
+  grid-gap:30px;
 }
 .customer-info__input{
   display:grid
@@ -317,6 +331,10 @@ td > button:hover{
   align-items: center;
   justify-content: space-between;
 }
+.customer-info__input > input::placeholder{
+  font-size: large;
+  padding-left: 10px;
+}
 .customer-info__input > input{
   font-family: 'Quicksand',sans-serif;
   height:38px;
@@ -324,6 +342,7 @@ td > button:hover{
   padding:5px;
   background-color:#F7F7F7;
   border:none;
+  border-radius: 5px;
   border-bottom:3px solid #FFFFFF;
 }
 .customer-info__input > input:focus{
@@ -336,14 +355,14 @@ td > button:hover{
   border-bottom:3px solid #2287E3;
 }
 .customer-info__submit-btn{
-  background: none;
+  background-color:#F7F7F7;
   font: inherit;
   color:#2287E3;
-  border:2px solid #bdb9b7;
+  border:2px solid #2287E3 ;
   border-radius:5px;
   cursor: pointer;
-  padding:10px 40px;
-  margin:50px 530px 0 530px;
+  padding:20px 80px;
+  margin:10px 0 0 300px;
 
 }
 .customer-info__submit-btn:hover{
@@ -356,14 +375,15 @@ td > button:hover{
   display:grid;
   width:300px;
   height:200px;
-  border:2px solid #bdb9b7;
+  border:2px solid #2287E3;
   border-radius: 5px;
 }
 .customer__header{
   display:flex;
+  color:#F7F7F7;
   align-items: center;
   justify-content: space-between;
-  background-color: #37C68E;
+  background-color: #2287E3;
   border-top-left-radius: 5px;
   border-top-right-radius:5px;
 }
@@ -390,7 +410,7 @@ td > button:hover{
 .customer__footer button{
   font: inherit;
   color:#2287E3;
-  border:2px solid #bdb9b7;
+  border:2px solid #2287E3;
   border-radius:5px;
   cursor: pointer;
 }
