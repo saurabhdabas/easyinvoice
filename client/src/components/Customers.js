@@ -12,23 +12,28 @@ const Customers = () => {
     .catch((err)=>`Error:${err}`);
   },[])
   
-
   return (
-    <div className='customers'>
-      {customers.map((customer)=>
-      <Customer 
-        key={customer.id} 
-        name={customer.name} 
-        country={customer.country}
-        city={customer.city}
-        province={customer.province}
-        company={customer.company}
-        taxnumber={customer.taxnumber}
-      />
-      )}
-      
-      {displaySubComponent(stack[0 + index],setIndex)}
-    </div>
+    <React.Fragment>
+      {customers.length ?     
+        <div className='customers'>
+          {customers.map((customer)=>
+            <Customer 
+              key={customer.id} 
+              name={customer.name} 
+              country={customer.country}
+              city={customer.city}
+              province={customer.province}
+              company={customer.company}
+              taxnumber={customer.taxnumber}
+            />
+        )}
+        {displaySubComponent(stack[0 + index],setIndex)}
+        </div> :       
+        <div className='customers'>
+          {displaySubComponent(stack[0 + index],setIndex)}
+        </div> 
+      }
+    </React.Fragment>
   )
 }
 
