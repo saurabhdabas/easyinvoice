@@ -6,7 +6,7 @@ const cors = require('cors');
 const db = require('./configs/db.config');
 
 const indexRouter = require('./routes/index');
-
+const customersRouter = require('./routes/customers');
 
 const app = express();
 
@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
+app.use('/customers', customersRouter(db));
 
 // Add user authentication
 app.post('/user-data',(req,res)=>{
