@@ -302,8 +302,27 @@ td > button:hover{
   display:flex
 }
 .form > div{
+  display:flex;
+  flex-direction: column;
   width:50vw;
-  margin:auto 0;
+}
+.form__goback-btn{
+  display:flex;
+  text-align: center;
+  border-radius: 20px;
+  width:100px;
+  padding:5px 10px;
+  color:#2287E3;
+  background-color: #D4E2F2;
+  border:2px solid #2287E3;
+  text-decoration: none;
+  margin:50px 30px;
+}
+.form__goback-btn > img {
+  margin-right:10px;
+}
+.form__image{
+  margin-top:30px;
 }
 .customer-info{
   padding:20px 50px;
@@ -357,12 +376,13 @@ td > button:hover{
 .customer-info__submit-btn{
   background-color:#F7F7F7;
   font: inherit;
+  font-size: large;
   color:#2287E3;
   border:2px solid #2287E3 ;
   border-radius:5px;
   cursor: pointer;
   padding:20px 80px;
-  margin:10px 0 0 300px;
+  margin:10px 300px 0 300px;
 
 }
 .customer-info__submit-btn:hover{
