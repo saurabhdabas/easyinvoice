@@ -1,9 +1,33 @@
-import React from 'react'
-
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
+import Customer from './Customer';
+import displaySubComponent from '../Helpers/displaySubComponent';
 const Customers = () => {
+  const [index,setIndex] = useState(0);
+  const [customers,setCustomers] = useState([]);
+  const stack = ['AddCustomer','CustomerForm']
+  useEffect(()=>{
+    axios.get('http://localhost:8080/customers')
+    .then((response)=>setCustomers((prev)=>[...prev,response.data.customers[0]]))
+    .catch((err)=>`Error:${err}`);
+  },[])
+  
+
   return (
-    <div>
-      Customers
+    <div className='customers'>
+      {customers.map((customer)=>
+      <Customer 
+        key={customer.id} 
+        name={customer.name} 
+        country={customer.country}
+        city={customer.city}
+        province={customer.province}
+        company={customer.company}
+        taxnumber={customer.taxnumber}
+      />
+      )}
+      
+      {displaySubComponent(stack[0 + index],setIndex)}
     </div>
   )
 }
