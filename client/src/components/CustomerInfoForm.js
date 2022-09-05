@@ -17,7 +17,11 @@ const CustomerInfoForm = () => {
     console.log('Inputs:',inputs);
   }
   return (
-    <div className="customer-info">
+    <div className='form'>
+      <div>
+        <img src='./form.png' alt='background-image' width='700' height='600'/>
+      </div>
+      <div className="customer-info">
       <h1 className='customer-info__form-title'>Client Information</h1>
       <form className='customer-info__form'>
         <div className='customer-info__input'>
@@ -86,7 +90,7 @@ const CustomerInfoForm = () => {
       </form>
       <button className='customer-info__submit-btn' type='submit' name='submit-button'  onClick={handleSubmission}>Submit</button>
     </div>
-  
+    </div>
   )
 }
 
