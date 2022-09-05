@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-
+import {Link} from 'react-router-dom'
 const CustomerInfoForm = () => {
   const [inputs,setInputs]=useState({
     name:'',
@@ -19,7 +19,11 @@ const CustomerInfoForm = () => {
   return (
     <div className='form'>
       <div>
-        <img src='./form.png' alt='background-image' width='700' height='600'/>
+        <Link className='form__goback-btn' to='/dashboard'>
+          <img src='./left-arrow.png' alt='left-arrow' width='20' height='20'/>
+          <span>Go back</span>
+        </Link>
+        <img className='form__image' src='./form.png' alt='background-image' width='700' height='600'/>
       </div>
       <div className="customer-info">
       <h1 className='customer-info__form-title'>Client Information</h1>
