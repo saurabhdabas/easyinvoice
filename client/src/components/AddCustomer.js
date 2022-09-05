@@ -1,10 +1,12 @@
-import React from 'react'
-import Customer from './Customer'
+import React from 'react';
+import {useNavigate} from 'react-router-dom'
+
 
 const AddCustomer = ({setIndex}) => {
-
+  const navigate = useNavigate()
   const handleClick = () => {
     setIndex((index)=>index + 1);
+    navigate('/newclient')
   }
   
   return (
