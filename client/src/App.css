@@ -162,16 +162,14 @@ body {
   grid-template-columns: repeat(16,1fr);
 }
 .main > div.dashboard,.main > div.customers{
-  height:90vh;
-  overflow-y: scroll;
+  min-height:90vh;
 }
 /******************************sideNavigation*********************************/
 
 .sideNavigation{
   grid-column: 1/4;
   background-color:#F7F7F7;
-  /* max-width: 250px; */
-  height:90vh
+  min-height:90vh
 }
 .sideNavigation__items{
   display:grid;
@@ -206,6 +204,7 @@ body {
 .dashboard{
   grid-column: 4/17;
   margin:0 20px;
+  overflow-y: scroll;
 }
 
 .dashboard__tables{
@@ -278,18 +277,20 @@ td > button:hover{
 
 /*************************************Customers*******************************************/
 .customers{
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
   grid-column: 4/17;
   position:relative;
+  margin:20px;
+  overflow-y: scroll;
 }
 .customers__AddCustomer{
   display:flex;
   flex-direction: column;
   width:300px;
   height:200px;
-  position:absolute;
-  left:37%;
-  top:35%;
   background-color: #F7F7F7;
+  border:2px solid #bdb9b7;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
@@ -297,7 +298,7 @@ td > button:hover{
 }
 /*************************************CustomerInfoForm*******************************************/
 .customer-info{
-  margin:50px;
+  margin:0 30px;
 }
 .customer-info__form-title{
   margin:21px 0;
@@ -353,7 +354,6 @@ td > button:hover{
 /*************************************customer*******************************************/
 .customer{
   display:grid;
-  /* grid-template-rows: 1fr 0.25fr 0.25fr; */
   width:300px;
   height:200px;
   border:2px solid #bdb9b7;
