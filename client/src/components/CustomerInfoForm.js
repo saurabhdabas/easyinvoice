@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
+import axios from 'axios';
+
 const CustomerInfoForm = () => {
   const [inputs,setInputs]=useState({
     name:'',
@@ -15,6 +17,9 @@ const CustomerInfoForm = () => {
   const handleSubmission = (event) => {
     event.preventDefault();
     console.log('Inputs:',inputs);
+    axios.post('http://localhost:8080/client-data',{data:inputs})
+    .then((response)=>console.log("response:",response.data.rows[0]))
+
   }
   return (
     <div className='form'>
