@@ -8,15 +8,17 @@ const Customers = () => {
   const stack = ['AddCustomer','CustomerForm']
   useEffect(()=>{
     axios.get('http://localhost:8080/customers')
-    .then((response)=>setCustomers((prev)=>[...prev,response.data.customers[0]]))
+    .then((response)=>{
+      setCustomers((prev)=>[...prev,response.data.customers])
+    })
     .catch((err)=>`Error:${err}`);
   },[])
-  
+
   return (
     <React.Fragment>
       {customers.length ?     
         <div className='customers'>
-          {customers.map((customer)=>
+          {customers[0].map((customer)=>
             <Customer 
               key={customer.id} 
               name={customer.name} 
