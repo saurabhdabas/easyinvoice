@@ -26,6 +26,11 @@ function App() {
               <Home/>
             }
           />
+          <Route path="/customers" 
+            element={
+              <Home/>
+            }
+          />
           <Route path="/newclient" 
             element={
               <CustomerInfoForm/>
