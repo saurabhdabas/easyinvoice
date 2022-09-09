@@ -1,42 +1,39 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import Customer from './Customer';
-import displaySubComponent from '../Helpers/displaySubComponent';
+import AddCustomer from './AddCustomer';
+
 const Customers = () => {
-  const [index,setIndex] = useState(0);
+  
   const [customers,setCustomers] = useState([]);
-  const stack = ['AddCustomer','CustomerForm']
+
   useEffect(()=>{
     axios.get('http://localhost:8080/customers')
     .then((response)=>{
       setCustomers((prev)=>[...prev,response.data.customers])
     })
-    .catch((err)=>`Error:${err}`);
+    .catch((err)=>`The Error is:${err}`);
   },[])
 
-  return (
+  return(
+  <div className='customers'>
+    {customers.length ? 
     <React.Fragment>
-      {customers.length ?     
-        <div className='customers'>
-          {customers[0].map((customer)=>
-            <Customer 
-              key={customer.id} 
-              name={customer.name} 
-              country={customer.country}
-              city={customer.city}
-              province={customer.province}
-              company={customer.company}
-              taxnumber={customer.taxnumber}
-            />
-        )}
-        {displaySubComponent(stack[0 + index],setIndex)}
-        </div> :       
-        <div className='customers'>
-          {displaySubComponent(stack[0 + index],setIndex)}
-        </div> 
-      }
-    </React.Fragment>
-  )
+      {customers[0].map((customer)=>
+        <Customer 
+          key={customer.id} 
+          name={customer.name} 
+          country={customer.country}
+          city={customer.city}
+          province={customer.province}
+          company={customer.company}
+          taxnumber={customer.taxnumber}
+        />
+      )}
+      <AddCustomer/>
+    </React.Fragment> : 
+    <AddCustomer/>}
+  </div>)
 }
 
 export default Customers
