@@ -278,6 +278,7 @@ td > button:hover{
 /*************************************Customers*******************************************/
 .customers{
   display:grid;
+  grid-gap:20px;
   grid-template-columns: repeat(4,1fr);
   grid-column: 4/17;
   position:relative;
@@ -296,6 +297,7 @@ td > button:hover{
   justify-content: center;
   align-items: center;
   cursor:pointer;
+  padding:5px
 }
 /*************************************CustomerInfoForm*******************************************/
 .form{
@@ -397,6 +399,8 @@ td > button:hover{
   height:200px;
   border:2px solid #2287E3;
   border-radius: 5px;
+  padding:5px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .customer__header{
   display:flex;
@@ -406,41 +410,61 @@ td > button:hover{
   background-color: #2287E3;
   border-top-left-radius: 5px;
   border-top-right-radius:5px;
+
 }
 .customer__main,.customer__footer{
-  padding:5px;
+  padding:10px;
   background-color: #F7F7F7;
 }
-.customer__logo,.customer__name{
+.customer__logos{
+  display:grid;
+  grid-template-columns:repeat(2,0.50fr);
+  grid-template-rows: repeat(2,1fr);
+  justify-content: space-around;
+  align-items: center;
   padding:5px;
 }
-.customer__logo > h2{
-  color:#000000;
-  margin:0;
-  background-color: #F7F7F7;
-  padding:10px 20px;
-  border-radius: 50px;
+.customer__name{
+  padding:5px
 }
-.customer__name h2,.customer__name h3{
-  margin:0
+
+.customer__logos p{
+  margin:5px 0;
+}
+.customer__name h4,.customer__name h3{
+  font-style: italic;
+  margin:5px;
 }
 .customer__taxnumber p{
+  margin:5px 0;
+  font-style: italic;
+}
+.customer__address p{
+  margin:2px 0;
+  font-style: italic;
+}
+.customer__taxnumber h4,.customer__address h4{
   margin:0;
 }
 .customer__footer button{
   font: inherit;
-  color:#2287E3;
-  border:2px solid #2287E3;
+  border:2px solid #bdb9b7;
   border-radius:5px;
   cursor: pointer;
 }
-.customer__edit:hover{
+.customer__edit{
   color:#FFFFFF;
   background-color: #37C68E;
 }
-.customer__delete:hover{
+.customer__delete{
   color:#FFFFFF;
   background-color: #F1483E;
+}
+.customer__edit:hover{
+  background-color: #087149;
+}
+.customer__delete:hover{
+  background-color: #b72821;
 }
 .customer__taxnumber{
   display:flex;
