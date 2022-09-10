@@ -56,8 +56,15 @@ app.post('/customers/add',(req,res)=>{
   .catch((error) => res.send(error));
 })
 //Remove the client from data
-app.put('/customers/delete',(req, res) => {
-  db.query(`DELETE FROM customers WHERE name = $1;`, [req.body.name])
+app.put('/customers/:id/delete',(req, res) => {
+  db.query(`DELETE FROM customers WHERE id = $1;`, [req.body.customerId])
+    .then((response) => res.send(response))
+    .catch((error) => res.send(error));
+});
+
+//Update the client data
+app.put('/customers/update',(req, res) => {
+  db.query(`SELECT * FROM customers WHERE name = $1;`, [req.body.name])
     .then((response) => res.send(response))
     .catch((error) => res.send(error));
 });
