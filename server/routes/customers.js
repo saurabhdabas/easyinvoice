@@ -6,7 +6,7 @@ module.exports = (db) => {
   
   router.get('/', (req, res) => {
     customers.getAllCustomers().then(data => {
-      res.json({customers: data});
+      res.json(data);
     })
   });
   return router;
