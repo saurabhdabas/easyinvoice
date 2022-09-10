@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login'
 import Home from './pages/Home';
 import ProtectedRoutes from './Hooks/useAuth';
-import CustomerInfoForm from './components/CustomerInfoForm';
+
 import './App.css';
 
 function App() {
@@ -31,11 +31,7 @@ function App() {
               <Home/>
             }
           />
-          <Route path="/newclient" 
-            element={
-              <CustomerInfoForm/>
-            }
-          />
+
         </Route>
       </Routes>
 
