@@ -1,31 +1,28 @@
-import React,{useState} from 'react'
+import React from 'react'
 import axios from 'axios';
 
-const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm}) => {
-  const [inputs,setInputs]=useState({
-    name:'',
-    email:'',
-    country:'',
-    street:'',
-    city:'',
-    province:'',
-    zipcode:'',
-    company:'',
-    taxnumber:''
-  })
+const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,setInputs,updateCustomerId}) => {
+
   const handleSubmission = (event) => {
     event.preventDefault();
-    setShowForm(false)
-    if(showForm){
+    
+    if(updateCustomerId){
+      axios.put(`http://localhost:8080/customers/${updateCustomerId}/update`,{data:inputs,customerId:updateCustomerId})
+      .then((response)=>{
+        setCustomers(({...customers,list:response.data}))
+      })
+    }
+    else{
       axios.post('http://localhost:8080/customers/add',{data:inputs})
       .then((response)=>{
         axios.get('http://localhost:8080/customers')
         .then((response)=> {
           setCustomers(({...customers,list:response.data}))
+          setShowForm(false)
         })
       })
     }
-  }
+  } 
 
   return (
     <div className='form'>
