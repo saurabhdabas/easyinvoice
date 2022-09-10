@@ -1,14 +1,7 @@
-import React, { useState,useEffect } from 'react';
-import axios from 'axios';
-const Customer = ({name,country,city,province,company,taxnumber,customers,setCustomers}) => {
-  const [deleteCustomer,setDeleteCustomer] = useState(false);
+import React from 'react';
 
-  useEffect(()=>{
-    if(deleteCustomer){
-      axios.put('http://localhost:8080/customers/delete',{name})
-      .then((response)=>setCustomers({...customers,list:response.data.rows}))
-    }
-  },[deleteCustomer])
+const Customer = ({id,name,country,city,province,company,taxnumber,setShowForm,setDeleteCustomerId,setUpdateCustomerId}) => {
+
 
   return (
     <div className='customer'>
@@ -31,12 +24,20 @@ const Customer = ({name,country,city,province,company,taxnumber,customers,setCus
         </div>
         <div className='customer__address'>
           <h4>Location</h4>
-          <p>{`${city.toUpperCase()},${province.toUpperCase()},${country.toUpperCase()}`}</p>
+          <p>{`${city.toLowerCase()},${province.toLowerCase()},${country.toLowerCase()}`}</p>
         </div>
       </div>
       <div className='customer__footer'>
-        <button className='customer__edit' type='submit'>Edit</button>
-        <button className='customer__delete' type='submit' onClick={()=>setDeleteCustomer(true)}>Delete</button>
+        <button className='customer__edit' type='submit' id={id} onClick={
+          (event)=>{
+            setUpdateCustomerId(event.currentTarget.id)
+            setShowForm(true)
+          }}>Edit</button>
+        <button className='customer__delete' type='submit' id={id} onClick={
+          (event)=>{
+            setDeleteCustomerId(event.currentTarget.id)
+          }
+          }>Delete</button>
       </div>
     </div>
   )
