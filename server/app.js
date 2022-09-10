@@ -34,8 +34,8 @@ app.post('/user-data',(req,res)=>{
       res.send(response.rows[0])})
     .catch(e => console.error(e.stack));
 })
-// Add the new client data to database
-app.post('/client-data',(req,res)=>{
+// Add the new client to database
+app.post('/customers/add',(req,res)=>{
   console.log(req.body.data)
   let formData = {
     name:req.body.data.name,
@@ -55,6 +55,11 @@ app.post('/client-data',(req,res)=>{
   .then((response) => res.send(response))
   .catch((error) => res.send(error));
 })
-
+//Remove the client from data
+app.put('/customers/delete',(req, res) => {
+  db.query(`DELETE FROM customers WHERE name = $1;`, [req.body.name])
+    .then((response) => res.send(response))
+    .catch((error) => res.send(error));
+});
 
 module.exports = app;
