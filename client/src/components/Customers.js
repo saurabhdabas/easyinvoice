@@ -8,7 +8,7 @@ const Customers = () => {
   const [customers,setCustomers] = useState({list:[]});
   const [showForm,setShowForm] = useState(false);
   const [deleteCustomerId,setDeleteCustomerId] = useState(0);
-  const [updateCustomer,setUpdateCustomer] = useState(false);
+  const [updateCustomerId,setUpdateCustomerId] = useState(0);
   const [inputs,setInputs]=useState({
     name:'',
     email:'',
@@ -40,6 +40,14 @@ const Customers = () => {
     }
   },[deleteCustomerId])
 
+  useEffect(()=>{
+    if(updateCustomerId){
+      const updatedCustomer = customers.list.find((customer)=>customer.id == updateCustomerId);
+      setInputs({...updatedCustomer})
+      setShowForm(true)
+    }
+  },[updateCustomerId])
+
   return(
   <div className='customers'>
     {customers.list.length ?
@@ -60,8 +68,8 @@ const Customers = () => {
               setShowForm={setShowForm}
               deleteCustomerId={deleteCustomerId}
               setDeleteCustomerId={setDeleteCustomerId}
-              updateCustomer={updateCustomer}
-              setUpdateCustomer={setUpdateCustomer}
+              updateCustomerId={updateCustomerId}
+              setUpdateCustomerId={setUpdateCustomerId}
               customers={customers}
               setCustomers={setCustomers}
               inputs={inputs}
@@ -70,7 +78,7 @@ const Customers = () => {
           )}
         </div>
       </div>
-      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomer={updateCustomer} setUpdateCustomer={setUpdateCustomer}/>
+      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId}/>
     </React.Fragment>
     : 
     <React.Fragment>
@@ -83,7 +91,7 @@ const Customers = () => {
           </p>
         </div>
       </div>
-      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomer={updateCustomer} setUpdateCustomer={setUpdateCustomer}/>
+      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId}/>
     </React.Fragment>
     }
 
