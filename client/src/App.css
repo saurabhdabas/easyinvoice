@@ -427,11 +427,11 @@ height:90vh;
   margin:5px;
 }
 .customer__taxnumber p{
-  margin:5px 0;
+  margin:5px 2px;
   font-style: italic;
 }
 .customer__address p{
-  margin:2px 0;
+  margin:2px;
   font-style: italic;
 }
 .customer__taxnumber h4,.customer__address h4{
