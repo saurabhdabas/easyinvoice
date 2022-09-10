@@ -34,7 +34,7 @@ app.post('/user-data',(req,res)=>{
       res.send(response.rows[0])})
     .catch(e => console.error(e.stack));
 })
-// Add the new client to database
+// Add the client
 app.post('/customers/add',(req,res)=>{
   console.log(req.body.data)
   let formData = {
@@ -55,16 +55,28 @@ app.post('/customers/add',(req,res)=>{
   .then((response) => res.send(response))
   .catch((error) => res.send(error));
 })
-//Remove the client from data
+//Remove the client
 app.put('/customers/:id/delete',(req, res) => {
   db.query(`DELETE FROM customers WHERE id = $1;`, [req.body.customerId])
     .then((response) => res.send(response))
     .catch((error) => res.send(error));
 });
 
-//Update the client data
-app.put('/customers/update',(req, res) => {
-  db.query(`SELECT * FROM customers WHERE name = $1;`, [req.body.name])
+//Update the client
+app.put('/customers/:id/update',(req, res) => {
+  let formData = {
+    name:req.body.data.name,
+    email:req.body.data.email,
+    country:req.body.data.country,
+    street:req.body.data.street,
+    city:req.body.data.city,
+    province:req.body.data.province,
+    zipcode:req.body.data.zipcode,
+    company:req.body.data.company,
+    taxnumber:req.body.data.taxnumber
+  }
+  db.query(`UPDATE customers SET name=$2, email=$3, country=$4, street=$5, city=$6, province=$7, zipcode=$8, company=$9, taxnumber=$10
+  WHERE id = ($1) RETURNING *;`, [req.body.customerId,formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
     .then((response) => res.send(response))
     .catch((error) => res.send(error));
 });
