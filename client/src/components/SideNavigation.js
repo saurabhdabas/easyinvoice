@@ -10,9 +10,10 @@ const SideNavigation = ({state,setState}) => {
         aria-label='Dashboard' 
         className={state.includes('Dashboard') ? 'sideNavigation__item active' : 'sideNavigation__item'} 
         onClick={
-        (event)=>{
-          setState([event.currentTarget.ariaLabel]);
-        }}
+          (event)=>{
+            setState([event.currentTarget.ariaLabel])
+            navigate('/dashboard');
+          }}
         >
           <img src='./dashboard.png' alt='list-item-logo' width='30' height='30'/>
           <h3>Dashboard</h3>
