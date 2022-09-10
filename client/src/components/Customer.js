@@ -1,6 +1,15 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
+import axios from 'axios';
+const Customer = ({name,country,city,province,company,taxnumber,customers,setCustomers}) => {
+  const [deleteCustomer,setDeleteCustomer] = useState(false);
 
-const Customer = ({name,country,city,province,company,taxnumber}) => {
+  useEffect(()=>{
+    if(deleteCustomer){
+      axios.put('http://localhost:8080/customers/delete',{name})
+      .then((response)=>setCustomers({...customers,list:response.data.rows}))
+    }
+  },[deleteCustomer])
+
   return (
     <div className='customer'>
       <div className='customer__header'>
@@ -27,7 +36,7 @@ const Customer = ({name,country,city,province,company,taxnumber}) => {
       </div>
       <div className='customer__footer'>
         <button className='customer__edit' type='submit'>Edit</button>
-        <button className='customer__delete' type='submit'>Delete</button>
+        <button className='customer__delete' type='submit' onClick={()=>setDeleteCustomer(true)}>Delete</button>
       </div>
     </div>
   )
