@@ -17,7 +17,7 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm}) => {
     event.preventDefault();
     setShowForm(false)
     if(showForm){
-      axios.post('http://localhost:8080/client-data',{data:inputs})
+      axios.post('http://localhost:8080/customers/add',{data:inputs})
       .then((response)=>{
         axios.get('http://localhost:8080/customers')
         .then((response)=> {
