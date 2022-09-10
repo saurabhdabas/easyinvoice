@@ -11,8 +11,8 @@ const Customer = ({name,country,city,province,company,taxnumber}) => {
           <p>Company</p>
         </div>
         <div className='customer__name'>
-          <h4>{name.toLowerCase()}</h4>
-          <h4>{company.toLowerCase()}</h4>
+          <h4>{name.toUpperCase()}</h4>
+          <h4>{company.toUpperCase()}</h4>
         </div>
       </div>
       <div className='customer__main'>
@@ -22,7 +22,7 @@ const Customer = ({name,country,city,province,company,taxnumber}) => {
         </div>
         <div className='customer__address'>
           <h4>Location</h4>
-          <p>{`${city.toLowerCase()},${province.toLowerCase()},${country.toLowerCase()}`}</p>
+          <p>{`${city.toUpperCase()},${province.toUpperCase()},${country.toUpperCase()}`}</p>
         </div>
       </div>
       <div className='customer__footer'>
