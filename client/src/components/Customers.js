@@ -18,7 +18,7 @@ const Customers = () => {
     })
     .catch((err)=>`The Error is:${err}`);
   },[customers.list.length])
-  console.log("customers:",customers)
+
   return(
   <div className='customers'>
     {customers.list.length ?
@@ -35,6 +35,8 @@ const Customers = () => {
               province={customer.province}
               company={customer.company}
               taxnumber={customer.taxnumber}
+              customers={customers}
+              setCustomers={setCustomers}
             />
           )}
         </div>
