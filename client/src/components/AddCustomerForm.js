@@ -17,7 +17,7 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
       })
     }
     else{
-      console.log(updateCustomerId);
+
       axios.post('http://localhost:8080/customers/add',{data:inputs})
       .then((response)=>{
         axios.get('http://localhost:8080/customers')
@@ -29,12 +29,31 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
     }
   } 
 
+  const handleNavigation = () => {
+    setShowForm(false)
+    setInputs({
+      name:'',
+      email:'',
+      country:'',
+      street:'',
+      city:'',
+      province:'',
+      zipcode:'',
+      company:'',
+      taxnumber:''
+    })
+    setUpdateCustomerId(0)
+  }
+
   return (
     <div className='form'>
       {showForm 
       ?
       <div className="customer-info">
-      <h1 className='customer-info__form-title'>Client Information</h1>
+      <div className='customer-info__header'>
+        <h1 className='customer-info__form-title'>Client Information</h1>
+        <button className='customer-info__back-btn' type='submit' onClick={handleNavigation}>Go back</button>
+      </div>
       <form className='customer-info__form' onSubmit={handleSubmission}>
         <div className='customer-info__input'>
           <span>
