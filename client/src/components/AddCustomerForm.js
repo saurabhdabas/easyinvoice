@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios';
 
-const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,setInputs,updateCustomerId}) => {
+const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,setInputs,updateCustomerId,setUpdateCustomerId}) => {
 
   const handleSubmission = (event) => {
     event.preventDefault();
@@ -11,8 +11,13 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
       .then((response)=>{
         setCustomers(({...customers,list:response.data}))
       })
+      .then(()=>{
+        setUpdateCustomerId(0)
+        setShowForm(false)
+      })
     }
     else{
+      console.log(updateCustomerId);
       axios.post('http://localhost:8080/customers/add',{data:inputs})
       .then((response)=>{
         axios.get('http://localhost:8080/customers')
