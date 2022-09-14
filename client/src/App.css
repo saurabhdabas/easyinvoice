@@ -325,6 +325,27 @@ height:90vh;
   margin:10px 10px 0 10px;
   border-top: 3px solid #2287E3;
 }
+.customer-info__header{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.customer-info__header img{
+  margin-right: 5px;
+}
+.customer-info__back-btn{
+  font:inherit;
+  display:flex;  color:#F7F7F7;
+  background-color: #2287E3;
+  border:2px solid #2287E3 ;
+  border-radius: 20px;
+  padding:2px 10px;
+  cursor: pointer;
+}
+.customer-info__back-btn:hover{
+  color:#2287E3;
+  background-color: #F7F7F7;
+}
 
 .customer-info__form-title{
   margin:11px 0;
