@@ -19,7 +19,9 @@ const Customers = () => {
     zipcode:'',
     company:'',
     taxnumber:''
-  })
+  });
+  const [search,setSearch] = useState('');
+  const [searchedCustomer,setSearchedCustomer] = useState([]);
 
   useEffect(()=>{
     axios.get('http://localhost:8080/customers')
@@ -47,35 +49,62 @@ const Customers = () => {
       setShowForm(true)
     }
   },[updateCustomerId])
-
+  console.log("length:",searchedCustomer.length);
   return(
   <div className='customers'>
     {customers.list.length ?
     <React.Fragment>
       <div className='customers__list-wrapper'>
         <div className='customers__list'>
-          <SearchBar/>
-          {customers.list.map((customer)=>
-            <Customer 
-              key={customer.id}
-              id={customer.id} 
-              name={customer.name} 
-              country={customer.country}
-              city={customer.city}
-              province={customer.province}
-              company={customer.company}
-              taxnumber={customer.taxnumber}
-              setShowForm={setShowForm}
-              deleteCustomerId={deleteCustomerId}
-              setDeleteCustomerId={setDeleteCustomerId}
-              updateCustomerId={updateCustomerId}
-              setUpdateCustomerId={setUpdateCustomerId}
-              customers={customers}
-              setCustomers={setCustomers}
-              inputs={inputs}
-              setInputs={setInputs}
-            />
-          )}
+          <SearchBar search={search} setSearch={setSearch} 
+          customers={customers} setSearchedCustomer={setSearchedCustomer}/>
+          {search ? 
+          <React.Fragment>
+            {searchedCustomer.map((customer)=>
+              <Customer 
+                key={customer.id}
+                id={customer.id} 
+                name={customer.name} 
+                country={customer.country}
+                city={customer.city}
+                province={customer.province}
+                company={customer.company}
+                taxnumber={customer.taxnumber}
+                setShowForm={setShowForm}
+                deleteCustomerId={deleteCustomerId}
+                setDeleteCustomerId={setDeleteCustomerId}
+                updateCustomerId={updateCustomerId}
+                setUpdateCustomerId={setUpdateCustomerId}
+                customers={customers}
+                setCustomers={setCustomers}
+                inputs={inputs}
+                setInputs={setInputs}
+              />
+            )} 
+          </React.Fragment> : 
+          <React.Fragment>
+            {customers.list.map((customer)=>
+              <Customer 
+                key={customer.id}
+                id={customer.id} 
+                name={customer.name} 
+                country={customer.country}
+                city={customer.city}
+                province={customer.province}
+                company={customer.company}
+                taxnumber={customer.taxnumber}
+                setShowForm={setShowForm}
+                deleteCustomerId={deleteCustomerId}
+                setDeleteCustomerId={setDeleteCustomerId}
+                updateCustomerId={updateCustomerId}
+                setUpdateCustomerId={setUpdateCustomerId}
+                customers={customers}
+                setCustomers={setCustomers}
+                inputs={inputs}
+                setInputs={setInputs}
+              />
+            )} 
+          </React.Fragment>}
         </div>
       </div>
       <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId}/>
