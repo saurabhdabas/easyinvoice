@@ -22,7 +22,7 @@ const Customers = () => {
   });
   const [search,setSearch] = useState('');
   const [searchedCustomer,setSearchedCustomer] = useState([]);
-
+  const [isListening, setIsListening] = useState(false);
   useEffect(()=>{
     axios.get('http://localhost:8080/customers')
     .then((response)=> {
@@ -49,7 +49,7 @@ const Customers = () => {
       setShowForm(true)
     }
   },[updateCustomerId])
-  console.log("length:",searchedCustomer.length);
+
   return(
   <div className='customers'>
     {customers.list.length ?
@@ -57,7 +57,7 @@ const Customers = () => {
       <div className='customers__list-wrapper'>
         <div className='customers__list'>
           <SearchBar search={search} setSearch={setSearch} 
-          customers={customers} setSearchedCustomer={setSearchedCustomer}/>
+          customers={customers} setSearchedCustomer={setSearchedCustomer} isListening={isListening} setIsListening={setIsListening}/>
           {search ? 
           <React.Fragment>
             {searchedCustomer.map((customer)=>
