@@ -81,22 +81,12 @@ const Invoices = () => {
                 key={invoice.id}
                 id={invoice.id} 
                 name={invoice.name} 
-                country={invoice.country}
-                city={invoice.city}
-                province={invoice.province}
                 company={invoice.company}
-                taxnumber={invoice.taxnumber}
-                invoicetitle={invoice.invoicetitle}
-                message={invoice.message}
+                date={invoice.date}
+                balance={invoice.balance}
                 setShowInvoiceForm={setShowInvoiceForm}
-                deleteInvoiceId={deleteInvoiceId}
                 setDeleteInvoiceId={setDeleteInvoiceId}
-                updateInvoiceId={updateInvoiceId}
                 setUpdateInvoiceId={setUpdateInvoiceId}
-                invoices={invoices}
-                setInvoices={setInvoices}
-                invoiceInputs={invoiceInputs}
-                setInvoiceInputs={setInvoiceInputs}
               />
             )} 
           </React.Fragment> : 
@@ -106,22 +96,12 @@ const Invoices = () => {
               key={invoice.id}
               id={invoice.id} 
               name={invoice.name} 
-              country={invoice.country}
-              city={invoice.city}
-              province={invoice.province}
               company={invoice.company}
-              taxnumber={invoice.taxnumber}
-              invoicetitle={invoice.invoicetitle}
-              message={invoice.message}
+              date={invoice.date}
+              balance={invoice.balance}
               setShowInvoiceForm={setShowInvoiceForm}
-              deleteInvoiceId={deleteInvoiceId}
               setDeleteInvoiceId={setDeleteInvoiceId}
-              updateInvoiceId={updateInvoiceId}
               setUpdateInvoiceId={setUpdateInvoiceId}
-              invoices={invoices}
-              setInvoices={setInvoices}
-              invoiceInputs={invoiceInputs}
-              setInvoiceInputs={setInvoiceInputs}
             />
             )} 
           </React.Fragment>}
