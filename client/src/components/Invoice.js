@@ -1,30 +1,25 @@
 import React from 'react';
 
-const Invoice = ({id,name,country,city,province,company,taxnumber,invoicetitle,message,setShowInvoiceForm,setDeleteInvoiceId,setUpdateInvoiceId}) => {
+const Invoice = ({id,name,company,date,balance,setShowInvoiceForm,setDeleteInvoiceId,setUpdateInvoiceId}) => {
 
 
   return (
     <div className='invoice'>
       <div className='invoice__header'>
         <div className='invoice__logos'>
-          <img src='/id-card.png' alt='name-logo' width='20' height='20'/>
-          <p>Client</p>
-          <img src='/office-building.png' alt='company-logo' width='20' height='20'/>
-          <p>Company</p>
+          <img src='/id-card.png' alt='name-logo' width='20'/>
+          <div>Client</div>
         </div>
         <div className='invoice__name'>
           <h4>{name.toUpperCase()}</h4>
-          <h4>{company.toUpperCase()}</h4>
         </div>
       </div>
       <div className='invoice__main'>
-        <div className='invoice__taxnumber'>
-          <h4>Tax #</h4>
-          <p>{taxnumber}</p>
+        <div className='invoice__number'>
+          <p><a href={`/invoices/${id}`}>INV-000{id}</a>&nbsp;|&nbsp;<span>{date}</span></p>
         </div>
-        <div className='invoice__address'>
-          <h4>Location</h4>
-          <p>{`${city.toLowerCase()},${province.toLowerCase()},${country.toLowerCase()}`}</p>
+        <div className='invoice__balance'>
+          <p>$&nbsp;{balance}</p>
         </div>
       </div>
       <div className='invoice__footer'>
