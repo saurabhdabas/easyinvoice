@@ -31,7 +31,11 @@ function App() {
               <Home/>
             }
           />
-
+          <Route path="/invoices" 
+            element={
+              <Home/>
+            }
+          />
         </Route>
       </Routes>
 
