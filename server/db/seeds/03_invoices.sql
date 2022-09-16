@@ -1,0 +1,3 @@
+--seeds/03_invoices.sql
+--invoices
+-- INSERT INTO invoices (id, name, email, country, street, city, province, zipcode, company, taxnumber, invoicetitle, invoicedate, subtotal, balance, message) VALUES (1,'Tenshin', 'tenshin@gmail.com','Canada', '56 ST NW', 'Calgary', 'Alberta','T3N 0P3', 'Intuit', '063-8765','Website redesign', '2022-09-17',2000,2100,'Thank you');
