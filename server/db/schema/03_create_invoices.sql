@@ -12,10 +12,10 @@ CREATE TABLE invoices (
   zipcode VARCHAR(255) NOT NULL,
   company VARCHAR(255) NOT NULL,
   taxnumber VARCHAR(255) NOT NULL,
-  invoicetitle VARCHAR(255) NOT NULL,
-  invoicedate VARCHAR(255) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  date VARCHAR(255) NOT NULL,
   subtotal INT NOT NULL,
   balance INT NOT NULL,
   message VARCHAR(255) NOT NULL,
-  data JSONB
+  tabledata JSONB
 );
