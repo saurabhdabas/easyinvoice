@@ -34,9 +34,10 @@ const SideNavigation = ({state,setState}) => {
         aria-label='Invoices' 
         className={state.includes('Invoices') ? 'sideNavigation__item active' : 'sideNavigation__item'} 
         onClick={
-        (event)=>{
-          setState([event.currentTarget.ariaLabel])
-        }}
+          (event)=>{
+            setState([event.currentTarget.ariaLabel])
+            navigate('/invoices');
+          }}
         >
           <img src='./invoice.png' alt='list-item-logo' width='30' height='30'/>
           <h3>Invoices</h3>
