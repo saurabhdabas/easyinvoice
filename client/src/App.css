@@ -699,7 +699,7 @@ input[name='description']{
 /*************************************Invoice*******************************************/
 .invoice{
   display:grid;
-  height:150px;
+  height:100px;
   border:2px solid #bdb9b7;
   border-radius: 5px;
   padding:5px;
@@ -716,40 +716,41 @@ input[name='description']{
   border-top-right-radius:5px;
 
 }
+.invoice__number{
+  display:flex;
+}
+.invoice__number a{
+  text-decoration: none;
+  cursor: pointer;
+  color:#2287E3;
+}
 .invoice__main,.invoice__footer{
+  display:flex;
+  justify-content: space-between;
   padding:2px 5px;
   background-color: #F7F7F7;
 }
+.invoice__main p{
+  margin:0;
+}
 .invoice__logos{
-  display:grid;
-  grid-template-columns:repeat(2,0.50fr);
-  grid-template-rows: repeat(2,1fr);
-  justify-content: space-around;
+  display:flex;
   align-items: center;
+  justify-content: space-between;
   padding:5px;
+}
+.invoice__logos img{
+  padding-top:4px;
+  margin-right:5px
 }
 .invoice__name{
   padding:5px
-}
-
-.invoice__logos p{
-  margin:2px 0;
 }
 .invoice__name h4,.invoice__name h3{
   font-style: italic;
   margin:5px;
 }
-.invoice__taxnumber p{
-  margin:5px 2px;
-  font-style: italic;
-}
-.invoice__address p{
-  margin:2px;
-  font-style: italic;
-}
-.invoice__taxnumber h4,.invoice__address h4{
-  margin:0;
-}
+
 .invoice__footer button{
   font: inherit;
   border:2px solid #bdb9b7;
@@ -769,17 +770,4 @@ input[name='description']{
 }
 .invoice__delete:hover{
   background-color: #b72821;
-}
-.invoice__taxnumber{
-  display:flex;
-  justify-content: space-between;
-}
-.invoice__address{
-  display:flex;
-  justify-content: space-between;
-}
-.invoice__footer{
-  display:flex;
-  justify-content: space-between;
-  align-items: center;
 }
