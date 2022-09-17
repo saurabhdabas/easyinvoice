@@ -84,7 +84,7 @@ body {
 }
 /**************************************header*******************************************/
 .header__header{
-  background-color: #2287E3;
+  background-color: #303233;
   display:grid;
   grid-template-columns: repeat(12,1fr);
   align-items: center;
@@ -125,13 +125,15 @@ body {
 .main{
   display:grid;
   grid-template-columns: repeat(16,1fr);
+  height:90vh;
 }
 
 /******************************sideNavigation*********************************/
 
 .sideNavigation{
   grid-column: 1/4;
-  background-color:#F7F7F7
+  background-color:#F7F7F7;
+  height:90vh;
 }
 .sideNavigation__items{
   display:grid;
@@ -148,18 +150,18 @@ body {
   align-items: center;
   justify-content: flex-start;
   cursor: pointer;
-  border:4px solid #F7F7F7;
+  border:3px solid #F7F7F7;
 }
 .sideNavigation__item img{
   margin: 0 15px;
 }
 .sideNavigation__item:hover{
-  border:4px solid #bdb9b7;
+  border:3px solid #303233;
   border-radius: 5px;
 }
 .active{
   background-color: #f4CC54;
-  border:4px solid #f4CC54;
+  border:3px solid #f4CC54;
   border-radius: 5px;
 }
 /*******************************************Dashboard*********************************/
@@ -245,10 +247,9 @@ td > button:hover{
 }
 .customers__list-wrapper{
   background-color:#F7F7F7;
-  margin: 10px 10px 0 10px;
-  border-top:3px solid #bdb9b7;
+  /* margin: 10px 10px 0 10px; */
+  /* border-left:3px solid #bdb9b7; */
   overflow-y: scroll;
-  height:90vh
 }
 .customers__list{
   display:grid;
@@ -285,6 +286,7 @@ td > button:hover{
   background-color: #D4E2F2;
   margin:10px 10px 0 10px;
   border-top: 3px solid #2287E3;
+  max-height:84vh
 }
 .customer-info__header{
   display:flex;
@@ -368,13 +370,14 @@ td > button:hover{
 /*************************************customer*******************************************/
 .customer{
   display:grid;
-  height:150px;
-  border:2px solid #bdb9b7;
+  height:120px;
+  border:2px solid #F7F7F7;
   border-radius: 5px;
   padding:5px;
   margin:10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
+
 .customer__header{
   display:flex;
   color:#000;
@@ -386,21 +389,23 @@ td > button:hover{
 
 }
 .customer__main,.customer__footer{
-  padding:2px 5px;
+  padding:0px 5px;
   background-color: #F7F7F7;
 }
 .customer__logos{
   display:grid;
   grid-template-columns:repeat(2,0.50fr);
-  grid-template-rows: repeat(2,1fr);
   justify-content: space-around;
   align-items: center;
   padding:5px;
 }
+.customer__logos img{
+  padding-top:4px;
+  margin-right:5px
+}
 .customer__name{
   padding:5px
 }
-
 .customer__logos p{
   margin:2px 0;
 }
@@ -408,16 +413,13 @@ td > button:hover{
   font-style: italic;
   margin:5px;
 }
-.customer__taxnumber p{
-  margin:5px 2px;
-  font-style: italic;
+.customer__taxnumber p,.customer__address p{
+  margin:0px;
 }
-.customer__address p{
-  margin:2px;
-  font-style: italic;
-}
-.customer__taxnumber h4,.customer__address h4{
-  margin:0;
+.customer__footer-btns{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap:10px
 }
 .customer__footer button{
   font: inherit;
@@ -425,19 +427,33 @@ td > button:hover{
   border-radius:5px;
   cursor: pointer;
 }
+.customer__details{
+  text-decoration: none;
+  font: inherit;
+  border:2px solid #bdb9b7;
+  border-radius:5px;
+  cursor: pointer;
+  font: inherit;
+  background-color: #2e6ba5;
+  color:#F7F7F7;
+  padding:1px 6px;
+}
+.customer__details:hover{
+  background-color: #2287E3;
+}
 .customer__edit{
-  color:#FFFFFF;
-  background-color: #37C68E;
-}
-.customer__delete{
-  color:#FFFFFF;
-  background-color: #F1483E;
-}
-.customer__edit:hover{
+  color:#F9F9F9;
   background-color: #087149;
 }
-.customer__delete:hover{
+.customer__delete{
+  color:#F9F9F9;
   background-color: #b72821;
+}
+.customer__edit:hover{
+  background-color: #37C68E;
+}
+.customer__delete:hover{
+  background-color: #F1483E;
 }
 .customer__taxnumber{
   display:flex;
@@ -457,10 +473,10 @@ td > button:hover{
   display:flex;
   align-items: center;
   justify-content: space-evenly;
-  margin:10px 5px;
+  margin:10px;
   background-color: #F7F7F7;
   border-radius: 5px;
-  border:3px solid #bdb9b7;
+  border:2px solid #2287E3;
   cursor:pointer;
 }
 .search:hover{
@@ -520,10 +536,9 @@ td > button:hover{
 }
 .invoices__list-wrapper{
   background-color:#F7F7F7;
-  margin: 10px 10px 0 10px;
-  border-top:3px solid #bdb9b7;
+  /* margin: 10px 10px 0 10px;
+  border-top:3px solid #bdb9b7; */
   overflow-y: scroll;
-  min-height:90vh
 }
 .invoices__list{
   display:grid;
@@ -560,7 +575,7 @@ td > button:hover{
   background-color: #D4E2F2;
   margin:10px 10px 0 10px;
   border-top: 3px solid #2287E3;
-  max-height:90vh;
+  max-height:84vh;
   overflow-y: scroll;
 }
 .invoice-info__header{
@@ -684,7 +699,7 @@ input[name='description']{
   background-color:#2287E3;
   font: inherit;
   font-size: large;
-  color:#F7F7F7;
+  color:#F9F9F9;
   border:2px solid #2287E3 ;
   border-radius:5px;
   cursor: pointer;
@@ -700,7 +715,7 @@ input[name='description']{
 .invoice{
   display:grid;
   height:100px;
-  border:2px solid #bdb9b7;
+  /* border:2px solid #bdb9b7; */
   border-radius: 5px;
   padding:5px;
   margin:10px;
@@ -750,24 +765,45 @@ input[name='description']{
   font-style: italic;
   margin:5px;
 }
-
+.invoice__footer-btns{
+  display:grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap:10px
+}
 .invoice__footer button{
   font: inherit;
   border:2px solid #bdb9b7;
   border-radius:5px;
   cursor: pointer;
 }
+.invoice__details{
+  text-decoration: none;
+  font: inherit;
+  border:2px solid #bdb9b7;
+  border-radius:5px;
+  cursor: pointer;
+  font: inherit;
+  background-color: #2e6ba5;
+  color:#F9F9F9;
+  padding:1px 6px;
+}
+.invoice__details:hover{
+  background-color: #2287E3;
+  
+}
 .invoice__edit{
-  color:#FFFFFF;
-  background-color: #37C68E;
+  color:#F9F9F9;
+  background-color: #087149;
+  
 }
 .invoice__delete{
-  color:#FFFFFF;
-  background-color: #F1483E;
+  color:#F9F9F9;
+  background-color: #b72821;
 }
 .invoice__edit:hover{
-  background-color: #087149;
+  background-color: #37C68E;
 }
 .invoice__delete:hover{
-  background-color: #b72821;
+  background-color: #F1483E;
+  
 }
