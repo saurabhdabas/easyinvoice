@@ -3,7 +3,7 @@ import axios from 'axios';
 import Customer from './Customer';
 import AddCustomer from './AddCustomer';
 import SearchBar from './SearchBar';
-const Customers = () => {
+const Customers = ({state,setState}) => {
   
   const [customers,setCustomers] = useState({list:[]});
   const [showForm,setShowForm] = useState(false);
@@ -63,7 +63,9 @@ const Customers = () => {
             {searchedCustomer.map((customer)=>
               <Customer 
                 key={customer.id}
-                id={customer.id} 
+                id={customer.id}
+                state={state} 
+                setState={setState}
                 name={customer.name} 
                 country={customer.country}
                 city={customer.city}
@@ -86,7 +88,9 @@ const Customers = () => {
             {customers.list.map((customer)=>
               <Customer 
                 key={customer.id}
-                id={customer.id} 
+                id={customer.id}
+                state={state} 
+                setState={setState} 
                 name={customer.name} 
                 country={customer.country}
                 city={customer.city}
