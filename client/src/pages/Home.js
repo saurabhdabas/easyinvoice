@@ -4,7 +4,7 @@ import SideNavigation from '../components/SideNavigation'
 import display from '../Helpers/display';
 
 
-const Home = ({state,setState,history,className, setClassName}) => {
+const Home = ({state,setState,history,className,setClassName}) => {
 
   return (
     <div>
