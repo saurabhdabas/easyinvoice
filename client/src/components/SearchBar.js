@@ -35,7 +35,7 @@ const SearchBar = ({search,setSearch,customers,setSearchedCustomer,isListening,s
       <input 
         className='search__input' 
         type='text' 
-        placeholder="Search customer's name"
+        placeholder="Search by customer's name"
         value={search} 
         onChange={(event)=>{
           setSearch(event.target.value)
