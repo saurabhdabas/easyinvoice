@@ -4,7 +4,7 @@ import axios from 'axios';
 import Invoice from './Invoice';
 import AddInvoice from './AddInvoice';
 import InvoicesSearchBar from './InvoicesSearchBar';
-const Invoices = () => {
+const Invoices = ({state,setState}) => {
   
   const [invoices,setInvoices] = useState({list:[]});
   const [showInvoiceForm,setShowInvoiceForm] = useState(false);
@@ -79,7 +79,9 @@ const Invoices = () => {
             {searchedInvoice.map((invoice)=>
               <Invoice 
                 key={invoice.id}
-                id={invoice.id} 
+                id={invoice.id}
+                state={state} 
+                setState={setState}
                 name={invoice.name} 
                 company={invoice.company}
                 date={invoice.date}
@@ -94,7 +96,9 @@ const Invoices = () => {
             {invoices.list.map((invoice)=>
               <Invoice 
               key={invoice.id}
-              id={invoice.id} 
+              id={invoice.id}
+              state={state} 
+              setState={setState} 
               name={invoice.name} 
               company={invoice.company}
               date={invoice.date}
