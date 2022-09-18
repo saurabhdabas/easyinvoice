@@ -4,7 +4,7 @@ import axios from 'axios';
 import Invoice from './Invoice';
 import AddInvoice from './AddInvoice';
 import InvoicesSearchBar from './InvoicesSearchBar';
-const Invoices = ({state,setState}) => {
+const Invoices = ({state,setState,setInvoiceId}) => {
   
   const [invoices,setInvoices] = useState({list:[]});
   const [showInvoiceForm,setShowInvoiceForm] = useState(false);
@@ -20,8 +20,11 @@ const Invoices = ({state,setState}) => {
     zipcode:'',
     company:'',
     taxnumber:'',
+    phone:'',
     title:'',
     date:'',
+    duedate:'',
+    notes:'',
     subtotal:0,
     balance:0,
     message:'Thank You for your business!',
@@ -42,9 +45,10 @@ const Invoices = ({state,setState}) => {
   useEffect(()=>{
     axios.get('http://localhost:8080/invoices')
     .then((response)=> {
-      if(response.data.length){
-        setInvoices(({...invoices,list:response.data}))
-      }
+      console.log("Before:",response.data);
+      console.log(invoices.list.length)
+      setInvoices(({...invoices,list:response.data}))
+
     })
     .catch((err)=>`The Error is:${err}`);
   },[invoices.list.length])
@@ -68,7 +72,7 @@ const Invoices = ({state,setState}) => {
 
   return(
   <div className='invoices'>
-    {invoices.list.length ?
+    {invoices.list ?
     <React.Fragment>
       <div className='invoices__list-wrapper'>
         <div className='invoices__list'>
@@ -79,7 +83,8 @@ const Invoices = ({state,setState}) => {
             {searchedInvoice.map((invoice)=>
               <Invoice 
                 key={invoice.id}
-                id={invoice.id}
+                invoiceId={invoice.id}
+                setInvoiceId={setInvoiceId}
                 state={state} 
                 setState={setState}
                 name={invoice.name} 
@@ -96,7 +101,8 @@ const Invoices = ({state,setState}) => {
             {invoices.list.map((invoice)=>
               <Invoice 
               key={invoice.id}
-              id={invoice.id}
+              invoiceId={invoice.id}
+              setInvoiceId={setInvoiceId}
               state={state} 
               setState={setState} 
               name={invoice.name} 
