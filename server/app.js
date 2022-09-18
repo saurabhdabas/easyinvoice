@@ -96,6 +96,9 @@ app.post('/invoices/add',(req,res)=>{
     company:req.body.data.company,
     taxnumber:req.body.data.taxnumber,
     date:req.body.data.date,
+    duedate:req.body.data.duedate,
+    notes:req.body.data.notes,
+    phone:req.body.data.phone,
     title:req.body.data.title,
     subtotal:req.body.data.subtotal,
     balance:req.body.data.balance,
@@ -103,13 +106,21 @@ app.post('/invoices/add',(req,res)=>{
     tabledata:req.body.data.tabledata
   }
   db.query(
-    `INSERT INTO invoices (name,email,country,street,city,province,zipcode,company,taxnumber,date,title,subtotal,balance,message,tabledata)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`,
-    [formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
+    `INSERT INTO invoices (name,email,country,street,city,province,zipcode,company,taxnumber,date,duedate,notes,phone,title,subtotal,balance,message,tabledata)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING *`,
+    [formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
   .then((response) => {res.send(response)})
   .catch((error) => res.send(error));
 })
-
+// Retrieve particular Invoice
+app.get('/invoices/:id',(req,res)=>{
+  const invoice = req.params;
+  db.query(`SELECT * FROM invoices WHERE id = $1`, [invoice.id])
+    .then(response =>{
+      res.send(response.rows[0])
+    })
+    .catch(e => console.error(e.stack));
+})
 //Remove the invoice
 app.put('/invoices/:id/delete',(req, res) => {
   db.query(`DELETE FROM invoices WHERE id = $1;`, [req.body.invoiceId])
@@ -128,11 +139,20 @@ app.put('/invoices/:id/update',(req, res) => {
     province:req.body.data.province,
     zipcode:req.body.data.zipcode,
     company:req.body.data.company,
-    taxnumber:req.body.data.taxnumber
+    taxnumber:req.body.data.taxnumber,
+    date:req.body.data.date,
+    duedate:req.body.data.duedate,
+    notes:req.body.data.notes,
+    phone:req.body.data.phone,
+    title:req.body.data.title,
+    message:req.body.data.message,
+    tabledata:req.body.data.tabledata
   }
-  db.query(`UPDATE invoices SET name=$2, email=$3, country=$4, street=$5, city=$6, province=$7, zipcode=$8, company=$9, taxnumber=$10
-  WHERE id = ($1) RETURNING *;`, [req.body.invoiceId,formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
+  db.query(`UPDATE invoices SET name=$2, email=$3, country=$4, street=$5, city=$6, province=$7, zipcode=$8, company=$9, taxnumber=$10, date=$11, duedate=$12, notes=$13, phone=$14, title=$15, message=$16, tabledata=$17
+  WHERE id = ($1) RETURNING *;`, [req.body.invoiceId,formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.message,formData.tabledata])
     .then((response) => res.send(response))
     .catch((error) => res.send(error));
 });
+
+
 module.exports = app;
