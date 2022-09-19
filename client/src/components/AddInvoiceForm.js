@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, {useEffect } from 'react'
 import axios from 'axios';
 import findSubtotal from '../Helpers/findSubtotal';
-const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,invoiceInputs,setInvoiceInputs,updateInvoiceId,setUpdateInvoiceId}) => {
-  
+const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,invoiceInputs,setInvoiceInputs,updateInvoiceId,setUpdateInvoiceId,loading,setLoading}) => {
+
   useEffect(()=>{
     setInvoiceInputs({...invoiceInputs,subtotal:findSubtotal(invoiceInputs,'tabledata')})
   },[invoiceInputs.tabledata])
@@ -13,32 +13,41 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
 
   const handleSubmission = (event) => {
     event.preventDefault();
-    if(updateInvoiceId){
-      axios.put(`http://localhost:8080/invoice/${updateInvoiceId}/update`,{data:invoiceInputs,invoiceId:updateInvoiceId})
-      .then((response)=>{
-        setInvoices(({...invoices,list:response.data}))
-      })
-      .then(()=>{
-        setUpdateInvoiceId(0)
-        setShowInvoiceForm(false)
-      })
-    }
-    else {
-      axios.post('http://localhost:8080/invoices/add',{data:invoiceInputs})
-      .then((response)=>{
-        console.log("Invoices:",invoices);
-        console.log("Response:",response);
-        setInvoices({...invoices,list:response.data.rows})
-        setShowInvoiceForm(false)
-      })
-    }
+    setLoading(true);
+
+    setTimeout(()=>{
+      if(updateInvoiceId){
+        console.log(updateInvoiceId);
+        axios.put(`http://localhost:8080/invoices/${updateInvoiceId}/update`,{data:invoiceInputs,invoiceId:updateInvoiceId})
+        .then((response)=>{
+          setInvoices(({...invoices,list:response.data}))
+        })
+        .then(()=>{
+          setUpdateInvoiceId(0)
+          setShowInvoiceForm(false)
+        })
+      }
+      else {
+        axios.post('http://localhost:8080/invoices/add',{data:invoiceInputs})
+        .then((response)=>{
+          axios.get('http://localhost:8080/invoices')
+          .then((response)=>{
+            setInvoices(({...invoices,list:response.data}))
+          })
+          setShowInvoiceForm(false)
+        })
+      }
+      setLoading(false)
+    },[2000])
   } 
-  
+
   const handleNavigation = () => {
     setShowInvoiceForm(false)
     setInvoiceInputs({
       name:'',
       email:'',
+      photo:'',
+      logo:'',
       country:'',
       street:'',
       city:'',
@@ -82,6 +91,20 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
             <img src='/id.png' alt='name-logo' width='20' height='20'/>
           </span>
           <input id='name' type='text' name='name' value={invoiceInputs.name} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,name:event.target.value})} placeholder='Jane thomas'/>
+        </div>
+        <div className='invoice-info__input'>
+          <span>
+            <label htmlFor='photo'><h3>Photo</h3></label>
+            <img src='/id.png' alt='photo-logo' width='20' height='20'/>
+          </span>
+          <input id='photo' type='text' name='photo' value={invoiceInputs.photo} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,photo:event.target.value})} placeholder='Paste an image URL'/>
+        </div>
+        <div className='invoice-info__input'>
+          <span>
+            <label htmlFor='company'><h3>Company logo</h3></label>
+            <img src='/office.png' alt='company-logo' width='20' height='20'/>
+          </span>
+          <input id='logo' type='text' name='logo' value={invoiceInputs.logo} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,logo:event.target.value})} placeholder='Paste an image URL'/>
         </div>
         <div className='invoice-info__input'>
           <span>
@@ -323,7 +346,9 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
             </tfoot>
           </table>
         </div>
-        <button className='invoice-info__submit-btn' type='submit' name='submit-button'>Generate Invoice</button>
+        <button className='invoice-info__submit-btn' type='submit' name='submit-button'>
+          {loading ? <div className="lds-hourglass"></div> : 'Generate Invoice' }
+        </button>
       </form>
     </div>
       : 
