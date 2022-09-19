@@ -2,7 +2,7 @@ import React from 'react';
 import AddInvoiceForm from './AddInvoiceForm';
 
 
-const AddInvoice = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,invoiceInputs,setInvoiceInputs,updateInvoiceId,setUpdateInvoiceId}) => {  
+const AddInvoice = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,invoiceInputs,setInvoiceInputs,updateInvoiceId,setUpdateInvoiceId,loading,setLoading}) => {  
   return (
     <React.Fragment>
       {!showInvoiceForm ?
@@ -11,6 +11,8 @@ const AddInvoice = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,inv
             setInvoiceInputs({
               name:'',
               email:'',
+              photo:'',
+              logo:'',
               country:'',
               street:'',
               city:'',
@@ -39,7 +41,7 @@ const AddInvoice = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,inv
             }}/>
           <h2>Generate an Invoice</h2>
         </div> : 
-        <AddInvoiceForm invoices={invoices} setInvoices={setInvoices} showInvoiceForm={showInvoiceForm} setShowInvoiceForm={setShowInvoiceForm} invoiceInputs={invoiceInputs} setInvoiceInputs={setInvoiceInputs} updateInvoiceId={updateInvoiceId} setUpdateInvoiceId={setUpdateInvoiceId}/>
+        <AddInvoiceForm invoices={invoices} setInvoices={setInvoices} showInvoiceForm={showInvoiceForm} setShowInvoiceForm={setShowInvoiceForm} invoiceInputs={invoiceInputs} setInvoiceInputs={setInvoiceInputs} updateInvoiceId={updateInvoiceId} setUpdateInvoiceId={setUpdateInvoiceId} loading={loading} setLoading={setLoading}/>
       }
     </React.Fragment>
   )
