@@ -1,25 +1,23 @@
 import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
 
-const Invoice = ({name,invoiceId,setInvoiceId,setState,date,balance,setShowInvoiceForm,setDeleteInvoiceId,setUpdateInvoiceId}) => {
+const Invoice = ({name,photo,logo,company,invoiceId,setInvoiceId,setState,date,balance,setShowInvoiceForm,setDeleteInvoiceId,setUpdateInvoiceId}) => {
   const navigate = useNavigate();
-
-  const handleStateChange = () => {
-    navigate(`/invoices/${invoiceId}`)
-    setState(['DetailedInvoice']);
-    setInvoiceId(invoiceId);
-  }
+  
   return (
     <div className='invoice'>
       <div className='invoice__header'>
-        <div className='invoice__logos'>
-          <img src='/id-card.png' alt='name-logo' width='20'/>
-          <div>Client</div>
-        </div>
         <div className='invoice__name'>
-          <h4>{name.toUpperCase()}</h4>
+          <img src={photo} alt="customer-image" width="30" height="30"/>
+          <h5>{name.toUpperCase()}</h5>
+        </div>
+        <div className='invoice__logos'>
+          <img src={logo} alt='name-logo' width='20' height='20'/>
+          <h3>{company.toUpperCase()}</h3>
         </div>
       </div>
+      <hr className="invoice__rule"/>
       <div className='invoice__main'>
         <div className='invoice__number'>
           <p>INV-000{invoiceId}&nbsp;|&nbsp;<span>{date}</span></p>
@@ -41,7 +39,14 @@ const Invoice = ({name,invoiceId,setInvoiceId,setState,date,balance,setShowInvoi
             }
             }>Delete</button>
         </div>
-        <button className='invoice__details' onClick={handleStateChange} id={invoiceId}>Details</button>
+        <button 
+        className='invoice__details'
+        id={invoiceId} 
+        onClick={()=>{
+          setInvoiceId(invoiceId);
+          setState(['DetailedInvoice']);
+          navigate(`/invoices/${invoiceId}`);
+        }} >Details</button>
       </div>
     </div>
   )
