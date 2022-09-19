@@ -3,7 +3,7 @@ import axios from 'axios';
 import Customer from './Customer';
 import AddCustomer from './AddCustomer';
 import SearchBar from './SearchBar';
-const Customers = ({state,setState}) => {
+const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
   
   const [customers,setCustomers] = useState({list:[]});
   const [showForm,setShowForm] = useState(false);
@@ -11,6 +11,7 @@ const Customers = ({state,setState}) => {
   const [updateCustomerId,setUpdateCustomerId] = useState(0);
   const [inputs,setInputs]=useState({
     name:'',
+    photo:'',
     email:'',
     country:'',
     street:'',
@@ -18,11 +19,14 @@ const Customers = ({state,setState}) => {
     province:'',
     zipcode:'',
     company:'',
+    logo:'',
     taxnumber:''
   });
   const [search,setSearch] = useState('');
   const [searchedCustomer,setSearchedCustomer] = useState([]);
   const [isListening, setIsListening] = useState(false);
+  
+
   useEffect(()=>{
     axios.get('http://localhost:8080/customers')
     .then((response)=> {
@@ -63,14 +67,16 @@ const Customers = ({state,setState}) => {
             {searchedCustomer.map((customer)=>
               <Customer 
                 key={customer.id}
-                id={customer.id}
+                customerId={customer.id}
                 state={state} 
                 setState={setState}
-                name={customer.name} 
+                name={customer.name}
+                photo={customer.photo}
                 country={customer.country}
                 city={customer.city}
                 province={customer.province}
                 company={customer.company}
+                logo={customer.logo}
                 taxnumber={customer.taxnumber}
                 setShowForm={setShowForm}
                 deleteCustomerId={deleteCustomerId}
@@ -78,6 +84,7 @@ const Customers = ({state,setState}) => {
                 updateCustomerId={updateCustomerId}
                 setUpdateCustomerId={setUpdateCustomerId}
                 customers={customers}
+                setCustomerId={setCustomerId}
                 setCustomers={setCustomers}
                 inputs={inputs}
                 setInputs={setInputs}
@@ -88,14 +95,16 @@ const Customers = ({state,setState}) => {
             {customers.list.map((customer)=>
               <Customer 
                 key={customer.id}
-                id={customer.id}
+                customerId={customer.id}
                 state={state} 
                 setState={setState} 
-                name={customer.name} 
+                name={customer.name}
+                photo={customer.photo}  
                 country={customer.country}
                 city={customer.city}
                 province={customer.province}
                 company={customer.company}
+                logo={customer.logo}
                 taxnumber={customer.taxnumber}
                 setShowForm={setShowForm}
                 deleteCustomerId={deleteCustomerId}
@@ -103,6 +112,7 @@ const Customers = ({state,setState}) => {
                 updateCustomerId={updateCustomerId}
                 setUpdateCustomerId={setUpdateCustomerId}
                 customers={customers}
+                setCustomerId={setCustomerId}
                 setCustomers={setCustomers}
                 inputs={inputs}
                 setInputs={setInputs}
@@ -111,20 +121,20 @@ const Customers = ({state,setState}) => {
           </React.Fragment>}
         </div>
       </div>
-      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId}/>
+      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading}/>
     </React.Fragment>
     : 
     <React.Fragment>
       <div className='customers__list-wrapper'>
         <SearchBar/>
-        <div className='customers__list'>
+        {/* <div className='customers__list'>
           <p>Click&nbsp;
             <span><img src='./plus.png' alt='add-icon' width='20' height='20'/></span> 
             &nbsp;Icon to get started 
           </p>
-        </div>
+        </div> */}
       </div>
-      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId}/>
+      <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading}/>
     </React.Fragment>
     }
 
