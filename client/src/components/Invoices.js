@@ -4,15 +4,18 @@ import axios from 'axios';
 import Invoice from './Invoice';
 import AddInvoice from './AddInvoice';
 import InvoicesSearchBar from './InvoicesSearchBar';
-const Invoices = ({state,setState,setInvoiceId}) => {
+const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
   
   const [invoices,setInvoices] = useState({list:[]});
   const [showInvoiceForm,setShowInvoiceForm] = useState(false);
+  
   const [deleteInvoiceId,setDeleteInvoiceId] = useState(0);
   const [updateInvoiceId,setUpdateInvoiceId] = useState(0);
   const [invoiceInputs,setInvoiceInputs]=useState({
     name:'',
     email:'',
+    photo:'',
+    logo:'',
     country:'',
     street:'',
     city:'',
@@ -45,10 +48,9 @@ const Invoices = ({state,setState,setInvoiceId}) => {
   useEffect(()=>{
     axios.get('http://localhost:8080/invoices')
     .then((response)=> {
-      console.log("Before:",response.data);
-      console.log(invoices.list.length)
-      setInvoices(({...invoices,list:response.data}))
-
+      if(response.status === 200){
+        setInvoices(({...invoices,list:response.data}))
+      }
     })
     .catch((err)=>`The Error is:${err}`);
   },[invoices.list.length])
@@ -72,7 +74,7 @@ const Invoices = ({state,setState,setInvoiceId}) => {
 
   return(
   <div className='invoices'>
-    {invoices.list ?
+    {invoices.list.length ?
     <React.Fragment>
       <div className='invoices__list-wrapper'>
         <div className='invoices__list'>
@@ -87,7 +89,9 @@ const Invoices = ({state,setState,setInvoiceId}) => {
                 setInvoiceId={setInvoiceId}
                 state={state} 
                 setState={setState}
-                name={invoice.name} 
+                name={invoice.name}
+                photo={invoice.photo}
+                logo={invoice.logo} 
                 company={invoice.company}
                 date={invoice.date}
                 balance={invoice.balance}
@@ -105,7 +109,9 @@ const Invoices = ({state,setState,setInvoiceId}) => {
               setInvoiceId={setInvoiceId}
               state={state} 
               setState={setState} 
-              name={invoice.name} 
+              name={invoice.name}
+              photo={invoice.photo}
+              logo={invoice.logo}  
               company={invoice.company}
               date={invoice.date}
               balance={invoice.balance}
@@ -117,21 +123,21 @@ const Invoices = ({state,setState,setInvoiceId}) => {
           </React.Fragment>}
         </div>
       </div>
-      <AddInvoice invoices={invoices} setInvoices={setInvoices} showInvoiceForm={showInvoiceForm} setShowInvoiceForm={setShowInvoiceForm} invoiceInputs={invoiceInputs} setInvoiceInputs={setInvoiceInputs} updateInvoiceId={updateInvoiceId} setUpdateInvoiceId={setUpdateInvoiceId}/>
+      <AddInvoice invoices={invoices} setInvoices={setInvoices} showInvoiceForm={showInvoiceForm} setShowInvoiceForm={setShowInvoiceForm} invoiceInputs={invoiceInputs} setInvoiceInputs={setInvoiceInputs} updateInvoiceId={updateInvoiceId} setUpdateInvoiceId={setUpdateInvoiceId} loading={loading} setLoading={setLoading}/>
     </React.Fragment>
     : 
     <React.Fragment>
       <div className='invoices__list-wrapper'>
         <InvoicesSearchBar search={search} setSearch={setSearch} 
           invoices={invoices} setSearchedInvoice={setSearchedInvoice} isListening={isListening} setIsListening={setIsListening}/>
-        <div className='invoices__list'>
+        {/* <div className='invoices__list'>
           <p>Click&nbsp;
             <span><img src='./plus.png' alt='add-icon' width='20' height='20'/></span> 
             &nbsp;Icon to get started 
           </p>
-        </div>
+        </div> */}
       </div>
-      <AddInvoice invoices={invoices} setInvoices={setInvoices} showInvoiceForm={showInvoiceForm} setShowInvoiceForm={setShowInvoiceForm} invoiceInputs={invoiceInputs} setInvoiceInputs={setInvoiceInputs} updateInvoiceId={updateInvoiceId} setUpdateInvoiceId={setUpdateInvoiceId}/>
+      <AddInvoice invoices={invoices} setInvoices={setInvoices} showInvoiceForm={showInvoiceForm} setShowInvoiceForm={setShowInvoiceForm} invoiceInputs={invoiceInputs} setInvoiceInputs={setInvoiceInputs} updateInvoiceId={updateInvoiceId} setUpdateInvoiceId={setUpdateInvoiceId} loading={loading} setLoading={setLoading}/>
     </React.Fragment>
     }
 
