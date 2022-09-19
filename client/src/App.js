@@ -9,7 +9,12 @@ import './App.css';
 
 function App() {
   const [state,setState] = useState(['Dashboard']);
+  const [invoiceId,setInvoiceId] = useState(0);
+  const [customerId,setCustomerId] = useState(0);
+  const [loading,setLoading] = useState(false);
+
   let history = createBrowserHistory();
+
   return (
     <div className="App">
 
@@ -26,27 +31,27 @@ function App() {
         >
           <Route path="/dashboard" 
             element={
-              <Home state={state} setState={setState} history={history}/>
+              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading}/>
             }
           />
           <Route path="/customers" 
             element={
-              <Home state={state} setState={setState} history={history}/>
+              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}/>
             }
           />
           <Route path="/customers/:id" 
             element={
-              <Home state={state} setState={setState} history={history}/>
+              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}/>
             }
           />
           <Route path="/invoices" 
             element={
-              <Home state={state} setState={setState} history={history}/>
+              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading}/>
             }
           />
           <Route path="/invoices/:id" 
             element={
-              <Home state={state} setState={setState} history={history}/>
+              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading}/>
             }
           />
         </Route>
