@@ -1,9 +1,14 @@
 import React,{useState,useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-const DetailedInvoice = ({state,invoiceId}) => {
-
+const DetailedInvoice = ({state,setState,invoiceId}) => {
+  const navigate = useNavigate();
   const [detailedInvoice,setDetailedInvoice] = useState({list:[]});
+
+  const handleNavigation = () => {
+    setState('Invoices');
+    navigate('/invoices');
+  }
 
   useEffect(()=>{
     axios.get(`http://localhost:8080/invoices/${invoiceId}`)
@@ -15,8 +20,12 @@ const DetailedInvoice = ({state,invoiceId}) => {
     })
     .catch((err)=>`The Error is:${err}`);
   },[invoiceId])
+
+
   return (
     <div className="DetailedInvoice">
+      <button onClick={handleNavigation}>Back to Invoices</button>
+      <hr/>
       <div className="DetailedInvoice__header">
         <h2>INVOICE NO -&nbsp;{`INV-000${detailedInvoice.list.id}`}</h2>
         <div className="DetailedInvoice__action-btns">
