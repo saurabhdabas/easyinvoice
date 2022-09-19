@@ -1,38 +1,42 @@
 import React from 'react'
 import axios from 'axios';
 
-const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,setInputs,updateCustomerId,setUpdateCustomerId}) => {
+const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,setInputs,updateCustomerId,setUpdateCustomerId,loading,setLoading}) => {
 
   const handleSubmission = (event) => {
     event.preventDefault();
-    
-    if(updateCustomerId){
-      axios.put(`http://localhost:8080/customers/${updateCustomerId}/update`,{data:inputs,customerId:updateCustomerId})
-      .then((response)=>{
-        setCustomers(({...customers,list:response.data}))
-      })
-      .then(()=>{
-        setUpdateCustomerId(0)
-        setShowForm(false)
-      })
-    }
-    else{
-
-      axios.post('http://localhost:8080/customers/add',{data:inputs})
-      .then((response)=>{
-        axios.get('http://localhost:8080/customers')
-        .then((response)=> {
+    setLoading(true);
+    setTimeout(()=>{
+      if(updateCustomerId){
+        axios.put(`http://localhost:8080/customers/${updateCustomerId}/update`,{data:inputs,customerId:updateCustomerId})
+        .then((response)=>{
           setCustomers(({...customers,list:response.data}))
+        })
+        .then(()=>{
+          setUpdateCustomerId(0)
           setShowForm(false)
         })
-      })
-    }
-  } 
+      }
+      else{
+        axios.post('http://localhost:8080/customers/add',{data:inputs})
+        .then((response)=>{
+          console.log("response:",response);
+          axios.get('http://localhost:8080/customers')
+          .then((response)=> {
+            setCustomers(({...customers,list:response.data}))
+            setShowForm(false)
+          })
+        })
+      }
+      setLoading(false);
+    },2000)
+  }
 
   const handleNavigation = () => {
     setShowForm(false)
     setInputs({
       name:'',
+      photo:'',
       email:'',
       country:'',
       street:'',
@@ -40,6 +44,7 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
       province:'',
       zipcode:'',
       company:'',
+      logo:'',
       taxnumber:''
     })
     setUpdateCustomerId(0)
@@ -64,6 +69,13 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
         </div>
         <div className='customer-info__input'>
           <span>
+            <label htmlFor='photo'><h3>Photo</h3></label>
+            <img src='/id.png' alt='photo-logo' width='20' height='20'/>
+          </span>
+          <input id='photo' type='text' name='photo' value={inputs.photo} required onChange={(event)=>setInputs({...inputs,photo:event.target.value})} placeholder='Paste an image URL'/>
+        </div>
+        <div className='customer-info__input'>
+          <span>
             <label htmlFor='email'><h3>Email</h3></label>
             <img src='/email.png' alt='email-logo' width='20' height='20'/>
           </span>
@@ -71,10 +83,17 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
         </div>
         <div className='customer-info__input'>
           <span>
+            <label htmlFor='logo'><h3>Company logo</h3></label>
+            <img src='/office.png' alt='company-logo' width='20' height='20'/>
+          </span>
+          <input id='logo' type='text' name='logo' value={inputs.logo} required onChange={(event)=>setInputs({...inputs,logo:event.target.value})} placeholder='Paste a URL for logo'/>
+        </div>
+        <div className='customer-info__input'>
+          <span>
             <label htmlFor='company'><h3>Company</h3></label>
             <img src='/office.png' alt='company-logo' width='20' height='20'/>
           </span>
-          <input id='name' type='text' name='company' value={inputs.company} required onChange={(event)=>setInputs({...inputs,company:event.target.value})} placeholder='Enter a company name'/>
+          <input id='company' type='text' name='company' value={inputs.company} required onChange={(event)=>setInputs({...inputs,company:event.target.value})} placeholder='Enter a company name'/>
         </div>
         <div className='customer-info__input'>
           <span>
@@ -121,7 +140,9 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
         <div className='customer-info__input'>
 
         </div>
-        <button className='customer-info__submit-btn' type='submit' name='submit-button'>Submit</button>
+        <button className='customer-info__submit-btn' type='submit' name='submit-button'>
+          {loading ? <div className="lds-hourglass"></div> : 'Submit' }
+        </button>
       </form>
     </div>
       : 
