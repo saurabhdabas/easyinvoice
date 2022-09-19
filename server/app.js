@@ -41,6 +41,7 @@ app.post('/customers/add',(req,res)=>{
   console.log(req.body.data)
   let formData = {
     name:req.body.data.name,
+    photo:req.body.data.photo,
     email:req.body.data.email,
     country:req.body.data.country,
     street:req.body.data.street,
@@ -48,16 +49,28 @@ app.post('/customers/add',(req,res)=>{
     province:req.body.data.province,
     zipcode:req.body.data.zipcode,
     company:req.body.data.company,
+    logo:req.body.data.logo,
     taxnumber:req.body.data.taxnumber
   }
   db.query(
-    `INSERT INTO customers(name,email,country,street,city,province,zipcode,company,taxnumber)
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
-    [formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
-  .then((response) => res.send(response))
+    `INSERT INTO customers(name,photo,email,country,street,city,province,zipcode,company,logo,taxnumber)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+    [formData.name,formData.photo,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.logo,formData.taxnumber])
+  .then((response) => {
+    console.log("response:",response);
+    res.send(response)
+  })
   .catch((error) => res.send(error));
 })
-
+// Retrieve particular Customer
+app.get('/customers/:id',(req,res)=>{
+  const customer = req.params;
+  db.query(`SELECT * FROM customers WHERE id = $1`, [customer.id])
+    .then(response =>{
+      res.send(response.rows[0])
+    })
+    .catch(e => console.error(e.stack));
+})
 //Remove the client
 app.put('/customers/:id/delete',(req, res) => {
   db.query(`DELETE FROM customers WHERE id = $1;`, [req.body.customerId])
@@ -88,6 +101,8 @@ app.post('/invoices/add',(req,res)=>{
   let formData = {
     name:req.body.data.name,
     email:req.body.data.email,
+    photo:req.body.data.photo,
+    logo:req.body.data.logo,
     country:req.body.data.country,
     street:req.body.data.street,
     city:req.body.data.city,
@@ -106,10 +121,13 @@ app.post('/invoices/add',(req,res)=>{
     tabledata:req.body.data.tabledata
   }
   db.query(
-    `INSERT INTO invoices (name,email,country,street,city,province,zipcode,company,taxnumber,date,duedate,notes,phone,title,subtotal,balance,message,tabledata)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING *`,
-    [formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
-  .then((response) => {res.send(response)})
+    `INSERT INTO invoices (name,email,photo,logo,country,street,city,province,zipcode,company,taxnumber,date,duedate,notes,phone,title,subtotal,balance,message,tabledata)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *`,
+    [formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
+  .then((response) => {
+    console.log("response:",response);
+    res.send(response)
+  })
   .catch((error) => res.send(error));
 })
 // Retrieve particular Invoice
@@ -133,6 +151,8 @@ app.put('/invoices/:id/update',(req, res) => {
   let formData = {
     name:req.body.data.name,
     email:req.body.data.email,
+    photo:req.body.data.photo,
+    logo:req.body.data.logo,
     country:req.body.data.country,
     street:req.body.data.street,
     city:req.body.data.city,
@@ -148,9 +168,12 @@ app.put('/invoices/:id/update',(req, res) => {
     message:req.body.data.message,
     tabledata:req.body.data.tabledata
   }
-  db.query(`UPDATE invoices SET name=$2, email=$3, country=$4, street=$5, city=$6, province=$7, zipcode=$8, company=$9, taxnumber=$10, date=$11, duedate=$12, notes=$13, phone=$14, title=$15, message=$16, tabledata=$17
-  WHERE id = ($1) RETURNING *;`, [req.body.invoiceId,formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.message,formData.tabledata])
-    .then((response) => res.send(response))
+  db.query(`UPDATE invoices SET name=$2, email=$3, photo=$4, logo=$5, country=$6, street=$7, city=$8, province=$9, zipcode=$10, company=$11, taxnumber=$12, date=$13, duedate=$14, notes=$15, phone=$16, title=$17, message=$18, tabledata=$19
+  WHERE id = ($1) RETURNING *;`, [req.body.invoiceId,formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.message,formData.tabledata])
+    .then((response) => {
+      console.log(response);
+      res.send(response)
+    })
     .catch((error) => res.send(error));
 });
 
