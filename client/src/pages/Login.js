@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
-
+import { GrNorton } from "react-icons/gr";
+import { AiFillMail,AiFillLock } from "react-icons/ai";
 
 const Login = () => {
   const [inputs,setInputs]=useState({email:'',password:''});
@@ -35,7 +36,7 @@ const Login = () => {
   return (
     <div className='login'>
       <div className='login__brand-wrapper'>
-        <img src="/bill.png" alt="brand-logo" width="120" height="120"/>
+        <GrNorton size={100}/>
         <h1>Easy Invoice</h1>
         <h2>{tagline}</h2>
       </div>
@@ -45,14 +46,14 @@ const Login = () => {
           <div className='login__email'>
             <span>
               <label htmlFor='email'><h3>Email</h3></label>
-              <img src='/email.png' alt='email-logo' width='20' height='20'/>
+              <AiFillMail/>
             </span>
             <input id='email' type='email' name='email' value={inputs.email} onChange={(event)=>setInputs({...inputs,email:event.target.value})} placeholder='joe@gmail.com'/>
           </div>
           <div className='login__password'>
             <span>
               <label htmlFor='password'><h3>Password</h3></label>
-              <img src='/key.png' alt='password-logo' width='20' height='20'/>
+              <AiFillLock/>
             </span>
             <input id='password' type='password' name='password' value={inputs.password} onChange={(event)=>setInputs({...inputs,password:event.target.value})} placeholder='Enter your password'/>
           </div>
