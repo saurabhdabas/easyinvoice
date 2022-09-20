@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useNavigate} from 'react-router-dom';
+import { BsPeople } from "react-icons/bs";
+import { AiOutlineLayout, AiOutlineSnippets } from "react-icons/ai";
 
 const SideNavigation = ({state,setState,history}) => {
   const navigate = useNavigate();
@@ -16,7 +18,7 @@ const SideNavigation = ({state,setState,history}) => {
             history.push("/dashboard", { value: event.currentTarget.ariaLabel });
           }}
         >
-          <img src='./dashboard.png' alt='list-item-logo' width='30' height='30'/>
+          <AiOutlineLayout size={30}/>
           <h3>Dashboard</h3>
         </li>
         <li 
@@ -28,7 +30,7 @@ const SideNavigation = ({state,setState,history}) => {
             history.push("/customers", { value: event.currentTarget.ariaLabel });
           }}
         >
-          <img src='./customer.png' alt='list-item-logo' width='30' height='30'/>
+          <BsPeople size={30}/>
           <h3>Customers</h3>
         </li>
         <li 
@@ -40,7 +42,7 @@ const SideNavigation = ({state,setState,history}) => {
             history.push("/invoices", { value: event.currentTarget.ariaLabel });
           }}
         >
-          <img src='./invoice.png' alt='list-item-logo' width='30' height='30'/>
+          <AiOutlineSnippets size={30}/>
           <h3>Invoices</h3>
         </li>
       </ul>
