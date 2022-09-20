@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import searchinvoices from '../Helpers/searchinvoices';
+import { AiOutlineSearch, AiOutlineAudioMuted, AiOutlineAudio } from "react-icons/ai";
+
 const InvoicesSearchBar = ({search,setSearch,invoices,setSearchedInvoice,isListening,setIsListening}) => {
   const SpeechRecognition = window.speechRecognition || window.webkitSpeechRecognition;
   const speech = new SpeechRecognition();
@@ -31,7 +33,7 @@ const InvoicesSearchBar = ({search,setSearch,invoices,setSearchedInvoice,isListe
    },[isListening]);
   return (
     <div className='search'>
-      <img src='./loupe.png' alt='search-icon' width='25' height='25'/>
+      <AiOutlineSearch size={30}/>
       <input 
         className='search__input' 
         type='text' 
@@ -42,8 +44,8 @@ const InvoicesSearchBar = ({search,setSearch,invoices,setSearchedInvoice,isListe
         }}
       />
       <div className='search__voice-icon'>
-        <img src={isListening ?'./google-voice.png': './microphone-off.png'}alt='search-icon' width='25' height='25' onClick={handleVoiceCommand}/>
-        <svg height="40" width="40" className={isListening ? 'blinking' :'hidden'}>
+        {isListening ? <AiOutlineAudio size={25} onClick={handleVoiceCommand}/>: <AiOutlineAudioMuted size={25} onClick={handleVoiceCommand}/>}
+        <svg height="50" width="50" className={isListening ? 'blinking' :'hidden'}>
           {isListening ? <circle cx="50%" cy="50%" r="5" fill="crimson" />: null}
         </svg>
       </div> 
