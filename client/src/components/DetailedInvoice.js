@@ -1,10 +1,14 @@
 import React,{useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineBackward,AiOutlineShareAlt,AiOutlineDownload } from "react-icons/ai";
 import axios from 'axios';
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
+
 const DetailedInvoice = ({state,setState,invoiceId}) => {
   const navigate = useNavigate();
   const [detailedInvoice,setDetailedInvoice] = useState({list:[]});
-
+  const [clipText,setClipText] = useState("");
   const handleNavigation = () => {
     setState('Invoices');
     navigate('/invoices');
@@ -19,18 +23,31 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
       }
     })
     .catch((err)=>`The Error is:${err}`);
-  },[invoiceId])
+  },[])
 
-
+  const handleDownload = () => {
+    const input = document.getElementsByClassName("DetailedInvoice");
+    html2canvas(input[0]).then((canvas)=>{
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, 'PNG', 0, 0, 210, 240);
+      pdf.save(`INV-000${detailedInvoice.list.id}.pdf`);
+  })
+  }
   return (
     <div className="DetailedInvoice">
-      <button onClick={handleNavigation}>Back to Invoices</button>
+      <div className='DetailedInvoice__back-btn'>
+        <AiOutlineBackward size={20} color={'#2287E3'} onClick={handleNavigation}/>
+        <span>Back to Invoices</span>
+      </div>
       <hr/>
       <div className="DetailedInvoice__header">
-        <h2>INVOICE NO -&nbsp;{`INV-000${detailedInvoice.list.id}`}</h2>
+        <h3>INVOICE NO -&nbsp;{`INV-000${detailedInvoice.list.id}`}</h3>
         <div className="DetailedInvoice__action-btns">
-          <button className='DetailedInvoice__share'>Share</button>
-          <button className='DetailedInvoice__download'>Download</button>
+          <div className='DetailedInvoice__download' onClick={handleDownload}>
+            <AiOutlineDownload size={20} color={'#2287E3'} />
+            <span>Download</span>
+          </div>
         </div>
       </div>
       <div className="DetailedInvoice__address-wrapper">
@@ -43,7 +60,7 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
           </address>
         </div>
         <div className="DetailedInvoice__Logo">
-          <img src="https://www.computronix.com/wp-content/uploads/2017/08/cx-icon@2x.png" alt="company-logo" width ="100" height="100"/>
+          <img src={detailedInvoice.list.logo} alt="company-logo" width ="100" height="100"/>
         </div>
       </div>
       <hr/>
