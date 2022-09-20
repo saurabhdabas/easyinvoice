@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { AiOutlineLink } from "react-icons/ai";
 const Dashboard = () => {
   return (
     <div className='dashboard'>
@@ -57,7 +58,7 @@ const Dashboard = () => {
                   <span className='dashboard__invoice-number'>
                     <div>10589</div>
                     <Link to='/invoices:id'>
-                      <img src='./link.png' alt='link-icon' width='15' height='15'/>
+                      <AiOutlineLink color={'#2287E3'} size={20}/>
                     </Link>
                   </span>
                 </td>
@@ -71,7 +72,7 @@ const Dashboard = () => {
                   <span className='dashboard__invoice-number'>
                     <div>10189</div>
                     <Link to='/invoices:id'>
-                      <img src='./link.png' alt='link-icon' width='15' height='15'/>
+                      <AiOutlineLink color={'#2287E3'} size={20}/>
                     </Link>
                   </span>
                 </td>
@@ -85,7 +86,7 @@ const Dashboard = () => {
                   <span className='dashboard__invoice-number'>
                     <div>10089</div>
                     <Link to='/invoices:id'>
-                      <img src='./link.png' alt='link-icon' width='15' height='15'/>
+                      <AiOutlineLink color={'#2287E3'} size={20}/>
                     </Link>
                   </span>
                 </td>
