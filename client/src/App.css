@@ -21,7 +21,7 @@ body {
   align-content: center;
   justify-items: center;
   color: #f1f1f1;;
-  background-color:#2287E3;
+  background-color:#303233;
   
 }
 .login__brand-wrapper h3{
@@ -41,9 +41,11 @@ body {
   justify-items: center;
   grid-template-rows: repeat(4,0.5fr);
   grid-row: 2/span 2;
+  margin:0 200px;
 }
 .login__email,.login__password{
   display:grid;
+  width:100%;
   grid-template-rows:repeat(2,1fr);
 }
 .login__email span, .login__password span{
@@ -52,35 +54,33 @@ body {
   align-items: center;
 }
 .login__email input, .login__password input{
-  width:400px;
   height:40px;
-  font:inherit;
+  font-family: 'Quicksand', sans-serif;
   border-radius:5px;
+  padding: 0 10px;
+  border:none;
   background-color:#F7F7F7;
 }
-.login__email input:hover,.login__password input:hover{
-  outline:none;
-  border:2px solid #2287E3;
-}
+
 .login__email input:focus,.login__password input:focus{
   outline:none;
   border:none;
-  border-bottom: 3px solid #2287E3;
+  border-bottom: 3px solid #303233;
 }
 .login__submit-btn{
-  width: 408px;
+  width: 100%;
   height:45px;
   padding: 1px 2px;
   font: inherit;
   font-size: large;
   font-weight: bold;
-  background-color: #2287E3;
   border:none;
   border-radius:5px;
 }
 .login__submit-btn:hover{
   cursor: pointer;
-  background-color: #FCA222;
+  color:#F7F7F7;
+  background-color: #303233;
 }
 /**************************************header*******************************************/
 .header__header{
@@ -98,7 +98,9 @@ body {
   padding:0 15px;
 }
 .header__header img{
-  border-radius: 10%;
+  border:2px solid #37C68E;
+  padding:4px;
+  border-radius:50px;
 }
 .header__brand{
   display:flex; 
@@ -115,15 +117,13 @@ body {
   justify-content: space-evenly;
   text-decoration: none;
   grid-column: 12/12;
-  border:2px solid #2287E3;
   border-radius: 5px;
-  background-color: #2287E3;
   margin-right:5px;
 }
-.header__button:hover{
+/* .header__button:hover{
   color:black;
   background-color: #f3f3f3;
-}
+} */
 
 /*************************Main***************************************/
 
@@ -140,31 +140,30 @@ body {
   grid-column: 1/4;
   background-color:#F7F7F7;
   background-color:#bdb9b7;
-  height:90vh;
 }
 .sideNavigation__items{
   display:grid;
-  margin:0;
+  margin:10px 20px;
+  padding:0;
   grid-template-rows: repeat(2,1fr);
   justify-items: start;
-  padding:10px;
   list-style-type: none;
 }
 .sideNavigation__item{
-  display:flex;
-  width:90%;
-  margin:10px 5px;
+  display:grid;
+  grid-template-columns: 0.50fr 1fr;
+  width:100%;
+  margin:10px 0;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
+  justify-items: center;
   cursor: pointer;
-  border:2px solid #F7F7F7;
+  border:2px solid #bdb9b7;
   border-radius: 5px;
 }
-.sideNavigation__item img{
-  margin: 0 15px;
-}
+
 .sideNavigation__item:hover{
-  border:2px solid #303233;
+  border:2px solid #F7F7F7;
   border-radius: 5px;
 }
 .active{
@@ -193,7 +192,7 @@ body {
   border-radius:5px;
   background-color: #f4CC54;
   padding:10px;
-  margin:0
+  margin-bottom:5px;
 }
 .dashboard__table-wrapper > table{
   height:300px
@@ -371,10 +370,10 @@ td > button:hover{
   margin: 15px 0;
   grid-column: span 2;
 }
-.customer-info__submit-btn:hover{
+/* .customer-info__submit-btn:hover{
   color:#2287E3;
   background-color: #F7F7F7;
-}
+} */
 
 /*************************************customer*******************************************/
 .customer{
@@ -506,6 +505,7 @@ td > button:hover{
   margin:10px;
   background-color: #f4CC54;
   border-radius: 5px;
+  padding:0px 3px;
   /* border:2px solid #303233; */
   cursor:pointer;
 }
@@ -542,8 +542,8 @@ td > button:hover{
 .blinking {
   position:absolute;
   animation:1s blink ease 5;
-  left:10px;
-  top:-20px
+  left:1px;
+  top:-29px
 }
 @keyframes blink {
   from, to {
@@ -674,6 +674,7 @@ td > button:hover{
   height:28px;
   width:95%;
   padding:4px;
+  text-align: center;
   background-color:#F7F7F7;
   border:none;
   /* border-radius: 5px; */
@@ -735,10 +736,10 @@ input[name='description']{
   margin: 15px 0;
   grid-column: span 2;
 }
-.invoice-info__submit-btn:hover{
+/* .invoice-info__submit-btn:hover{
   color:#2287E3;
   background-color: #F7F7F7;
-}
+} */
 /*************************************Invoice*******************************************/
 .invoice{
   display:grid;
@@ -875,23 +876,35 @@ input[name='description']{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top:10px;
+}
+.DetailedInvoice__back-btn{
+  display:flex;
+  align-items: center;
+  cursor:pointer;
+  color:#2287E3;
+}
+.DetailedInvoice__back-btn span{
+  margin-left: 5px;
+}
+.DetailedInvoice__action-btns{
+  display:grid;
+  grid-template-columns: 1fr;
 }
 
-.DetailedInvoice__share{
-  font:inherit;
-  padding:2px 4px;
-  cursor:pointer;
-  margin-right: 5px;
+.DetailedInvoice__download span{
+  margin-left: 5px;
 }
 .DetailedInvoice__download{
-  font:inherit;
-  padding:2px;
-  cursor:pointer;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 .DetailedInvoice__address-wrapper{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top:20px;
 }
 .DetailedInvoice__address h3{
   margin:8px 0;
@@ -971,4 +984,62 @@ hr{
   100% {
     transform: rotate(1800deg);
   }
+}
+/********************************************* DetailedCustomer **********************************/
+.detailedCustomer{
+  background-color: #FFF;
+  grid-column: 4/17;
+  padding:20px 40px;
+}
+.detailedCustomer__clientInfo{
+  margin-top:20px;
+}
+.detailedCustomer__clientInfo h2{
+  font-variant: small-caps;
+  margin:5px 0px; 
+}
+.detailedCustomer__clientInfo img{
+  border-radius: 100px;
+  border:2px solid #303233;
+  padding:1px;
+}
+.detailedCustomer__back-btn{
+  display:flex;
+  align-items: center;
+  cursor:pointer;
+  color:#2287E3;
+}
+.detailedCustomer__back-btn span{
+  margin-left: 5px;
+}
+.detailedCustomer__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top:10px;
+}
+.detailedCustomer__address-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.detailedCustomer__address h3{
+  margin:8px 0;
+}
+.detailedCustomer__address address{
+  display:flex;
+  flex-direction: column;
+}
+.detailedCustomer__address address p{
+  margin:0;
+}
+.detailedCustomer__details{
+  display:grid;
+  grid-template-columns: 0.25fr 1fr;
+}
+.detailedCustomer__details p{
+  margin: 5px 0;
+}
+hr{
+  background-color:#303233;
 }
