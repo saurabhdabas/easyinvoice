@@ -5,6 +5,7 @@ import DetailedInvoice from "../components/DetailedInvoice";
 import DetailedCustomer from "../components/DetailedCustomer";
 
 const display = (component,setState,invoiceId,setInvoiceId,loading,setLoading,customerId,setCustomerId) => {
+
   switch(component) {
     case
      "Customers":
