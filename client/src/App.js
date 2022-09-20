@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {React,useState} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { createBrowserHistory } from "history";
 import Login from './pages/Login'
@@ -9,9 +9,9 @@ import './App.css';
 
 function App() {
   const [state,setState] = useState(['Dashboard']);
+  const [loading,setLoading] = useState(false);
   const [invoiceId,setInvoiceId] = useState(0);
   const [customerId,setCustomerId] = useState(0);
-  const [loading,setLoading] = useState(false);
 
   let history = createBrowserHistory();
 
@@ -31,27 +31,27 @@ function App() {
         >
           <Route path="/dashboard" 
             element={
-              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading}/>
+              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}  invoiceId={invoiceId} setInvoiceId={setInvoiceId}/>
             }
           />
           <Route path="/customers" 
             element={
-              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}/>
+              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}  invoiceId={invoiceId} setInvoiceId={setInvoiceId}/>
             }
           />
           <Route path="/customers/:id" 
             element={
-              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}/>
+              <Home state={state} setState={setState} history={history} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}  invoiceId={invoiceId} setInvoiceId={setInvoiceId}/>
             }
           />
           <Route path="/invoices" 
             element={
-              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading}/>
+              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}/>
             }
           />
           <Route path="/invoices/:id" 
             element={
-              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading}/>
+              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}/>
             }
           />
         </Route>
