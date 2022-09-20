@@ -42,6 +42,8 @@ app.post('/customers/add',(req,res)=>{
   let formData = {
     name:req.body.data.name,
     photo:req.body.data.photo,
+    phone:req.body.data.phone,
+    date:req.body.data.date,
     email:req.body.data.email,
     country:req.body.data.country,
     street:req.body.data.street,
@@ -53,9 +55,9 @@ app.post('/customers/add',(req,res)=>{
     taxnumber:req.body.data.taxnumber
   }
   db.query(
-    `INSERT INTO customers(name,photo,email,country,street,city,province,zipcode,company,logo,taxnumber)
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
-    [formData.name,formData.photo,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.logo,formData.taxnumber])
+    `INSERT INTO customers(name,photo,phone,date,email,country,street,city,province,zipcode,company,logo,taxnumber)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`,
+    [formData.name,formData.photo,formData.phone,formData.date,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.logo,formData.taxnumber])
   .then((response) => {
     console.log("response:",response);
     res.send(response)
@@ -82,6 +84,7 @@ app.put('/customers/:id/delete',(req, res) => {
 app.put('/customers/:id/update',(req, res) => {
   let formData = {
     name:req.body.data.name,
+    phone:req.body.data.phone,
     email:req.body.data.email,
     country:req.body.data.country,
     street:req.body.data.street,
@@ -89,10 +92,11 @@ app.put('/customers/:id/update',(req, res) => {
     province:req.body.data.province,
     zipcode:req.body.data.zipcode,
     company:req.body.data.company,
-    taxnumber:req.body.data.taxnumber
+    taxnumber:req.body.data.taxnumber,
+    
   }
-  db.query(`UPDATE customers SET name=$2, email=$3, country=$4, street=$5, city=$6, province=$7, zipcode=$8, company=$9, taxnumber=$10
-  WHERE id = ($1) RETURNING *;`, [req.body.customerId,formData.name,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
+  db.query(`UPDATE customers SET name=$2, phone=$3, email=$4, country=$5, street=$6, city=$7, province=$8, zipcode=$9, company=$10, taxnumber=$11 
+  WHERE id = ($1) RETURNING *;`, [req.body.customerId,formData.name,formData.phone,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
     .then((response) => res.send(response))
     .catch((error) => res.send(error));
 });
