@@ -134,7 +134,7 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
         <InvoicesSearchBar search={search} setSearch={setSearch} 
           invoices={invoices} setSearchedInvoice={setSearchedInvoice} isListening={isListening} setIsListening={setIsListening}/>
         {loading 
-          ? <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
+          ? <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
           : null
         }
       </div>
