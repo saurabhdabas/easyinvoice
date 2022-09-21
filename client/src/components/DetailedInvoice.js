@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineBackward,AiOutlineShareAlt,AiOutlineDownload } from "react-icons/ai";
+import { AiOutlineBackward,AiOutlineDownload } from "react-icons/ai";
 import axios from 'axios';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
@@ -15,14 +15,16 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
   }
 
   useEffect(()=>{
-    axios.get(`http://localhost:8080/invoices/${invoiceId}`)
-    .then((response)=> {
-      console.log(response);
-      if(response.data){
-        setDetailedInvoice({...detailedInvoice,list:response.data})
-      }
-    })
-    .catch((err)=>`The Error is:${err}`);
+    if(invoiceId){
+      axios.get(`http://localhost:8080/invoices/${invoiceId}`)
+      .then((response)=> {
+        console.log(response);
+        if(response.data){
+          setDetailedInvoice({...detailedInvoice,list:response.data})
+        }
+      })
+      .catch((err)=>`The Error is:${err}`);
+    }
   },[])
 
   const handleDownload = () => {
@@ -37,7 +39,7 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
   return (
     <div className="DetailedInvoice">
       <div className='DetailedInvoice__back-btn'>
-        <AiOutlineBackward size={20} color={'#2287E3'} onClick={handleNavigation}/>
+        <AiOutlineBackward size={20} color={'#2287E3'} style={{marginRight:'5'}} onClick={handleNavigation}/>
         <span>Back to Invoices</span>
       </div>
       <hr/>
@@ -45,7 +47,7 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
         <h3>INVOICE NO -&nbsp;{`INV-000${detailedInvoice.list.id}`}</h3>
         <div className="DetailedInvoice__action-btns">
           <div className='DetailedInvoice__download' onClick={handleDownload}>
-            <AiOutlineDownload size={20} color={'#2287E3'} />
+            <AiOutlineDownload size={20} color={'#F7F7F7'} />
             <span>Download</span>
           </div>
         </div>
