@@ -8,7 +8,6 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
   
   const [invoices,setInvoices] = useState({list:[]});
   const [showInvoiceForm,setShowInvoiceForm] = useState(false);
-  
   const [deleteInvoiceId,setDeleteInvoiceId] = useState(0);
   const [updateInvoiceId,setUpdateInvoiceId] = useState(0);
   const [invoiceInputs,setInvoiceInputs]=useState({
@@ -46,13 +45,17 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
   const [searchedInvoice,setSearchedInvoice] = useState([]);
   const [isListening, setIsListening] = useState(false);
   useEffect(()=>{
-    axios.get('http://localhost:8080/invoices')
-    .then((response)=> {
+    setLoading(true);
+    setTimeout(()=>{
+      axios.get('http://localhost:8080/invoices')
+      .then((response)=> {
       if(response.status === 200){
         setInvoices(({...invoices,list:response.data}))
       }
-    })
-    .catch((err)=>`The Error is:${err}`);
+      })
+      .then(()=>setLoading(false))
+      .catch((err)=>`The Error is:${err}`);
+    },[400])
   },[invoices.list.length])
 
   useEffect(()=>{
@@ -130,12 +133,10 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
       <div className='invoices__list-wrapper'>
         <InvoicesSearchBar search={search} setSearch={setSearch} 
           invoices={invoices} setSearchedInvoice={setSearchedInvoice} isListening={isListening} setIsListening={setIsListening}/>
-        {/* <div className='invoices__list'>
-          <p>Click&nbsp;
-            <span><img src='./plus.png' alt='add-icon' width='20' height='20'/></span> 
-            &nbsp;Icon to get started 
-          </p>
-        </div> */}
+        {loading 
+          ? <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
+          : null
+        }
       </div>
       <AddInvoice invoices={invoices} setInvoices={setInvoices} showInvoiceForm={showInvoiceForm} setShowInvoiceForm={setShowInvoiceForm} invoiceInputs={invoiceInputs} setInvoiceInputs={setInvoiceInputs} updateInvoiceId={updateInvoiceId} setUpdateInvoiceId={setUpdateInvoiceId} loading={loading} setLoading={setLoading}/>
     </React.Fragment>
