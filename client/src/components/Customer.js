@@ -4,14 +4,6 @@ import { useNavigate } from 'react-router-dom';
 const Customer = ({name,company,logo,photo,setState,country,city,province,taxnumber,setShowForm,setDeleteCustomerId,setUpdateCustomerId,customerId,setCustomerId}) => {
   const navigate = useNavigate();
 
-  const handleStateChange = () => {
-    console.log(customerId)
-    navigate(`/customers/${customerId}`)
-    // history.push(`/customers/${id}`)
-    setState(['DetailedCustomer'])
-    setCustomerId(customerId);
-  }
-
   return (
     <div className='customer'>
       <div className='customer__header'>
@@ -48,7 +40,14 @@ const Customer = ({name,company,logo,photo,setState,country,city,province,taxnum
             }
             }>Delete</button>
         </div>
-        <button className='customer__details' onClick={handleStateChange} id={customerId}>Details</button>
+        <button 
+        className='customer__details' 
+        onClick={()=>{
+          navigate(`/customers/${customerId}`)
+          setState(['DetailedCustomer'])
+          setCustomerId(customerId)
+        }} 
+        id={customerId}>Details</button>
       </div>
     </div>
   )
