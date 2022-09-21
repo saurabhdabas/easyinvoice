@@ -84,6 +84,7 @@ app.put('/customers/:id/delete',(req, res) => {
 app.put('/customers/:id/update',(req, res) => {
   let formData = {
     name:req.body.data.name,
+    photo:req.body.data.photo,
     phone:req.body.data.phone,
     email:req.body.data.email,
     country:req.body.data.country,
@@ -95,9 +96,12 @@ app.put('/customers/:id/update',(req, res) => {
     taxnumber:req.body.data.taxnumber,
     
   }
-  db.query(`UPDATE customers SET name=$2, phone=$3, email=$4, country=$5, street=$6, city=$7, province=$8, zipcode=$9, company=$10, taxnumber=$11 
-  WHERE id = ($1) RETURNING *;`, [req.body.customerId,formData.name,formData.phone,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
-    .then((response) => res.send(response))
+  db.query(`UPDATE customers SET name=$2, photo=$3, phone=$4, email=$5, country=$6, street=$7, city=$8, province=$9, zipcode=$10, company=$11, taxnumber=$12 
+  WHERE id = ($1) RETURNING *;`, [req.body.customerId,formData.name,formData.photo,formData.phone,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
+    .then((response) => {
+      console.log(response);
+      res.send(response)
+    })
     .catch((error) => res.send(error));
 });
 // Add the Invoice
