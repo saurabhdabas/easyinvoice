@@ -1,13 +1,13 @@
 import React from 'react';
 import AddInvoiceForm from './AddInvoiceForm';
-
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const AddInvoice = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,invoiceInputs,setInvoiceInputs,updateInvoiceId,setUpdateInvoiceId,loading,setLoading}) => {  
   return (
     <React.Fragment>
       {!showInvoiceForm ?
         <div className='invoices__AddInvoice'>
-          <img src='./plus.png' alt='add-icon' width='50' height='50' onClick={()=>{
+          <AiOutlinePlusCircle size={50} onClick={()=>{
             setInvoiceInputs({
               name:'',
               email:'',
