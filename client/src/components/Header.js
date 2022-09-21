@@ -11,7 +11,7 @@ const Header = () => {
     <div className='header'>
       <header className='header__header'>
         <span className='header__brand'>
-          <GrNorton size={30}/>
+          <GrNorton size={40}/>
           <h2>Easy Invoice</h2>
         </span>
         <Link className="header__button" to="/" onClick={clearLocalStorage}>
