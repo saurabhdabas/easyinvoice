@@ -1,13 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { AiOutlineLink } from "react-icons/ai";
+import { AiFillLayout,AiOutlineLink, AiFillFund, AiFillSnippets, AiFillWarning } from "react-icons/ai";
 const Dashboard = () => {
   return (
     <div className='dashboard'>
-      <h1 className='dashboard__title'>Your Dashboard</h1>
+      <div className='dashboard__title'>
+        <h1>Your Dashboard</h1>
+        <AiFillLayout size={30}/>
+      </div>
       <div className='dashboard__tables'>
         <div className='dashboard__table-wrapper'>
-          <h2>Performance</h2>
+          <div className='dashboard__table-title'>
+            <h2>Performance</h2>
+            <AiFillFund size={30}/> 
+          </div>
           <table className='dashboard__performance'>
             <thead>
               <tr>
@@ -40,7 +46,10 @@ const Dashboard = () => {
           </table>
         </div>
         <div className='dashboard__table-wrapper'>
-          <h2>Recent Invoices</h2>
+          <div className='dashboard__table-title'>
+            <h2>Recent Invoices</h2>
+            <AiFillSnippets size={30}/>
+          </div>
           <table className='dashboard__invoices'>
             <thead>
               <tr>
@@ -100,7 +109,10 @@ const Dashboard = () => {
       </div>
       <h2 className='dashboard__message'>You have 20 Unpaid Invoices</h2>
       <div className='dashboard__table-wrapper'>
+        <div className='dashboard__table-title'>
           <h2>Unpaid Invoices</h2>
+          <AiFillWarning size={30}/>
+        </div>
           <table className='dashboard__unpaid-invoices'>
             <thead>
               <tr>
