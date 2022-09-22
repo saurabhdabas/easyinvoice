@@ -41,6 +41,7 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
         if(response.status === 200){
           setCustomers(({...customers,list:response.data}))
         }
+        console.log("customers:",customers.list)
       })
       .then(()=>setLoading(false))
       .catch((err)=>`The Error is:${err}`);
@@ -64,6 +65,34 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
     }
   },[updateCustomerId])
   
+  const customersList = customers.list.map((customer)=>{
+    return (
+      <Customer
+      key={customer.id}
+      customerId={customer.id}
+      state={state} 
+      setState={setState}
+      name={customer.name}
+      photo={customer.photo}
+      company={customer.company_name}
+      businessLocation={`${customer.city}, ${customer.province}`}
+      logo={customer.logo}
+      taxnumber={customer.taxnumber}
+      setShowForm={setShowForm}
+      deleteCustomerId={deleteCustomerId}
+      setDeleteCustomerId={setDeleteCustomerId}
+      updateCustomerId={updateCustomerId}
+      setUpdateCustomerId={setUpdateCustomerId}
+      customers={customers}
+      setCustomerId={setCustomerId}
+      setCustomers={setCustomers}
+      inputs={inputs}
+      setInputs={setInputs}
+      todaysDate={todaysDate}
+      />
+    )
+  })
+  console.log(customersList)
   return(
     <div className='customers'>
       {customers.list.length ?
@@ -82,12 +111,10 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
                   setState={setState}
                   name={customer.name}
                   photo={customer.photo}
-                  country={customer.country}
-                  city={customer.city}
-                  province={customer.province}
-                  company={customer.company}
+                  company={customer.company_name}
                   logo={customer.logo}
                   taxnumber={customer.taxnumber}
+                  businessLocation={`${customer.city},${customer.province}`}
                   setShowForm={setShowForm}
                   deleteCustomerId={deleteCustomerId}
                   setDeleteCustomerId={setDeleteCustomerId}
@@ -103,35 +130,9 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
               )} 
             </React.Fragment> : 
             <React.Fragment>
-              {customers.list.map((customer)=>
-                <Customer 
-                  key={customer.id}
-                  customerId={customer.id}
-                  state={state} 
-                  setState={setState} 
-                  name={customer.name}
-                  photo={customer.photo}  
-                  country={customer.country}
-                  city={customer.city}
-                  province={customer.province}
-                  company={customer.company}
-                  logo={customer.logo}
-                  taxnumber={customer.taxnumber}
-                  setShowForm={setShowForm}
-                  deleteCustomerId={deleteCustomerId}
-                  setDeleteCustomerId={setDeleteCustomerId}
-                  updateCustomerId={updateCustomerId}
-                  setUpdateCustomerId={setUpdateCustomerId}
-                  customers={customers}
-                  setCustomerId={setCustomerId}
-                  setCustomers={setCustomers}
-                  inputs={inputs}
-                  setInputs={setInputs}
-                  todaysDate={todaysDate}
-                />
-              )} 
-              </React.Fragment>
-              }
+              {customersList} 
+            </React.Fragment>
+            }
           </div>
         </div>
         <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading} todaysDate={todaysDate}/>
