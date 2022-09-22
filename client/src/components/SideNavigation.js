@@ -1,11 +1,14 @@
 import React from 'react';
 import {useNavigate} from 'react-router-dom';
-import { BsPeople } from "react-icons/bs";
-import { AiOutlineLayout, AiOutlineSnippets } from "react-icons/ai";
+import { BsPeopleFill } from "react-icons/bs";
+import { AiFillLayout, AiFillSnippets, AiFillCaretDown } from "react-icons/ai";
 
 const SideNavigation = ({state,setState,history}) => {
   const navigate = useNavigate();
   console.log("state:",state);
+  const clearLocalStorage = () => {
+    localStorage.removeItem('user');
+  }
   return (
     <div className='sideNavigation'>
       <ul className='sideNavigation__items'>
@@ -18,7 +21,7 @@ const SideNavigation = ({state,setState,history}) => {
             history.push("/dashboard", { value: event.currentTarget.ariaLabel });
           }}
         >
-          <AiOutlineLayout size={30}/>
+          <AiFillLayout size={30}/>
           <h3>Dashboard</h3>
         </li>
         <li 
@@ -30,7 +33,7 @@ const SideNavigation = ({state,setState,history}) => {
             history.push("/customers", { value: event.currentTarget.ariaLabel });
           }}
         >
-          <BsPeople size={30}/>
+          <BsPeopleFill size={30}/>
           <h3>Customers</h3>
         </li>
         <li 
@@ -42,10 +45,19 @@ const SideNavigation = ({state,setState,history}) => {
             history.push("/invoices", { value: event.currentTarget.ariaLabel });
           }}
         >
-          <AiOutlineSnippets size={30}/>
+          <AiFillSnippets size={30}/>
           <h3>Invoices</h3>
         </li>
       </ul>
+      <div className="sideNavigation__account">
+        <div className="sideNavigation__userImage" to="/" onClick={clearLocalStorage}>
+          <img src={JSON.parse(localStorage.getItem('user')).avatar} alt='avatar' width='50' height='50'/>
+	      </div>
+        <div className="sideNavigation__account-description">
+          <h3>Account&nbsp;<AiFillCaretDown/></h3>
+          <h4>{JSON.parse(localStorage.getItem('user')).email}</h4>
+        </div>
+      </div>
     </div>
   )
 }
