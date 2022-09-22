@@ -3,17 +3,19 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiFillPhone,
    AiFillMail,
-   AiFillIdcard,
-   AiOutlineBackward,
+   AiOutlineArrowLeft,
    AiOutlineNumber,
    AiFillShop,
    AiFillEnvironment,
    AiFillWarning,
    AiFillCheckCircle,
-   AiFillCreditCard,
-   AiFillCalendar
+   AiFillDollarCircle,
+   AiFillCalendar,
+   AiFillSignal
   } from "react-icons/ai";
 import { DiGoogleAnalytics } from 'react-icons/di';
+import MonthlyOrderChart from './MonthlyOrderChart';
+
 const DetailedCustomer = ({state,customerId}) => {
   const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ const DetailedCustomer = ({state,customerId}) => {
   return (
     <div className="detailedCustomer">
       <div className='detailedCustomer__back-btn' onClick={handleNavigation}>
-        <AiOutlineBackward size={20} color={'#2287E3'} style={{marginRight:'5'}}/>
+        <AiOutlineArrowLeft size={20} style={{marginRight:'5'}}/>
         <span>Back to Customers</span>
       </div>
       <hr className="detailedCustomer__rule"/>
@@ -52,13 +54,7 @@ const DetailedCustomer = ({state,customerId}) => {
             </div>
           </div>
           <div className="detailedCustomer__main">
-            <div className="detailedCustomer__row-wrapper">
-              <div className="detailedCustomer__row">
-                <AiFillIdcard size={25} style={{marginRight:'10'}}/>
-                <h3>Client</h3>
-              </div>
-              <span>{detailedCustomer.list.name}</span>
-            </div>
+            <h1>{detailedCustomer.list.name}</h1>
             <div className="detailedCustomer__row-wrapper">
               <div className="detailedCustomer__row">
               <AiOutlineNumber size={25} style={{marginRight:'10'}}/>
@@ -102,39 +98,48 @@ const DetailedCustomer = ({state,customerId}) => {
               </address>
             </div>
           </div>
-          <h4 className='detailedCustomer__footer'>{`Customer Since : ${detailedCustomer.list.date}`}</h4>
+          {/* <h4 className='detailedCustomer__footer'>{`Customer Since : ${detailedCustomer.list.date}`}</h4> */}
         </div>
         <div className='detailedCustomer__stats-wrapper'>
-          <h2 className="detailedCustomer__stats-header">
-            Customer Statistics
-            <DiGoogleAnalytics size={50}/>
-            </h2>
           <div className='detailedCustomer__stats'>
-            <div className='detailedCustomer__stats-row'>
-              <div className='detailedCustomer__stats-row-title'>
-                <h3><AiFillCheckCircle/>TOTAL ORDERS</h3>
+            <div className="detailedCustomer__stats-header">
+              <h2>Customer Statistics</h2>
+              <DiGoogleAnalytics size={30}/>
+            </div>
+            <div className='detailedCustomer__stats-component'>
+              <div className='detailedCustomer__stats-description'>
+                <AiFillCheckCircle size={30} color={'#087149'}/>
+                <h3>TOTAL ORDERS</h3>
               </div>
-              <h1 className='detailedCustomer__stats-row-num'>0&nbsp;9</h1>
+              <h1 className='detailedCustomer__stats-num'>0&nbsp;9</h1>
             </div>
-            <div className='detailedCustomer__stats-row'>
-              <h3 className='detailedCustomer__stats-row-title'>
-                <AiFillWarning/>UNPAID INVOICES
-              </h3>
-              <h1 className='detailedCustomer__stats-row-num'>0&nbsp;1</h1>
+            <div className='detailedCustomer__stats-component'>
+              <div className='detailedCustomer__stats-description'>
+                <AiFillWarning size={30} color={'#b72821'}/>
+                <h3>UNPAID INVOICES</h3>
+              </div>
+              <h1 className='detailedCustomer__stats-num'>0&nbsp;1</h1>
             </div>
-            <div className='detailedCustomer__stats-row'>
-              <h3 className='detailedCustomer__stats-row-title'>
-                <AiFillCreditCard/>AMOUNT PAID
-              </h3>
-              <h1 className='detailedCustomer__stats-row-num'>$ 9000</h1>
+            <div className='detailedCustomer__stats-component'>
+              <div className='detailedCustomer__stats-description'>
+                <AiFillDollarCircle size={30} color={'#2287E3'}/>
+                <h3>AMOUNT PAID</h3>
+              </div>
+              <h1 className='detailedCustomer__stats-num'>9000</h1>
             </div>
-            <div className='detailedCustomer__stats-row'>
-              <h3 className='detailedCustomer__stats-row-title'>
-                <AiFillCalendar/>NEXT INVOICE DUE
-              </h3>
-              <h1 className='detailedCustomer__stats-row-num'>2022-09-25</h1>
+            <div className='detailedCustomer__stats-component'>
+              <div className='detailedCustomer__stats-description'>
+                <AiFillCalendar size={30} />
+                <h3>NEXT INVOICE DUE</h3>
+              </div>
+              <h1 className='detailedCustomer__stats-num'>2022-09-25</h1>
             </div>
           </div>
+          <div className='detailedCustomer__stats-chart'>
+            <h2>Last Six Orders</h2>
+            <AiFillSignal size={30}/>
+          </div>
+          <MonthlyOrderChart/>
         </div>
       </div>
     </div>
