@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Customer = ({name,company,logo,photo,setState,country,city,province,taxnumber,setShowForm,setDeleteCustomerId,setUpdateCustomerId,customerId,setCustomerId}) => {
+const Customer = ({name,company,logo,taxnumber,businessLocation,photo,setState,setShowForm,setDeleteCustomerId,setUpdateCustomerId,customerId,setCustomerId}) => {
   const navigate = useNavigate();
 
   return (
@@ -24,7 +24,7 @@ const Customer = ({name,company,logo,photo,setState,country,city,province,taxnum
         </div>
         <div className='customer__address'>
           <p>Location</p>
-          <p>{`${city.toLowerCase()},${province.toLowerCase()},${country.toLowerCase()}`}</p>
+          <p>{businessLocation}</p>
         </div>
       </div>
       <div className='customer__footer'>
