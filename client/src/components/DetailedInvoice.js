@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineBackward,AiOutlineDownload } from "react-icons/ai";
+import { AiOutlineArrowLeft,AiOutlineDownload } from "react-icons/ai";
 import axios from 'axios';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
@@ -39,7 +39,7 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
   return (
     <div className="DetailedInvoice">
       <div className='DetailedInvoice__back-btn'>
-        <AiOutlineBackward size={20} color={'#2287E3'} style={{marginRight:'5'}} onClick={handleNavigation}/>
+        <AiOutlineArrowLeft size={20} style={{marginRight:'5'}}/>
         <span>Back to Invoices</span>
       </div>
       <hr/>
