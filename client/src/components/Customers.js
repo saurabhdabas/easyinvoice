@@ -5,7 +5,9 @@ import AddCustomer from './AddCustomer';
 import SearchBar from './SearchBar';
 const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
 
-  const todaysDate = new Date().toISOString().split("T")[0]; // Date client added in database
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const today  = new Date();
+  const todaysDate = today.toLocaleDateString("en-US", options); // Date on which client was added to database
 
   const [customers,setCustomers] = useState({list:[]});
   const [showForm,setShowForm] = useState(false);
