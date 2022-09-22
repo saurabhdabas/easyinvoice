@@ -17,7 +17,7 @@ const Login = () => {
     axios.post('http://localhost:8080/user-data',{data:inputs})
     .then((response)=>{
       setInputs({email:'',password:''});
-      localStorage.setItem('user',JSON.stringify({token:response.data.token,avatar:response.data.avatar}));
+      localStorage.setItem('user',JSON.stringify({token:response.data.token,avatar:response.data.avatar,email:response.data.email}));
       navigate('/dashboard');
       })
     .catch((err)=>console.log(err))
