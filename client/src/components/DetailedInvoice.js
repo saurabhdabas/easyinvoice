@@ -6,6 +6,7 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
 const DetailedInvoice = ({state,setState,invoiceId}) => {
+  console.log("invoiceId:",invoiceId);
   const navigate = useNavigate();
   const [detailedInvoice,setDetailedInvoice] = useState({list:[]});
   const [clipText,setClipText] = useState("");
@@ -15,42 +16,41 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
   }
 
   useEffect(()=>{
-    if(invoiceId){
-      axios.get(`http://localhost:8080/invoices/${invoiceId}`)
+    axios.get(`http://localhost:8080/invoices/${invoiceId}`)
       .then((response)=> {
         console.log(response);
-        if(response.data){
+        if(response.status === 200){
           setDetailedInvoice({...detailedInvoice,list:response.data})
         }
       })
       .catch((err)=>`The Error is:${err}`);
-    }
-  },[])
-
+  },[invoiceId])
+  console.log("detailedInvoice:",detailedInvoice.list.invoice_id);
   const handleDownload = () => {
     const input = document.getElementsByClassName("DetailedInvoice");
     html2canvas(input[0]).then((canvas)=>{
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
       pdf.addImage(imgData, 'PNG', 0, 0, 210, 240);
-      pdf.save(`INV-000${detailedInvoice.list.id}.pdf`);
+      pdf.save(`INV-000${detailedInvoice.list.invoice_id}.pdf`);
   })
   }
   return (
     <div className="DetailedInvoice">
-      <div className='DetailedInvoice__back-btn'>
-        <AiOutlineArrowLeft size={20} style={{marginRight:'5'}}/>
-        <span>Back to Invoices</span>
+      <div className="DetailedInvoice__action-btns">
+        <div className='DetailedInvoice__back-btn'>
+          <AiOutlineArrowLeft size={20} style={{marginRight:'5'}}/>
+          <span>Back to Invoices</span>
+        </div>
+        <div className='DetailedInvoice__download' onClick={handleDownload}>
+          <AiOutlineDownload size={20} color={'#F7F7F7'} />
+          <span>Download</span>
+        </div>
       </div>
       <hr/>
       <div className="DetailedInvoice__header">
-        <h3>INVOICE NO -&nbsp;{`INV-000${detailedInvoice.list.id}`}</h3>
-        <div className="DetailedInvoice__action-btns">
-          <div className='DetailedInvoice__download' onClick={handleDownload}>
-            <AiOutlineDownload size={20} color={'#F7F7F7'} />
-            <span>Download</span>
-          </div>
-        </div>
+        <h3>INVOICE NO -&nbsp;{`INV-000${detailedInvoice.list.invoice_id}`}</h3>
+        <h3>ASSOCIATED ORDER ID -&nbsp;{`ORD-000${detailedInvoice.list.orderid}`}</h3>
       </div>
       <div className="DetailedInvoice__address-wrapper">
         <div className="DetailedInvoice__address">
