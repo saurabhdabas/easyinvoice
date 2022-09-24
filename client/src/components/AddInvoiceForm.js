@@ -107,7 +107,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
         <div className='invoice-info__input'>
           <span>
             <label htmlFor='orderid'><h3>Order Id</h3></label>
-            <AiOutlineIdcard color={'#2287E3'} size={20}/>
+            <AiOutlineNumber color={'#2287E3'} size={20}/>
           </span>
           <input id='orderid' type='text' name='orderid' value={invoiceInputs.orderId} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,orderId:event.target.value})} placeholder='Enter Order Id'/>
         </div>
