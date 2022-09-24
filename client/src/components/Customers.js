@@ -3,9 +3,9 @@ import axios from 'axios';
 import Customer from './Customer';
 import AddCustomer from './AddCustomer';
 import SearchBar from './SearchBar';
-const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
+const Customers = ({setState,setCustomerId,loading,setLoading}) => {
 
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const options = { year: 'numeric', month: 'short', day: 'numeric' };
   const today  = new Date();
   const todaysDate = today.toLocaleDateString("en-US", options); // Date on which client was added to database
 
@@ -14,19 +14,19 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
   const [deleteCustomerId,setDeleteCustomerId] = useState(0);
   const [updateCustomerId,setUpdateCustomerId] = useState(0);
   const [inputs,setInputs]=useState({
-    name:'',
     photo:'',
-    phone:'',
-    date:todaysDate,
+    fullname:'',
+    phonenumber:'',
     email:'',
-    country:'',
+    date:todaysDate,
+    company_name:'',
+    company_logo:'',
+    taxnumber:'',
     street:'',
     city:'',
-    province:'',
     zipcode:'',
-    company:'',
-    logo:'',
-    taxnumber:''
+    province:'',
+    country:''
   });
   const [search,setSearch] = useState('');
   const [searchedCustomer,setSearchedCustomer] = useState([]);
@@ -41,7 +41,6 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
         if(response.status === 200){
           setCustomers(({...customers,list:response.data}))
         }
-        console.log("customers:",customers.list)
       })
       .then(()=>setLoading(false))
       .catch((err)=>`The Error is:${err}`);
@@ -70,14 +69,13 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
       <Customer
       key={customer.id}
       customerId={customer.id}
-      state={state} 
-      setState={setState}
-      name={customer.name}
       photo={customer.photo}
+      name={customer.fullname}
+      logo={customer.company_logo}
       company={customer.company_name}
-      businessLocation={`${customer.city}, ${customer.province}`}
-      logo={customer.logo}
       taxnumber={customer.taxnumber}
+      businessLocation={`${customer.city}, ${customer.province}`}
+      setState={setState}
       setShowForm={setShowForm}
       deleteCustomerId={deleteCustomerId}
       setDeleteCustomerId={setDeleteCustomerId}
@@ -92,29 +90,28 @@ const Customers = ({state,setState,setCustomerId,loading,setLoading}) => {
       />
     )
   })
-  console.log(customersList)
+  
   return(
     <div className='customers'>
       {customers.list.length ?
       <React.Fragment>
         <div className='customers__list-wrapper'>
+        <SearchBar search={search} setSearch={setSearch} 
+        customers={customers} setSearchedCustomer={setSearchedCustomer} isListening={isListening} setIsListening={setIsListening}/>
         <div className='customers__list'>
-            <SearchBar search={search} setSearch={setSearch} 
-            customers={customers} setSearchedCustomer={setSearchedCustomer} isListening={isListening} setIsListening={setIsListening}/>
             {search ? 
             <React.Fragment>
               {searchedCustomer.map((customer)=>
                 <Customer 
                   key={customer.id}
                   customerId={customer.id}
-                  state={state} 
-                  setState={setState}
-                  name={customer.name}
+                  name={customer.fullname}
                   photo={customer.photo}
+                  logo={customer.company_logo}
                   company={customer.company_name}
-                  logo={customer.logo}
                   taxnumber={customer.taxnumber}
                   businessLocation={`${customer.city},${customer.province}`}
+                  setState={setState}
                   setShowForm={setShowForm}
                   deleteCustomerId={deleteCustomerId}
                   setDeleteCustomerId={setDeleteCustomerId}
