@@ -4,10 +4,18 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./configs/db.config');
+const addToCustomers = require('./db/queries/addToCustomers');
+const addToCompanies = require('./db/queries/addToCompanies');
+const updateCustomers = require('./db/queries/updateCustomers');
+const updateCompanies = require('./db/queries/updateCompanies');
+const customers = require('./db/queries/getAllCustomers');
+const customerWithId = require('./db/queries/getCustomerById');
+const ordersByCustomer = require('./db/queries/getOrdersByCustomerId');
 
 const indexRouter = require('./routes/index');
 const customersRouter = require('./routes/customers');
 const invoicesRouter = require('./routes/invoices');
+
 
 const app = express();
 
@@ -40,38 +48,38 @@ app.post('/user-data',(req,res)=>{
 app.post('/customers/add',(req,res)=>{
   console.log(req.body.data)
   let formData = {
-    name:req.body.data.name,
     photo:req.body.data.photo,
-    phone:req.body.data.phone,
-    date:req.body.data.date,
+    fullname:req.body.data.fullname,
+    phonenumber:req.body.data.phonenumber,
     email:req.body.data.email,
-    country:req.body.data.country,
+    joiningdate:req.body.data.date,
+    company_name:req.body.data.company_name,
+    company_logo:req.body.data.company_logo,
+    taxnumber:req.body.data.taxnumber,
     street:req.body.data.street,
     city:req.body.data.city,
-    province:req.body.data.province,
     zipcode:req.body.data.zipcode,
-    company:req.body.data.company,
-    logo:req.body.data.logo,
-    taxnumber:req.body.data.taxnumber
+    province:req.body.data.province,
+    country:req.body.data.country
   }
-  db.query(
-    `INSERT INTO customers(name,photo,phone,date,email,country,street,city,province,zipcode,company,logo,taxnumber)
-    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13) RETURNING *`,
-    [formData.name,formData.photo,formData.phone,formData.date,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.logo,formData.taxnumber])
-  .then((response) => {
-    console.log("response:",response);
-    res.send(response)
+  const customersQuery=addToCustomers.addToCustomers(formData);
+  const companiesQuery=addToCompanies.addToCompanies(formData);
+  Promise.all([customersQuery,companiesQuery])
+  .then((response)=>{
+    res.send(response);
   })
   .catch((error) => res.send(error));
 })
 // Retrieve particular Customer
 app.get('/customers/:id',(req,res)=>{
   const customer = req.params;
-  db.query(`SELECT * FROM customers WHERE id = $1`, [customer.id])
-    .then(response =>{
-      res.send(response.rows[0])
-    })
-    .catch(e => console.error(e.stack));
+  const orders =ordersByCustomer.getOrdersByCustomerId(customer);
+  const customerById =customerWithId.getCustomerById(customer);
+
+  Promise.all([customerById,orders])
+  .then((response)=>{
+  res.send(response)}
+  );
 })
 //Remove the client
 app.put('/customers/:id/delete',(req, res) => {
@@ -82,27 +90,35 @@ app.put('/customers/:id/delete',(req, res) => {
 
 //Update the client
 app.put('/customers/:id/update',(req, res) => {
+  
   let formData = {
-    name:req.body.data.name,
+    customerId:req.body.customerId,
+    companyId:req.body.customerId,
     photo:req.body.data.photo,
-    phone:req.body.data.phone,
+    fullname:req.body.data.fullname,
+    phonenumber:req.body.data.phonenumber,
     email:req.body.data.email,
-    country:req.body.data.country,
+    joiningdate:req.body.data.date,
+    company_name:req.body.data.company_name,
+    company_logo:req.body.data.company_logo,
+    taxnumber:req.body.data.taxnumber,
     street:req.body.data.street,
     city:req.body.data.city,
-    province:req.body.data.province,
     zipcode:req.body.data.zipcode,
-    company:req.body.data.company,
-    taxnumber:req.body.data.taxnumber,
-    
+    province:req.body.data.province,
+    country:req.body.data.country
   }
-  db.query(`UPDATE customers SET name=$2, photo=$3, phone=$4, email=$5, country=$6, street=$7, city=$8, province=$9, zipcode=$10, company=$11, taxnumber=$12 
-  WHERE id = ($1) RETURNING *;`, [req.body.customerId,formData.name,formData.photo,formData.phone,formData.email,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber])
-    .then((response) => {
-      console.log(response);
-      res.send(response)
-    })
-    .catch((error) => res.send(error));
+const updateCustomersQuery=updateCustomers.updateCustomers(formData);
+const updateCompaniesQuery=updateCompanies.updateCompanies(formData);
+Promise.all([updateCustomersQuery,updateCompaniesQuery])
+.then(()=>{
+  customers.getAllCustomers().then(data => {
+    res.send(data);
+  })
+
+})
+.catch((error) => res.send(error));
+
 });
 // Add the Invoice
 app.post('/invoices/add',(req,res)=>{
