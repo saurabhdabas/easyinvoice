@@ -36,6 +36,7 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
           console.log("response:",response);
           axios.get('http://localhost:8080/customers')
           .then((response)=> {
+            
             setCustomers(({...customers,list:response.data}))
             setShowForm(false)
           })
@@ -48,19 +49,19 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
   const handleNavigation = () => {
     setShowForm(false)
     setInputs({
-      name:'',
       photo:'',
-      phone:'',
-      date:todaysDate,
+      fullname:'',
+      phonenumber:'',
       email:'',
-      country:'',
+      date:todaysDate,
+      company_name:'',
+      company_logo:'',
+      taxnumber:'',
       street:'',
       city:'',
-      province:'',
       zipcode:'',
-      company:'',
-      logo:'',
-      taxnumber:''
+      province:'',
+      country:''
     })
     setUpdateCustomerId(0)
   }
@@ -79,10 +80,10 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
       <form className='customer-info__form' onSubmit={handleSubmission}>
         <div className='customer-info__input'>
           <span>
-            <label htmlFor='name'><h3>Client Name</h3></label>
+            <label htmlFor='fullname'><h3>Client Name</h3></label>
             <AiOutlineIdcard color={'#2287E3'} size={20}/>
           </span>
-          <input id='name' type='text' name='name' value={inputs.name} required onChange={(event)=>setInputs({...inputs,name:event.target.value})} placeholder='Jane thomas'/>
+          <input id='fullname' type='text' name='fullname' value={inputs.fullname} required onChange={(event)=>setInputs({...inputs,fullname:event.target.value})} placeholder='Jane thomas'/>
         </div>
         <div className='customer-info__input'>
           <span>
@@ -96,7 +97,7 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
             <label htmlFor='date'><h3>Today's date</h3></label>
             <AiOutlineCalendar color={'#2287E3'} size={20}/>
           </span>
-          <input id='date' type='text' name='date' value={inputs.date} disabled required/>
+          <input id='date' type='text' name='date' value={todaysDate} disabled required/>
         </div>
         <div className='customer-info__input'>
           <span>
@@ -107,24 +108,24 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
         </div>
         <div className='customer-info__input'>
           <span>
-            <label htmlFor='phone'><h3>Phone</h3></label>
+            <label htmlFor='phonenumber'><h3>Phone</h3></label>
             <AiOutlinePhone color={'#2287E3'} size={20}/>
           </span>
-          <input id='phone' type='tel' name='phone' value={inputs.phone} required onChange={(event)=>setInputs({...inputs,phone:event.target.value})} placeholder='658-712-0480'/>
+          <input id='phonenumber' type='tel' name='phonenumber' value={inputs.phonenumber} required onChange={(event)=>setInputs({...inputs,phonenumber:event.target.value})} placeholder='658-712-0480'/>
         </div>
         <div className='customer-info__input'>
           <span>
-            <label htmlFor='logo'><h3>Company logo</h3></label>
+            <label htmlFor='company_logo'><h3>Company logo</h3></label>
             <AiOutlinePicture color={'#2287E3'} size={20}/>
           </span>
-          <input id='logo' type='text' name='logo' value={inputs.logo} required onChange={(event)=>setInputs({...inputs,logo:event.target.value})} placeholder='Paste a URL for logo'/>
+          <input id='company_logo' type='text' name='company_logo' value={inputs.company_logo} required onChange={(event)=>setInputs({...inputs,company_logo:event.target.value})} placeholder='Paste a URL for logo'/>
         </div>
         <div className='customer-info__input'>
           <span>
             <label htmlFor='company'><h3>Company</h3></label>
             <AiOutlineShop color={'#2287E3'} size={20}/>
           </span>
-          <input id='company' type='text' name='company' value={inputs.company} required onChange={(event)=>setInputs({...inputs,company:event.target.value})} placeholder='Computronix'/>
+          <input id='company_name' type='text' name='company_name' value={inputs.company_name} required onChange={(event)=>setInputs({...inputs,company_name:event.target.value})} placeholder='Computronix'/>
         </div>
         <div className='customer-info__input'>
           <span>
