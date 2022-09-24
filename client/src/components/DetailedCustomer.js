@@ -20,15 +20,44 @@ const DetailedCustomer = ({state,customerId}) => {
   const navigate = useNavigate();
 
   const [detailedCustomer,setDetailedCustomer] = useState({list:[]});
-  
+  const [chart, setChart] = useState([]);
+  const [totalAmount,setTotalAmount] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalUnpaidInvoices,setTotalUnpaidInvoices] = useState(0);
+
   useEffect(()=>{
     if(customerId){
       axios.get(`http://localhost:8080/customers/${customerId}`)
       .then((response)=> {
-        console.log(response);
+        const [customerInfo,orderInfo]=[...response.data];
         if(response.data){
-          setDetailedCustomer({...detailedCustomer,list:response.data})
+          setDetailedCustomer({...detailedCustomer,list:customerInfo});
+          setChart((prev)=>[...prev,orderInfo]);
         }
+
+        const totalAmount = (orderInfo) => {
+        const listOfAmounts = orderInfo.map((order)=>{
+        return order.order_status === 'Unpaid' ? order.order_amount : 0
+        });
+
+        setTotalAmount(listOfAmounts.reduce((acc,curr)=>{acc += curr;
+        return acc }),0)}
+        totalAmount(orderInfo);
+
+        const totalOrders = (orderInfo) => {
+          let count=0;
+          orderInfo.map((order)=> {
+            count += 1;
+          })
+          setTotalOrders(count); 
+        }
+        totalOrders(orderInfo);
+        const totalUnpaidInvoices = (orderInfo) => {
+          const unpaidInvoices = orderInfo.filter((order)=>order.order_status === "Unpaid");
+          setTotalUnpaidInvoices(unpaidInvoices.length);
+        }
+        totalUnpaidInvoices(orderInfo);
+
       })
       .catch((err)=>`The Error is:${err}`);
     }
@@ -37,10 +66,11 @@ const DetailedCustomer = ({state,customerId}) => {
     // setState('Invoices');
     navigate('/customers');
   }
-
-
+  console.log(detailedCustomer);
   return (
     <div className="detailedCustomer">
+      {chart[0] ? 
+      <React.Fragment>
       <div className='detailedCustomer__back-btn' onClick={handleNavigation}>
         <AiOutlineArrowLeft size={20} style={{marginRight:'5'}}/>
         <span>Back to Customers</span>
@@ -54,7 +84,7 @@ const DetailedCustomer = ({state,customerId}) => {
             </div>
           </div>
           <div className="detailedCustomer__main">
-            <h1>{detailedCustomer.list.name}</h1>
+            <h1>{detailedCustomer.list.fullname}</h1>
             <div className="detailedCustomer__row-wrapper">
               <div className="detailedCustomer__row">
               <AiOutlineNumber size={25} style={{marginRight:'10'}}/>
@@ -74,7 +104,7 @@ const DetailedCustomer = ({state,customerId}) => {
                 <AiFillPhone size={25} style={{marginRight:'10'}}/>
                 <h3>Phone Number</h3>
               </div>
-              <p>{detailedCustomer.list.phone}</p>
+              <p>{detailedCustomer.list.phonenumber}</p>
             </div>
             <div className="detailedCustomer__row-wrapper">
               <div className="detailedCustomer__row">
@@ -82,8 +112,8 @@ const DetailedCustomer = ({state,customerId}) => {
               <h3>Business</h3>
               </div>
               <div className="detailedCustomer__row">
-                <img src={detailedCustomer.list.logo} width ="20" height="20"/>
-                <span>{detailedCustomer.list.company}</span>
+                <img src={detailedCustomer.list.company_logo} width ="20" height="20"/>
+                <span>{detailedCustomer.list.company_name}</span>
               </div>
             </div>
             <div className="detailedCustomer__row-wrapper">
@@ -98,7 +128,6 @@ const DetailedCustomer = ({state,customerId}) => {
               </address>
             </div>
           </div>
-          {/* <h4 className='detailedCustomer__footer'>{`Customer Since : ${detailedCustomer.list.date}`}</h4> */}
         </div>
         <div className='detailedCustomer__stats-wrapper'>
           <div className='detailedCustomer__stats'>
@@ -108,40 +137,48 @@ const DetailedCustomer = ({state,customerId}) => {
             </div>
             <div className='detailedCustomer__stats-component'>
               <div className='detailedCustomer__stats-description'>
+                <AiFillCalendar size={30} />
+                <h3>CUSTOMER SINCE</h3>
+              </div>
+              <h2 className='detailedCustomer__stats-num'>{detailedCustomer.list.joiningdate}</h2>
+            </div>
+            <div className='detailedCustomer__stats-component'>
+              <div className='detailedCustomer__stats-description'>
                 <AiFillCheckCircle size={30} color={'#087149'}/>
                 <h3>TOTAL ORDERS</h3>
               </div>
-              <h1 className='detailedCustomer__stats-num'>0&nbsp;9</h1>
+              <h2 className='detailedCustomer__stats-num'>{totalOrders ? totalOrders : 0}</h2>
             </div>
             <div className='detailedCustomer__stats-component'>
               <div className='detailedCustomer__stats-description'>
                 <AiFillWarning size={30} color={'#b72821'}/>
                 <h3>UNPAID INVOICES</h3>
               </div>
-              <h1 className='detailedCustomer__stats-num'>0&nbsp;1</h1>
+              <h2 className='detailedCustomer__stats-num'>
+                {totalUnpaidInvoices ? totalUnpaidInvoices : 0}
+              </h2>
             </div>
             <div className='detailedCustomer__stats-component'>
               <div className='detailedCustomer__stats-description'>
                 <AiFillDollarCircle size={30} color={'#2287E3'}/>
                 <h3>AMOUNT PAID</h3>
               </div>
-              <h1 className='detailedCustomer__stats-num'>9000</h1>
+              <h2 className='detailedCustomer__stats-num'>$ {totalAmount ? totalAmount : 0}</h2>
             </div>
-            <div className='detailedCustomer__stats-component'>
-              <div className='detailedCustomer__stats-description'>
-                <AiFillCalendar size={30} />
-                <h3>NEXT INVOICE DUE</h3>
-              </div>
-              <h1 className='detailedCustomer__stats-num'>2022-09-25</h1>
-            </div>
+            
           </div>
-          <div className='detailedCustomer__stats-chart'>
-            <h2>Last Six Orders</h2>
+          <div className='detailedCustomer__stats-charttitle'>
+            <h2>Previous Orders</h2>
             <AiFillSignal size={30}/>
           </div>
-          <MonthlyOrderChart/>
+          <div className="detailedCustomer__stats-chart">
+          {chart[0].length ? <MonthlyOrderChart chart={chart[0].slice(-6)}/> : <img src="https://mkposhak.com/empty%20cart%20icon.svg" alt="empty-cart" width='200'/>}
+          </div>
         </div>
       </div>
+      </React.Fragment> 
+      : "NO DATA"}
+      
     </div>
   )
 }
