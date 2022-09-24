@@ -37,6 +37,7 @@ const Customer = ({name,company,logo,taxnumber,businessLocation,photo,setState,s
           <button className='customer__delete' type='submit' id={customerId} onClick={
             (event)=>{
               setDeleteCustomerId(event.currentTarget.id)
+              setShowForm(false)
             }
             }>Delete</button>
         </div>
