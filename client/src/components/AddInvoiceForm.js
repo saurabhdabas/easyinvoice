@@ -45,7 +45,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
       }
       else {
         axios.post('http://localhost:8080/invoices/add',{data:invoiceInputs})
-        .then((response)=>{
+        .then(()=>{
           axios.get('http://localhost:8080/invoices')
           .then((response)=>{
             setInvoices(({...invoices,list:response.data}))
@@ -60,6 +60,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
   const handleNavigation = () => {
     setShowInvoiceForm(false)
     setInvoiceInputs({
+      orderId:0,
       name:'',
       email:'',
       photo:'',
@@ -103,6 +104,13 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
         </button>
       </div>
       <form className='invoice-info__form' onSubmit={handleSubmission}>
+        <div className='invoice-info__input'>
+          <span>
+            <label htmlFor='orderid'><h3>Order Id</h3></label>
+            <AiOutlineIdcard color={'#2287E3'} size={20}/>
+          </span>
+          <input id='orderid' type='text' name='orderid' value={invoiceInputs.orderId} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,orderId:event.target.value})} placeholder='Enter Order Id'/>
+        </div>
         <div className='invoice-info__input'>
           <span>
             <label htmlFor='name'><h3>Bill To</h3></label>
@@ -281,21 +289,21 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
                     placeholder='Add a description'/>
                 </td>
                 <td className='invoice-table__row'>
-                  <input id='quantity' type='number' name='quantity' value={invoiceInputs.tabledata.rTwo.quantity} required onChange={(event)=>{
+                  <input id='quantity' type='number' min='0' name='quantity' value={invoiceInputs.tabledata.rTwo.quantity} required onChange={(event)=>{
                     setInvoiceInputs(
                     {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rTwo: { ...invoiceInputs.tabledata.rTwo,quantity:event.target.value } }
                     })
                   }} placeholder='Enter quantity'/>
                 </td>
                 <td className='invoice-table__row'>
-                  <input id='unitprice' type='number' name='unitprice' value={invoiceInputs.tabledata.rTwo.unitprice} required onChange={(event)=>{
+                  <input id='unitprice' type='number' min='0' name='unitprice' value={invoiceInputs.tabledata.rTwo.unitprice} required onChange={(event)=>{
                     setInvoiceInputs(
                     {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rTwo:{ ...invoiceInputs.tabledata.rTwo,unitprice:event.target.value } }
                     })
                   }} placeholder='Enter unit price'/>
                 </td>
                 <td className='invoice-table__row'>
-                  <input id='total' type='number' name='total' value={invoiceInputs.tabledata.rTwo.total} required onChange={(event) => {    
+                  <input id='total' type='number' min='0' name='total' value={invoiceInputs.tabledata.rTwo.total} required onChange={(event) => {    
                     setInvoiceInputs(
                     {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rTwo: { ...invoiceInputs.tabledata.rTwo,total:event.target.value } }
                     })
