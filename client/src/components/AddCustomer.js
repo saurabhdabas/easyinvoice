@@ -9,19 +9,19 @@ const AddCustomer = ({customers,setCustomers,showForm,setShowForm,inputs,setInpu
         <div className='customers__AddCustomer'>
           <AiOutlinePlusCircle size={50} onClick={()=>{
             setInputs({
-              name:'',
               photo:'',
-              phone:'',
-              date:todaysDate,
+              fullname:'',
+              phonenumber:'',
               email:'',
-              country:'',
+              date:todaysDate,
+              company_name:'',
+              company_logo:'',
+              taxnumber:'',
               street:'',
               city:'',
-              province:'',
               zipcode:'',
-              company:'',
-              logo:'',
-              taxnumber:''
+              province:'',
+              country:''
             })
             setShowForm(true)
             }}/>
