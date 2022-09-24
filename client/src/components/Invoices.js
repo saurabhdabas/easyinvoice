@@ -11,6 +11,7 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
   const [deleteInvoiceId,setDeleteInvoiceId] = useState(0);
   const [updateInvoiceId,setUpdateInvoiceId] = useState(0);
   const [invoiceInputs,setInvoiceInputs]=useState({
+    orderId:0,
     name:'',
     email:'',
     photo:'',
