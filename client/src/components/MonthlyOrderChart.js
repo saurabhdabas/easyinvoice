@@ -2,59 +2,14 @@ import React,{useState} from 'react';
 import { Chart as ChartJS } from "chart.js/auto";
 import { Bar } from 'react-chartjs-2';
 
-const chartData = [
-  {
-  id:1,
-  year:2020,
-  month:'Jan',
-  Orders:2,
-  amount:2000
-  },
-  {
-    id:2,
-    year:2021,
-    month:'Feb',
-    Orders:2,
-    amount:3000
-  },
-  {
-    id:3,
-    year:2022,
-    month:'Mar',
-    Orders:2,
-    amount:4000
-  },
-  {
-    id:4,
-    year:2023,
-    month:'Apr',
-    orders:2,
-    amount:5000
-  },
-  {
-    id:5,
-    year:2023,
-    month:'Jan',
-    orders:2,
-    amount:5000
-  },
-  {
-    id:6,
-    year:2023,
-    month:'Jan',
-    orders:2,
-    amount:5000
-  }
-]
-const MonthlyOrderChart = () => {
-  // const [chartData, setChartData] = useState([]);
+const MonthlyOrderChart = ({chart}) => {
 
   const data = {
-    labels: chartData.map((item) => `Order #${item.id}`),
+    labels: chart.map((item) => `Order Id ${item.order_id}`),
     datasets: [
       {
         label: 'Amount Spent Per Order',
-        data: chartData.map((item) => item.amount),
+        data: chart.map((item) => item.order_amount),
         backgroundColor: [
           'rgba(255, 99, 132, 0.5)',
           'rgba(255, 159, 64, 0.5)',
@@ -79,7 +34,7 @@ const MonthlyOrderChart = () => {
       }
     ]
   }
-  // let delayed;
+
   const options={
     scales: {
       x: {
@@ -89,18 +44,7 @@ const MonthlyOrderChart = () => {
         },
         grid: {
           display: false
-        },
-        // title: {
-        //   display: true,
-        //   text: 'Order ID',
-        //   color: '#000',
-        //   font: {
-        //     family: 'Quicksand',
-        //     size: 15,
-        //     weight: 'bold',
-        //     lineHeight: 1.2,
-        //   }
-        // }
+        }
       },
     y:{
       ticks:{
@@ -115,6 +59,20 @@ const MonthlyOrderChart = () => {
     }
     },
     responsive:true,
+    plugins: {
+      title: {
+          display: true,
+          text: 'Display Last Six Orders',
+          padding: {
+              top: 10,
+              bottom: 30
+          },
+          font:{
+            family:'quicksand',
+            size:14
+          }
+      }
+    }
   }
 
   return (
