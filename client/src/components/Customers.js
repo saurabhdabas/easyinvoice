@@ -5,10 +5,6 @@ import AddCustomer from './AddCustomer';
 import SearchBar from './SearchBar';
 const Customers = ({setState,setCustomerId,loading,setLoading}) => {
 
-  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-  const today  = new Date();
-  const todaysDate = today.toLocaleDateString("en-US", options); // Date on which client was added to database
-
   const [customers,setCustomers] = useState({list:[]});
   const [showForm,setShowForm] = useState(false);
   const [deleteCustomerId,setDeleteCustomerId] = useState(0);
@@ -19,7 +15,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
     lastname:'',
     phonenumber:'',
     email:'',
-    date:todaysDate,
+    date:'',
     company_name:'',
     company_logo:'',
     taxnumber:'',
@@ -73,6 +69,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
       photo={customer.photo}
       firstname={customer.firstname}
       lastname={customer.lastname}
+      customerSince={customer.date}
       logo={customer.company_logo}
       company={customer.company_name}
       taxnumber={customer.taxnumber}
@@ -88,7 +85,6 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
       setCustomers={setCustomers}
       inputs={inputs}
       setInputs={setInputs}
-      todaysDate={todaysDate}
       />
     )
   })
@@ -110,6 +106,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
                   firstname={customer.firstname}
                   lastname={customer.lastname}
                   photo={customer.photo}
+                  customerSince={customer.date}
                   logo={customer.company_logo}
                   company={customer.company_name}
                   taxnumber={customer.taxnumber}
@@ -125,7 +122,6 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
                   setCustomers={setCustomers}
                   inputs={inputs}
                   setInputs={setInputs}
-                  todaysDate={todaysDate}
                 />
               )} 
             </React.Fragment> : 
@@ -135,7 +131,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
             }
           </div>
         </div>
-        <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading} todaysDate={todaysDate}/>
+        <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading}/>
       </React.Fragment>
       : 
       <React.Fragment>
@@ -145,7 +141,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
             ? <div className="lds-default customer-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
             : null}
         </div>
-        <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading} todaysDate={todaysDate}/>
+        <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading}/>
       </React.Fragment>
       }
     </div> 
