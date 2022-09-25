@@ -50,7 +50,8 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
     setShowForm(false)
     setInputs({
       photo:'',
-      fullname:'',
+      firstname:'',
+      lastname:'',
       phonenumber:'',
       email:'',
       date:todaysDate,
@@ -80,10 +81,17 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
       <form className='customer-info__form' onSubmit={handleSubmission}>
         <div className='customer-info__input'>
           <span>
-            <label htmlFor='fullname'><h3>Client Name</h3></label>
+            <label htmlFor='fullname'><h3>First Name</h3></label>
             <AiOutlineIdcard color={'#2287E3'} size={20}/>
           </span>
-          <input id='fullname' type='text' name='fullname' value={inputs.fullname} required onChange={(event)=>setInputs({...inputs,fullname:event.target.value})} placeholder='Jane thomas'/>
+          <input id='firstname' type='text' name='firstname' value={inputs.firstname} required onChange={(event)=>setInputs({...inputs,firstname:event.target.value})} placeholder='Jane'/>
+        </div>
+        <div className='customer-info__input'>
+          <span>
+            <label htmlFor='lastname'><h3>Last Name</h3></label>
+            <AiOutlineIdcard color={'#2287E3'} size={20}/>
+          </span>
+          <input id='Lastname' type='text' name='Lastname' value={inputs.lastname} required onChange={(event)=>setInputs({...inputs,lastname:event.target.value})} placeholder='Thomas'/>
         </div>
         <div className='customer-info__input'>
           <span>
