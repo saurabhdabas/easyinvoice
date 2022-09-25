@@ -12,7 +12,7 @@ const customers = require('./db/queries/getAllCustomers');
 const customerWithId = require('./db/queries/getCustomerById');
 const ordersByCustomer = require('./db/queries/getOrdersByCustomerId');
 
-const indexRouter = require('./routes/index');
+const dashboardRouter = require('./routes/dashboard');
 const customersRouter = require('./routes/customers');
 const invoicesRouter = require('./routes/invoices');
 
@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/dashboard', dashboardRouter(db));
 app.use('/customers', customersRouter(db));
 app.use('/invoices', invoicesRouter(db));
 
@@ -49,10 +49,11 @@ app.post('/customers/add',(req,res)=>{
   console.log(req.body.data)
   let formData = {
     photo:req.body.data.photo,
-    fullname:req.body.data.fullname,
+    firstname:req.body.data.firstname,
+    lastname:req.body.data.lastname,
     phonenumber:req.body.data.phonenumber,
     email:req.body.data.email,
-    joiningdate:req.body.data.date,
+    customersince:req.body.data.date,
     company_name:req.body.data.company_name,
     company_logo:req.body.data.company_logo,
     taxnumber:req.body.data.taxnumber,
@@ -95,10 +96,11 @@ app.put('/customers/:id/update',(req, res) => {
     customerId:req.body.customerId,
     companyId:req.body.customerId,
     photo:req.body.data.photo,
-    fullname:req.body.data.fullname,
+    firstname:req.body.data.firstname,
+    lastname:req.body.data.lastname,
     phonenumber:req.body.data.phonenumber,
     email:req.body.data.email,
-    joiningdate:req.body.data.date,
+    customersince:req.body.data.date,
     company_name:req.body.data.company_name,
     company_logo:req.body.data.company_logo,
     taxnumber:req.body.data.taxnumber,
@@ -122,7 +124,9 @@ Promise.all([updateCustomersQuery,updateCompaniesQuery])
 });
 // Add the Invoice
 app.post('/invoices/add',(req,res)=>{
+  console.log("request.body.data:",req.body.data)
   let formData = {
+    orderId:req.body.data.orderId,
     name:req.body.data.name,
     email:req.body.data.email,
     photo:req.body.data.photo,
@@ -145,9 +149,9 @@ app.post('/invoices/add',(req,res)=>{
     tabledata:req.body.data.tabledata
   }
   db.query(
-    `INSERT INTO invoices (name,email,photo,logo,country,street,city,province,zipcode,company,taxnumber,date,duedate,notes,phone,title,subtotal,balance,message,tabledata)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20) RETURNING *`,
-    [formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
+    `INSERT INTO invoices (orderId,name,email,photo,logo,country,street,city,province,zipcode,company,taxnumber,date,duedate,notes,phone,title,subtotal,balance,message,tabledata)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21) RETURNING *`,
+    [formData.orderId,formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
   .then((response) => {
     console.log("response:",response);
     res.send(response)
@@ -157,7 +161,7 @@ app.post('/invoices/add',(req,res)=>{
 // Retrieve particular Invoice
 app.get('/invoices/:id',(req,res)=>{
   const invoice = req.params;
-  db.query(`SELECT * FROM invoices WHERE id = $1`, [invoice.id])
+  db.query(`SELECT * FROM invoices WHERE invoice_id = $1`, [invoice.id])
     .then(response =>{
       res.send(response.rows[0])
     })
@@ -165,7 +169,7 @@ app.get('/invoices/:id',(req,res)=>{
 })
 //Remove the invoice
 app.put('/invoices/:id/delete',(req, res) => {
-  db.query(`DELETE FROM invoices WHERE id = $1;`, [req.body.invoiceId])
+  db.query(`DELETE FROM invoices WHERE invoice_id = $1;`, [req.body.invoiceId])
     .then((response) => res.send(response))
     .catch((error) => res.send(error));
 });
@@ -173,6 +177,7 @@ app.put('/invoices/:id/delete',(req, res) => {
 //Update the invoice
 app.put('/invoices/:id/update',(req, res) => {
   let formData = {
+    orderId:req.body.data.orderId,
     name:req.body.data.name,
     email:req.body.data.email,
     photo:req.body.data.photo,
@@ -192,8 +197,8 @@ app.put('/invoices/:id/update',(req, res) => {
     message:req.body.data.message,
     tabledata:req.body.data.tabledata
   }
-  db.query(`UPDATE invoices SET name=$2, email=$3, photo=$4, logo=$5, country=$6, street=$7, city=$8, province=$9, zipcode=$10, company=$11, taxnumber=$12, date=$13, duedate=$14, notes=$15, phone=$16, title=$17, message=$18, tabledata=$19
-  WHERE id = ($1) RETURNING *;`, [req.body.invoiceId,formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.message,formData.tabledata])
+  db.query(`UPDATE invoices SET orderId=$2 name=$3, email=$4, photo=$5, logo=$6, country=$7, street=$8, city=$9, province=$10, zipcode=$11, company=$12, taxnumber=$13, date=$14, duedate=$15, notes=$16, phone=$17, title=$18, message=$19, tabledata=$20
+  WHERE invoice_id = ($1) RETURNING *;`, [req.body.invoiceId,formData.orderId,formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.message,formData.tabledata])
     .then((response) => {
       console.log(response);
       res.send(response)
