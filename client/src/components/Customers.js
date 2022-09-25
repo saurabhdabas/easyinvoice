@@ -106,7 +106,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
                   firstname={customer.firstname}
                   lastname={customer.lastname}
                   photo={customer.photo}
-                  customerSince={customer.date}
+                  customersince={customer.date}
                   logo={customer.company_logo}
                   company={customer.company_name}
                   taxnumber={customer.taxnumber}

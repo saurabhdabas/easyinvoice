@@ -8,5 +8,5 @@ CREATE TABLE customers (
   lastname VARCHAR(255) NOT NULL,
   phonenumber VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  joiningdate VARCHAR(255) NOT NULL
+  customersince VARCHAR(255) NOT NULL
 );

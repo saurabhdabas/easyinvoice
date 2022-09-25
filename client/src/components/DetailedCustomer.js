@@ -84,7 +84,7 @@ const DetailedCustomer = ({state,customerId}) => {
             </div>
           </div>
           <div className="detailedCustomer__main">
-            <h1>{detailedCustomer.list.fullname}</h1>
+            <h1>{`${detailedCustomer.list.firstname} ${detailedCustomer.list.lastname}`}</h1>
             <div className="detailedCustomer__row-wrapper">
               <div className="detailedCustomer__row">
               <AiOutlineNumber size={25} style={{marginRight:'10'}}/>
@@ -140,7 +140,7 @@ const DetailedCustomer = ({state,customerId}) => {
                 <AiFillCalendar size={30} />
                 <h3>CUSTOMER SINCE</h3>
               </div>
-              <h2 className='detailedCustomer__stats-num'>{detailedCustomer.list.joiningdate}</h2>
+              <h2 className='detailedCustomer__stats-num'>{detailedCustomer.list.customersince}</h2>
             </div>
             <div className='detailedCustomer__stats-component'>
               <div className='detailedCustomer__stats-description'>
