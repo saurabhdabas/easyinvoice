@@ -1,10 +1,11 @@
 import Customers from "../components/Customers";
 import Invoices from "../components/Invoices";
 import Dashboard from "../components/Dashboard";
+import Orders from "../components/Orders";
 import DetailedInvoice from "../components/DetailedInvoice";
 import DetailedCustomer from "../components/DetailedCustomer";
 
-const display = (component,setState,invoiceId,setInvoiceId,loading,setLoading,customerId,setCustomerId) => {
+const display = (component,setState,invoiceId,setInvoiceId,loading,setLoading,customerId,setCustomerId,setOrderId) => {
 
   switch(component) {
     case
@@ -12,7 +13,10 @@ const display = (component,setState,invoiceId,setInvoiceId,loading,setLoading,cu
       return <Customers state={component} setState={setState} loading={loading} setLoading={setLoading} setCustomerId={setCustomerId}/>
     case
      "Invoices":
-      return <Invoices state={component} setState={setState} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading}/> 
+      return <Invoices state={component} setState={setState} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading}/>
+    case  
+      "Orders":
+      return <Orders state={component} setState={setState} setOrderId={setOrderId} loading={loading} setLoading={setLoading}/>  
     case
       "DetailedInvoice":
        return <DetailedInvoice state={component} invoiceId={invoiceId} setState={setState}/>
@@ -20,7 +24,7 @@ const display = (component,setState,invoiceId,setInvoiceId,loading,setLoading,cu
       "DetailedCustomer":
        return <DetailedCustomer state={component} customerId={customerId}/>  
     default: 
-    return <Dashboard/>  
+    return <Dashboard loading={loading} setLoading={setLoading} setInvoiceId={setInvoiceId}/>  
   }
 }
 

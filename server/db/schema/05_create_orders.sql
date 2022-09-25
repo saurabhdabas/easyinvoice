@@ -4,8 +4,7 @@ DROP TABLE IF EXISTS orders CASCADE;
 CREATE TABLE orders (
   order_id SERIAL PRIMARY KEY,
   order_date VARCHAR(255) NOT NULL,
-  order_month VARCHAR(255) NOT NULL,
-  order_status VARCHAR(255) NOT NULL,
+  order_description VARCHAR(255) NOT NULL,
   order_amount INTEGER NOT NULL,
   customer_id INTEGER  NOT NULL REFERENCES customers(id) ON DELETE CASCADE
 );

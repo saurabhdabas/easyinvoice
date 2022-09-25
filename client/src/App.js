@@ -12,6 +12,7 @@ function App() {
   const [loading,setLoading] = useState(false);
   const [invoiceId,setInvoiceId] = useState(0);
   const [customerId,setCustomerId] = useState(0);
+  const [orderId,setOrderId] = useState(0);
 
   let history = createBrowserHistory();
 
@@ -52,6 +53,16 @@ function App() {
           <Route path="/invoices/:id" 
             element={
               <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId}/>
+            }
+          />
+          <Route path="/orders" 
+            element={
+              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId} orderId={orderId} setOrderId={setOrderId}/>
+            }
+          />
+          <Route path="/orders/:id" 
+            element={
+              <Home state={state} setState={setState} history={history} invoiceId={invoiceId} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading} customerId={customerId} setCustomerId={setCustomerId} orderId={orderId} setOrderId={setOrderId}/>
             }
           />
         </Route>
