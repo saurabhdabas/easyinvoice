@@ -10,7 +10,8 @@ const AddCustomer = ({customers,setCustomers,showForm,setShowForm,inputs,setInpu
           <AiOutlinePlusCircle size={50} onClick={()=>{
             setInputs({
               photo:'',
-              fullname:'',
+              firstname:'',
+              lastname:'',
               phonenumber:'',
               email:'',
               date:todaysDate,

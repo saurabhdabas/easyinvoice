@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Customer = ({name,company,logo,taxnumber,businessLocation,photo,setState,setShowForm,setDeleteCustomerId,setUpdateCustomerId,customerId,setCustomerId}) => {
+const Customer = ({firstname,lastname,company,logo,taxnumber,businessLocation,photo,setState,setShowForm,setDeleteCustomerId,setUpdateCustomerId,customerId,setCustomerId}) => {
   const navigate = useNavigate();
 
   return (
@@ -9,7 +9,7 @@ const Customer = ({name,company,logo,taxnumber,businessLocation,photo,setState,s
       <div className='customer__header'>
         <div className='customer__name'>
           <img src={photo} alt="customer-image" width="30" height="30"/>
-          <h5>{name.toUpperCase()}</h5>
+          <h5>{`${firstname.toUpperCase()} ${lastname.toUpperCase()}`}</h5>
         </div>
         <div className='customer__logos'>
           <img src={logo} alt='name-logo' width='20' height='20'/>

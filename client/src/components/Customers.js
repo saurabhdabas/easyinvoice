@@ -15,7 +15,8 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
   const [updateCustomerId,setUpdateCustomerId] = useState(0);
   const [inputs,setInputs]=useState({
     photo:'',
-    fullname:'',
+    firstname:'',
+    lastname:'',
     phonenumber:'',
     email:'',
     date:todaysDate,
@@ -70,7 +71,8 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
       key={customer.id}
       customerId={customer.id}
       photo={customer.photo}
-      name={customer.fullname}
+      firstname={customer.firstname}
+      lastname={customer.lastname}
       logo={customer.company_logo}
       company={customer.company_name}
       taxnumber={customer.taxnumber}
@@ -105,7 +107,8 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
                 <Customer 
                   key={customer.id}
                   customerId={customer.id}
-                  name={customer.fullname}
+                  firstname={customer.firstname}
+                  lastname={customer.lastname}
                   photo={customer.photo}
                   logo={customer.company_logo}
                   company={customer.company_name}
@@ -139,7 +142,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
         <div className='customers__list-wrapper'>
           <SearchBar/>
           {loading 
-            ? <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
+            ? <div className="lds-default customer-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
             : null}
         </div>
         <AddCustomer customers={customers} setCustomers={setCustomers} showForm={showForm} setShowForm={setShowForm} inputs={inputs} setInputs={setInputs} updateCustomerId={updateCustomerId} setUpdateCustomerId={setUpdateCustomerId} loading={loading} setLoading={setLoading} todaysDate={todaysDate}/>
