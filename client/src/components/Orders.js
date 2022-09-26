@@ -1,31 +1,36 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import Order from './Order';
-import SearchBar from './SearchBar';
-const Orders = ({setState,setOrderId,loading,setLoading}) => {
+import OrdersSearchBar from './OrdersSearchBar';
+import DetailedOrder from './DetailedOrder';
+const Orders = ({setState,orderId,setOrderId,loading,setLoading}) => {
 
   const [orders,setOrders] = useState({list:[]});
-  const [showOrder,setShowOrder] = useState(false);
+  
+  const [detailedOrder,setDetailedOrder] = useState([]);
   const [search,setSearch] = useState('');
   const [searchedOrder,setSearchedOrder] = useState([]);
   const [isListening, setIsListening] = useState(false);
-  
+
 
   useEffect(()=>{
     setLoading(true);
+    
     setTimeout(()=>{
       axios.get('http://localhost:8080/orders')
       .then((response)=> {
         if(response.status === 200){
-          setOrders(({...orders,list:response.data}))
+          // console.log("ORDERS:",response.data);
+          setOrders(({...orders,list:response.data}))        
         }
       })
       .then(()=>setLoading(false))
       .catch((err)=>`The Error is:${err}`);
     },[400])
-  },[orders.list.length])
-  
-  const ordersList = orders.list.map((order)=>{
+  },[])
+
+  const ordersArray = orders.list.map((order)=>{
+    
     return (
       <Order
       key={order.order_id}
@@ -35,19 +40,22 @@ const Orders = ({setState,setOrderId,loading,setLoading}) => {
       orderAmount={order.order_amount}
       setState={setState}
       orders={orders}
-      setorderId={setOrderId}
-      setorders={setOrders}
-      setShowOrder={setShowOrder}
+      setOrderId={setOrderId}
+      setOrders={setOrders}
+      customerPhoto={order.photo}
+      customerFirstName={order.firstname}
+      paymentStatus={order.payment_status}
+      setDetailedOrder={setDetailedOrder}
       />
     )
   })
-  
+  console.log("DetailedOrder:",detailedOrder);
   return(
     <div className='orders'>
       {orders.list.length ?
       <React.Fragment>
         <div className='orders__list-wrapper'>
-        <SearchBar search={search} setSearch={setSearch} 
+        <OrdersSearchBar search={search} setSearch={setSearch} 
         orders={orders} setSearchedOrder={setSearchedOrder} isListening={isListening} setIsListening={setIsListening}/>
         <div className='orders__list'>
             {search ? 
@@ -61,23 +69,49 @@ const Orders = ({setState,setOrderId,loading,setLoading}) => {
                 orderAmount={order.order_amount}
                 setState={setState}
                 orders={orders}
-                setorderId={setOrderId}
-                setorders={setOrders}
-                setShowOrder={setShowOrder}
+                setOrderId={setOrderId}
+                setOrders={setOrders}
+                customerPhoto={order.photo}
+                customerFirstName={order.firstname}
+                paymentStatus={order.payment_status}
+                setDetailedOrder={setDetailedOrder}
                 />
               )} 
             </React.Fragment> : 
             <React.Fragment>
-              {ordersList} 
+              {ordersArray} 
             </React.Fragment>
             }
           </div>
         </div>
+        {detailedOrder.map((order)=>{
+
+          return (
+            <DetailedOrder
+            key={orderId}
+            orderId={orderId}
+            orderDate={order.order_date}
+            orderDescription={order.order_description}
+            orderAmount={order.order_amount}
+            setState={setState}
+            orders={orders}
+            setOrderId={setOrderId}
+            setOrders={setOrders}
+            customerPhoto={order.photo}
+            customerFirstName={order.firstname}
+            paymentStatus={order.payment_status}
+            paymentMethod={order.payment_method}
+            paymentDate={order.payment_date}
+            // value={value}
+            // setValue={value}
+          />
+          )
+        })}
       </React.Fragment>
       : 
       <React.Fragment>
         <div className='orders__list-wrapper'>
-          <SearchBar/>
+          <OrdersSearchBar/>
           {loading 
             ? <div className="lds-default order-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
             : <></>}

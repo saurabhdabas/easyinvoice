@@ -46,7 +46,7 @@ const OrdersSearchBar = ({search,setSearch,orders,setSearchedOrder,isListening,s
       <div className='search__voice-icon'>
         {isListening ? <AiOutlineAudio size={25} onClick={handleVoiceCommand}/>: <AiOutlineAudioMuted size={25} onClick={handleVoiceCommand}/>}
         <svg height="50" width="50" className={isListening ? 'blinking' :'hidden'}>
-          {isListening ? <circle cx="50%" cy="50%" r="5" fill="crimson" />: null}
+          {isListening ? <circle cx="50%" cy="50%" r="5" fill="crimson" />: <></>}
         </svg>
       </div> 
     </div>
