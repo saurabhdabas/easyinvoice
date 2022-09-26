@@ -57,12 +57,16 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
     }
     return (
       <tr>
-        <td><h3>INV-000{dataset.invoice_id}</h3></td>
         <td>
           <span className='dashboard__invoice-number'>
-            <div>CUS-000{dataset.id}</div>
-              <AiOutlineLink color={'#2287E3'} size={20} onClick={handleNavigation} style={{cursor:'pointer'}}/>
+          <h3>INV-000{dataset.invoice_id}</h3>
+          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleNavigation} style={{cursor:'pointer'}}/>
           </span>
+          </td>
+        <td>
+         
+        <div>CUS-000{dataset.id}</div>
+          
         </td>
         <td>{dataset.duedate}</td>
         <td>
