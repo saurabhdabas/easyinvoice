@@ -51,6 +51,7 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
   const invoicesWithOrdersStatusArray = invoicesWithOrdersStatus.data.map((dataset)=>{
 
     const handleNavigation = () => {
+      setInvoiceId(dataset.invoice_id)
       setState(['DetailedInvoice']);
       navigate(`/invoices/${dataset.invoice_id}`)
     }

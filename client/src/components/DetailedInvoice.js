@@ -5,15 +5,12 @@ import axios from 'axios';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 
-const DetailedInvoice = ({state,setState,invoiceId}) => {
+const DetailedInvoice = ({state,setState,invoiceId,setInvoiceId}) => {
   console.log("invoiceId:",invoiceId);
   const navigate = useNavigate();
   const [detailedInvoice,setDetailedInvoice] = useState({list:[]});
   const [clipText,setClipText] = useState("");
-  const handleNavigation = () => {
-    setState(['Invoices']);
-    navigate('/invoices');
-  }
+
 
   useEffect(()=>{
     axios.get(`http://localhost:8080/invoices/${invoiceId}`)
@@ -26,6 +23,12 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
       .catch((err)=>`The Error is:${err}`);
   },[invoiceId])
   console.log("detailedInvoice:",detailedInvoice.list.invoice_id);
+
+  const handleNavigation = () => {
+    setState(['Invoices']);
+    navigate('/invoices');
+  }
+
   const handleDownload = () => {
     const input = document.getElementsByClassName("DetailedInvoice");
     html2canvas(input[0]).then((canvas)=>{

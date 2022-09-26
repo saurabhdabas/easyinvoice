@@ -19,7 +19,7 @@ const display = (component,setState,invoiceId,setInvoiceId,loading,setLoading,cu
       return <Orders state={component} setState={setState} setInvoiceId={setInvoiceId} loading={loading} setLoading={setLoading}/>  
     case
       "DetailedInvoice":
-       return <DetailedInvoice state={component} invoiceId={invoiceId} setState={setState}/>
+       return <DetailedInvoice state={component} invoiceId={invoiceId} setInvoiceId={setInvoiceId} setState={setState}/>
     case
       "DetailedCustomer":
        return <DetailedCustomer state={component} customerId={customerId} setState={setState}/>  
