@@ -1,7 +1,77 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React,{useState,useEffect} from 'react';
+import axios from 'axios';
+
 import { AiFillLayout,AiOutlineLink, AiFillFund, AiFillSnippets, AiFillWarning } from "react-icons/ai";
-const Dashboard = () => {
+import getNumberOfDays from '../Helpers/dueDaysCalculator';
+import PerformaceChart from './PerformanceChart';
+const Dashboard = ({loading,setLoading,setInvoiceId}) => {
+
+  const[unpaidInvoices,setunpaidInvoices]=useState({data:[]});
+  const[paidInvoices,setpaidInvoices]=useState({data:[]});
+  const[invoicesWithOrdersStatus,setInvoicesWithOrdersStatus]=useState({data:[]});
+  const[chartData,setChartData]=useState([]);
+
+  useEffect(()=>{
+    console.log(loading);
+    setLoading(true);
+    setTimeout(()=>{
+      axios.get('http://localhost:8080/dashboard')
+      .then((response)=>{
+        console.log(response.data[1])
+        const [unpaidinvoices,invoiceswithordersstatus,paidoffinvoices] = [...response.data]
+        setInvoicesWithOrdersStatus({...invoicesWithOrdersStatus,data:invoiceswithordersstatus});
+        setunpaidInvoices({...unpaidInvoices,data:unpaidinvoices});
+        setpaidInvoices({...paidInvoices,data:paidoffinvoices})
+        setChartData((prev)=>[...prev,response.data]);
+        setLoading(false);
+      });
+    },[200]);
+    
+  },[])
+
+  const unpaidInvoicesArray = unpaidInvoices.data.map((dataset)=>{ 
+    const dueBydays = getNumberOfDays(dataset.date,dataset.duedate);
+    return (
+      <tr key={dataset.phonenumber}>
+        <td><h3>CUS-000{dataset.id}</h3></td>
+        <td><div><img src={dataset.photo} width='30'/>&emsp;{dataset.name}</div></td>
+        <td>{dataset.phonenumber}</td>
+        <td>
+          <div>{dataset.date}</div>
+          <div className='duedays'>Due in {dueBydays} days</div>
+        </td>
+        <td>{dataset.duedate}</td>
+        <td>${dataset.balance}</td>
+        <td><button type='submit'>Send Reminder</button></td>
+      </tr>
+    )}
+  );
+  
+  const invoicesWithOrdersStatusArray = invoicesWithOrdersStatus.data.map((dataset)=>{
+    
+    return (
+      <tr>
+        <td><h3>INV-000{dataset.invoice_id}</h3></td>
+        <td>
+          <span className='dashboard__invoice-number'>
+            <div>CUS-000{dataset.id}</div>
+            <a href={`/invoices/${dataset.invoice_id}`}>
+              <AiOutlineLink color={'#2287E3'} size={20}/>
+            </a>
+          </span>
+        </td>
+        <td>{dataset.duedate}</td>
+        <td>
+          <h5 
+          className={dataset.payment_status === "UnPaid" ?'UnPaid' : dataset.payment_status === 'Partial' ? 'Partial' : ' Paid'}>
+            {dataset.payment_status}
+          </h5>
+        </td>
+        <td>${dataset.payment_amount}</td>
+      </tr>
+    )}
+    )
+
   return (
     <div className='dashboard'>
       <div className='dashboard__title'>
@@ -14,148 +84,70 @@ const Dashboard = () => {
             <h2>Performance</h2>
             <AiFillFund size={30}/> 
           </div>
-          <table className='dashboard__performance'>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Jul</th>
-                <th>Aug</th>
-                <th>Sep</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><h3>Billed</h3></td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td><h3>Received</h3></td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td><h3>Expenses</h3></td>
-                <td>10</td>
-                <td>10</td>
-                <td>10</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className='dashboard__performance-wrapper'>
+            <div className='dashboard__performance'>
+              {chartData.length?<PerformaceChart chartData={chartData}/>: <></>}
+            </div>
+          </div>
         </div>
         <div className='dashboard__table-wrapper'>
           <div className='dashboard__table-title'>
-            <h2>Recent Invoices</h2>
+            <h2>Recent 3 Invoices</h2>
             <AiFillSnippets size={30}/>
-          </div>
+          </div> 
           <table className='dashboard__invoices'>
             <thead>
               <tr>
                 <th>#</th>
                 <th>Client</th>
-                <th>Date</th>
+                <th>Due Date</th>
                 <th>Status</th>
-                <th>Total (CAD)</th>
+                <th>Amount Paid (CAD)</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><h3>92356</h3></td>
-                <td>
-                  <span className='dashboard__invoice-number'>
-                    <div>10589</div>
-                    <Link to='/invoices:id'>
-                      <AiOutlineLink color={'#2287E3'} size={20}/>
-                    </Link>
-                  </span>
-                </td>
-                <td>Aug 10,2021</td>
-                <td><h5 className='pending'>Pending</h5></td>
-                <td>$1000.00</td>
-              </tr>
-              <tr>
-                <td><h3>92356</h3></td>
-                <td>
-                  <span className='dashboard__invoice-number'>
-                    <div>10189</div>
-                    <Link to='/invoices:id'>
-                      <AiOutlineLink color={'#2287E3'} size={20}/>
-                    </Link>
-                  </span>
-                </td>
-                <td>Aug 10,2021</td>
-                <td><h5 className='paid'>Paid</h5></td>
-                <td>$2000.00</td>
-              </tr>
-              <tr>
-                <td><h3>92356</h3></td>
-                <td>
-                  <span className='dashboard__invoice-number'>
-                    <div>10089</div>
-                    <Link to='/invoices:id'>
-                      <AiOutlineLink color={'#2287E3'} size={20}/>
-                    </Link>
-                  </span>
-                </td>
-                <td>Jul 10,2021</td>
-                <td><h5 className='paid'>Paid</h5></td>
-                <td>$4000.00</td>
-              </tr>
+            {loading 
+  
+            ?  <div className="lds-default dashboard-spinnerTwo"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+            : <React.Fragment>
+                {invoicesWithOrdersStatus.data.length ? invoicesWithOrdersStatusArray.slice(-3) : <div className='empty-container'></div>}
+              </React.Fragment>
+            }
             </tbody>
           </table>
         </div> 
       </div>
-      <h2 className='dashboard__message'>You have 20 Unpaid Invoices</h2>
+      <h2 className='dashboard__message'>You have {unpaidInvoices.data ? unpaidInvoices.data.length : 0} Unpaid Invoice(s)</h2>
       <div className='dashboard__table-wrapper'>
         <div className='dashboard__table-title'>
-          <h2>Unpaid Invoices</h2>
+          <h2>Recent 3 Unpaid Invoices</h2>
           <AiFillWarning size={30}/>
         </div>
-          <table className='dashboard__unpaid-invoices'>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Client Name</th>
-                <th>Date</th>
-                <th>Total (CAD)</th>
-                <th>Overdue</th>
-                <th>Outstanding</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><h3>92356</h3></td>
-                <td>Jane Thomas</td>
-                <td>Aug 10,2021</td>
-                <td>$1000.00</td>
-                <td>30 days</td>
-                <td>$300.00</td>
-                <td><button type='submit'>Send Reminder</button></td>
-              </tr>
-              <tr>
-                <td><h3>92356</h3></td>
-                <td>Jane Thomas</td>
-                <td>Aug 10,2021</td>
-                <td>$1000.00</td>
-                <td>30 days</td>
-                <td>$200.00</td>
-                <td><button type='submit'>Send Reminder</button></td>
-              </tr>
-              <tr>
-                <td><h3>92356</h3></td>
-                <td>Jane Thomas</td>
-                <td>Aug 10,2021</td>
-                <td>$1000.00</td>
-                <td>30 days</td>
-                <td>$500.00</td>
-                <td><button type='submit'>Send Reminder</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div> 
+        <table className='dashboard__unpaid-invoices'>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Client</th>
+              <th>Phone Number</th>
+              <th>Invoice Date</th>
+              <th>Due Date</th>
+              <th>Total (CAD)</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {loading 
+  
+            ?  <div className="lds-default dashboard-spinnerOne"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                      
+            : <React.Fragment>
+              {unpaidInvoices.data.length ? unpaidInvoicesArray.slice(-3) : <div className='empty-container'></div>}
+              </React.Fragment>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }
