@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
-
 import { AiFillLayout,AiOutlineLink, AiFillFund, AiFillSnippets, AiFillWarning } from "react-icons/ai";
 import getNumberOfDays from '../Helpers/dueDaysCalculator';
 import PerformaceChart from './PerformanceChart';
-const Dashboard = ({loading,setLoading,setInvoiceId}) => {
+import { useNavigate } from 'react-router-dom';
+const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
 
   const[unpaidInvoices,setunpaidInvoices]=useState({data:[]});
   const[paidInvoices,setpaidInvoices]=useState({data:[]});
@@ -28,6 +28,7 @@ const Dashboard = ({loading,setLoading,setInvoiceId}) => {
     },[200]);
     
   },[])
+  const navigate = useNavigate();
 
   const unpaidInvoicesArray = unpaidInvoices.data.map((dataset)=>{ 
     const dueBydays = getNumberOfDays(dataset.date,dataset.duedate);
@@ -48,16 +49,18 @@ const Dashboard = ({loading,setLoading,setInvoiceId}) => {
   );
   
   const invoicesWithOrdersStatusArray = invoicesWithOrdersStatus.data.map((dataset)=>{
-    
+
+    const handleNavigation = () => {
+      setState(['DetailedInvoice']);
+      navigate(`/invoices/${dataset.invoice_id}`)
+    }
     return (
       <tr>
         <td><h3>INV-000{dataset.invoice_id}</h3></td>
         <td>
           <span className='dashboard__invoice-number'>
             <div>CUS-000{dataset.id}</div>
-            <a href={`/invoices/${dataset.invoice_id}`}>
-              <AiOutlineLink color={'#2287E3'} size={20}/>
-            </a>
+              <AiOutlineLink color={'#2287E3'} size={20} onClick={handleNavigation} style={{cursor:'pointer'}}/>
           </span>
         </td>
         <td>{dataset.duedate}</td>

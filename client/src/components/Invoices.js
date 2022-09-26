@@ -70,7 +70,7 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
 
   useEffect(()=>{
     if(updateInvoiceId){
-      const updatedInvoice = invoices.list.find((invoice)=>invoice.id == updateInvoiceId);
+      const updatedInvoice = invoices.list.find((invoice)=>invoice.invoice_id == updateInvoiceId);
       setInvoiceInputs({...updatedInvoice})
       setShowInvoiceForm(true)
     }
@@ -81,15 +81,16 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
     {invoices.list.length ?
     <React.Fragment>
       <div className='invoices__list-wrapper'>
+        <InvoicesSearchBar search={search} setSearch={setSearch} 
+        invoices={invoices} setSearchedInvoice={setSearchedInvoice} isListening={isListening} setIsListening={setIsListening}/>
         <div className='invoices__list'>
-          <InvoicesSearchBar search={search} setSearch={setSearch} 
-          invoices={invoices} setSearchedInvoice={setSearchedInvoice} isListening={isListening} setIsListening={setIsListening}/>
           {search ? 
           <React.Fragment>
             {searchedInvoice.map((invoice)=>
               <Invoice 
-                key={invoice.id}
-                invoiceId={invoice.id}
+                key={invoice.invoice_id}
+                invoiceId={invoice.invoice_id}
+                orderId={invoice.orderid}
                 setInvoiceId={setInvoiceId}
                 state={state} 
                 setState={setState}
@@ -108,8 +109,9 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
           <React.Fragment>
             {invoices.list.map((invoice)=>
               <Invoice 
-              key={invoice.id}
-              invoiceId={invoice.id}
+              key={invoice.invoice_id}
+              invoiceId={invoice.invoice_id}
+              orderId={invoice.orderid}
               setInvoiceId={setInvoiceId}
               state={state} 
               setState={setState} 
@@ -135,7 +137,7 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
         <InvoicesSearchBar search={search} setSearch={setSearch} 
           invoices={invoices} setSearchedInvoice={setSearchedInvoice} isListening={isListening} setIsListening={setIsListening}/>
         {loading 
-          ? <div className="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
+          ? <div className="lds-default invoice-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
           : null
         }
       </div>

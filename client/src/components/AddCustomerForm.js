@@ -12,7 +12,7 @@ import {
   AiOutlineCalendar,
   AiOutlinePhone
   } from "react-icons/ai";
-const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,setInputs,updateCustomerId,setUpdateCustomerId,loading,setLoading,todaysDate}) => {
+const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,setInputs,updateCustomerId,setUpdateCustomerId,loading,setLoading}) => {
 
   const handleSubmission = (event) => {
     event.preventDefault();

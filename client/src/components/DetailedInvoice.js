@@ -11,7 +11,7 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
   const [detailedInvoice,setDetailedInvoice] = useState({list:[]});
   const [clipText,setClipText] = useState("");
   const handleNavigation = () => {
-    setState('Invoices');
+    setState(['Invoices']);
     navigate('/invoices');
   }
 
@@ -38,7 +38,7 @@ const DetailedInvoice = ({state,setState,invoiceId}) => {
   return (
     <div className="DetailedInvoice">
       <div className="DetailedInvoice__action-btns">
-        <div className='DetailedInvoice__back-btn'>
+        <div className='DetailedInvoice__back-btn' onClick={handleNavigation}>
           <AiOutlineArrowLeft size={20} style={{marginRight:'5'}}/>
           <span>Back to Invoices</span>
         </div>

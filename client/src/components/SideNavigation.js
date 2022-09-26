@@ -10,6 +10,7 @@ const SideNavigation = ({state,setState,history}) => {
   console.log("state:",state);
   const clearLocalStorage = () => {
     localStorage.removeItem('user');
+    setState(['Dashboard']);
   }
   return (
     <div className='sideNavigation'>
@@ -60,7 +61,7 @@ const SideNavigation = ({state,setState,history}) => {
           className={state.includes('Orders') || state.includes('DetailedOrder')? 'sideNavigation__item active' : 'sideNavigation__item'} 
           onClick={
             (event)=>{
-              setState([event.currentTarget.ariaLabel])
+              setState([event.currentTarget.ariaLabel]);
               history.push("/orders", { value: event.currentTarget.ariaLabel });
             }}
           >

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import { 
   AiFillIdcard,
   AiFillCreditCard,
   AiOutlineNumber,
-  AiOutlineArrowLeft,
   AiFillCalendar,
   AiFillTag,
   AiOutlineDownload,
@@ -13,9 +12,10 @@ import {
   AiFillStar
   } from "react-icons/ai";
 
-const DetailedOrder = ({orderId,orderAmount,orderDate,orderDescription,customerFirstName,customerPhoto,paymentDate,paymentStatus,paymentMethod}) => {
+const DetailedOrder = ({orderId,orderAmount,orderDate,orderDescription,customerFirstName,customerPhoto,paymentDate,paymentStatus,paymentMethod,paymentAmount}) => {
   
-  
+  console.log(orderId)
+
   const handleDownload = () => {
     const input = document.getElementsByClassName("DetailedOrder");
     html2canvas(input[0]).then((canvas)=>{
@@ -25,6 +25,7 @@ const DetailedOrder = ({orderId,orderAmount,orderDate,orderDescription,customerF
       pdf.save(`ORD-000${orderId}.pdf`);
   })
   }
+
   return (
     <div className="DetailedOrder">
       <div className="DetailedOrder__action-btns">
@@ -65,6 +66,10 @@ const DetailedOrder = ({orderId,orderAmount,orderDate,orderDescription,customerF
         <div className='DetailedOrder__item-wrapper'>
           <h3><AiFillCreditCard style={{marginRight:'20'}} size={25} color='#2287E3'/>Payment Method</h3>
           <h3>{paymentMethod}</h3>
+        </div>
+        <div className='DetailedOrder__item-wrapper'>
+          <h3><AiFillDollarCircle style={{marginRight:'20'}} size={25} color='#2287E3'/>Payment Amount</h3>
+          <h3>$&nbsp;{paymentAmount}</h3>
         </div>
         <div className='DetailedOrder__item-wrapper'>
           <h3><AiFillCalendar style={{marginRight:'20'}} size={25} color='#2287E3'/>Payment Date</h3>

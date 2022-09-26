@@ -3,10 +3,10 @@ import axios from 'axios';
 import Order from './Order';
 import OrdersSearchBar from './OrdersSearchBar';
 import DetailedOrder from './DetailedOrder';
-const Orders = ({setState,orderId,setOrderId,loading,setLoading}) => {
-
-  const [orders,setOrders] = useState({list:[]});
+const Orders = ({setState,loading,setLoading}) => {
   
+  const [orders,setOrders] = useState({list:[]});
+  const [orderId,setOrderId] = useState(1);
   const [detailedOrder,setDetailedOrder] = useState([]);
   const [search,setSearch] = useState('');
   const [searchedOrder,setSearchedOrder] = useState([]);
@@ -20,15 +20,14 @@ const Orders = ({setState,orderId,setOrderId,loading,setLoading}) => {
       axios.get('http://localhost:8080/orders')
       .then((response)=> {
         if(response.status === 200){
-          // console.log("ORDERS:",response.data);
           setOrders(({...orders,list:response.data}))        
         }
       })
       .then(()=>setLoading(false))
       .catch((err)=>`The Error is:${err}`);
     },[400])
-  },[])
-
+  },[orders.list.length])
+  console.log("orderId:",orderId);
   const ordersArray = orders.list.map((order)=>{
     
     return (
@@ -88,7 +87,7 @@ const Orders = ({setState,orderId,setOrderId,loading,setLoading}) => {
 
           return (
             <DetailedOrder
-            key={orderId}
+            key={order.order_id}
             orderId={orderId}
             orderDate={order.order_date}
             orderDescription={order.order_description}
@@ -102,8 +101,7 @@ const Orders = ({setState,orderId,setOrderId,loading,setLoading}) => {
             paymentStatus={order.payment_status}
             paymentMethod={order.payment_method}
             paymentDate={order.payment_date}
-            // value={value}
-            // setValue={value}
+            paymentAmount={order.payment_amount}
           />
           )
         })}

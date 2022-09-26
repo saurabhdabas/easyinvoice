@@ -29,7 +29,7 @@ const MonthlyOrderChart = ({chart}) => {
           'rgb(201, 203, 207)'
         ],
         borderWidth: 2,
-        barThickness: 70,
+        barThickness: 60,
         borderRadius: 20,
       }
     ]

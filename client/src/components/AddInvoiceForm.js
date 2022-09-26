@@ -48,6 +48,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
         .then(()=>{
           axios.get('http://localhost:8080/invoices')
           .then((response)=>{
+            console.log(response.data)
             setInvoices(({...invoices,list:response.data}))
           })
           setShowInvoiceForm(false)
@@ -56,7 +57,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
       setLoading(false)
     },[2000])
   } 
-
+  console.log("invoices:",invoices)
   const handleNavigation = () => {
     setShowInvoiceForm(false)
     setInvoiceInputs({

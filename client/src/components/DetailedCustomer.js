@@ -16,7 +16,7 @@ import { AiFillPhone,
 import { DiGoogleAnalytics } from 'react-icons/di';
 import MonthlyOrderChart from './MonthlyOrderChart';
 
-const DetailedCustomer = ({state,customerId}) => {
+const DetailedCustomer = ({state,setState,customerId}) => {
   const navigate = useNavigate();
 
   const [detailedCustomer,setDetailedCustomer] = useState({list:[]});
@@ -71,7 +71,7 @@ const DetailedCustomer = ({state,customerId}) => {
     }
   },[])
   const handleNavigation = () => {
-    // setState('Invoices');
+    setState(['Customers']);
     navigate('/customers');
   }
   console.log(detailedCustomer);

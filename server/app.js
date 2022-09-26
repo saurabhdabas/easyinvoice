@@ -4,18 +4,19 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const db = require('./configs/db.config');
+
 const addToCustomers = require('./db/queries/addToCustomers');
 const addToCompanies = require('./db/queries/addToCompanies');
 const updateCustomers = require('./db/queries/updateCustomers');
 const updateCompanies = require('./db/queries/updateCompanies');
 const customers = require('./db/queries/getAllCustomers');
 const customerWithId = require('./db/queries/getCustomerById');
-const ordersByCustomer = require('./db/queries/getOrdersByCustomerId');
+const ordersPerCustomer = require('./db/queries/getOrdersPerCustomer');
 
 const dashboardRouter = require('./routes/dashboard');
 const customersRouter = require('./routes/customers');
 const invoicesRouter = require('./routes/invoices');
-
+const ordersRouter = require('./routes/orders');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dashboard', dashboardRouter(db));
 app.use('/customers', customersRouter(db));
 app.use('/invoices', invoicesRouter(db));
+app.use('/orders', ordersRouter(db));
 
 // Add user authentication
 app.post('/user-data',(req,res)=>{
@@ -74,7 +76,7 @@ app.post('/customers/add',(req,res)=>{
 // Retrieve particular Customer
 app.get('/customers/:id',(req,res)=>{
   const customer = req.params;
-  const orders =ordersByCustomer.getOrdersByCustomerId(customer);
+  const orders =ordersPerCustomer.getOrdersPerCustomer(customer);
   const customerById =customerWithId.getCustomerById(customer);
 
   Promise.all([customerById,orders])
@@ -205,6 +207,8 @@ app.put('/invoices/:id/update',(req, res) => {
     })
     .catch((error) => res.send(error));
 });
+
+
 
 
 module.exports = app;
