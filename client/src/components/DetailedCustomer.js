@@ -21,7 +21,7 @@ const DetailedCustomer = ({state,customerId}) => {
 
   const [detailedCustomer,setDetailedCustomer] = useState({list:[]});
   const [chart, setChart] = useState([]);
-  const [totalAmount,setTotalAmount] = useState(0);
+  const [totalAmountDue,setTotalAmountDue] = useState(0);
   const [totalOrders, setTotalOrders] = useState(0);
   const [totalUnpaidInvoices,setTotalUnpaidInvoices] = useState(0);
 
@@ -31,17 +31,25 @@ const DetailedCustomer = ({state,customerId}) => {
       .then((response)=> {
         const [customerInfo,orderInfo]=[...response.data];
         if(response.data){
+          console.log(orderInfo);
           setDetailedCustomer({...detailedCustomer,list:customerInfo});
           setChart((prev)=>[...prev,orderInfo]);
         }
 
         const totalAmount = (orderInfo) => {
-        const listOfAmounts = orderInfo.map((order)=>{
-        return order.order_status === 'Unpaid' ? order.order_amount : 0
+        const listOfPaidAmounts = orderInfo.map((order)=>{
+          console.log(order);
+        return order.payment_status === 'Paid' || order.payment_status === 'Partial'  ? order.order_amount : 0
         });
-
-        setTotalAmount(listOfAmounts.reduce((acc,curr)=>{acc += curr;
-        return acc }),0)}
+        const listOfOrderAmounts = orderInfo.map((order)=>{
+          return order.order_amount
+        })
+        const totalAmount = listOfOrderAmounts.reduce((acc,curr)=>{acc += curr;
+          return acc },0);
+        const paidAmount = listOfPaidAmounts.reduce((acc,curr)=>{acc += curr;
+          return acc },0);
+        setTotalAmountDue(totalAmount - paidAmount );
+      }
         totalAmount(orderInfo);
 
         const totalOrders = (orderInfo) => {
@@ -53,7 +61,7 @@ const DetailedCustomer = ({state,customerId}) => {
         }
         totalOrders(orderInfo);
         const totalUnpaidInvoices = (orderInfo) => {
-          const unpaidInvoices = orderInfo.filter((order)=>order.order_status === "Unpaid");
+          const unpaidInvoices = orderInfo.filter((order)=>order.payment_status === "UnPaid");
           setTotalUnpaidInvoices(unpaidInvoices.length);
         }
         totalUnpaidInvoices(orderInfo);
@@ -161,9 +169,9 @@ const DetailedCustomer = ({state,customerId}) => {
             <div className='detailedCustomer__stats-component'>
               <div className='detailedCustomer__stats-description'>
                 <AiFillDollarCircle size={30} color={'#2287E3'}/>
-                <h3>AMOUNT PAID</h3>
+                <h3>AMOUNT DUE</h3>
               </div>
-              <h2 className='detailedCustomer__stats-num'>$ {totalAmount ? totalAmount : 0}</h2>
+              <h2 className='detailedCustomer__stats-num'>$ {totalAmountDue ? totalAmountDue : 0}</h2>
             </div>
             
           </div>
