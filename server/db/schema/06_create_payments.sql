@@ -8,5 +8,5 @@ CREATE TABLE payments (
   payment_amount INTEGER NOT NULL,
   payment_status VARCHAR(255) NOT NULL,
   orderId INTEGER  NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
-  customerId INTEGER  NOT NULL REFERENCES customers(id) ON DELETE CASCADE
+  invoiceId INTEGER  NOT NULL REFERENCES invoices(invoice_id) ON DELETE CASCADE
 );
