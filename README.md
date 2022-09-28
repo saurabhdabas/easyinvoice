@@ -7,7 +7,7 @@ An Invoicing platform for businesses.
 
 ### Login (username: easyinvoice@gmail.com : password: 1234)
 - User can login <br />
-![""]()
+!["Login"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Login.png?raw=true)
 
 ### Dashboard
 - A Bar chart displaying total Invoices, paid Invoices and Unpaid Invoices
@@ -23,6 +23,11 @@ An Invoicing platform for businesses.
 - We can delete customers from our database <br />
 !["Customers"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Customers.png?raw=true)
 
+### CustomerInfo
+
+- User can browse all the details of a particular customer</br>
+!["Customer Details"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/5e038ce7ea581f8524a96d8f1cb7d5e1dfdf284e/docs/CustomerInfo.png)
+
 ### Invoices 
 - Voice search an invoice
 - We add invoices to database via a form
@@ -35,7 +40,7 @@ An Invoicing platform for businesses.
 - We can browse received orders
 - We can view details for an order
 - We can download an order as a pdf<br />
-![""]()
+!["Orders"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Orders.png?raw=true)
 
 ## Setup
 List of dependencies
