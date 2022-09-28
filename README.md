@@ -39,7 +39,7 @@ An Invoicing platform for businesses.
 ### InvoiceInfo
 
 - User can browse all the details of a particular invoice</br>
-!["Invoice Details"]()
+!["Invoice Details"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/InvoiceInfo.png?raw=true)
 
 ### Orders
 - Voice search an Order
