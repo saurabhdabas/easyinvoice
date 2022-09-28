@@ -14,21 +14,21 @@ An Invoicing platform for businesses.
 - Last three invoices with payment status
 - A Message displaying total unpaid invoices
 - Unpaid invoices with a send reminder button to send an automatic email to the customer<br />
-![""]()
+!["Dashboard"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Dashboard.png?raw=true)
 
 ### Customers
 - Voice search a customer
 - We add customers to database via a form
 - We can edit customer details
 - We can delete customers from our database <br />
-![""]()
+!["Customers"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Customers.png?raw=true)
 
 ### Invoices 
 - Voice search an invoice
 - We add invoices to database via a form
 - We can edit and delete invoice from database
 - We can download an invoice as a pdf<br />
-![""]()
+!["Invoices"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Invoices.png?raw=true)
 
 ### Orders
 - Voice search an Order
