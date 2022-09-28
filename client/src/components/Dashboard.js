@@ -8,6 +8,7 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
 
   const[unpaidInvoices,setunpaidInvoices]=useState({data:[]});
   const[paidInvoices,setpaidInvoices]=useState({data:[]});
+  const[partialInvoices,setpartialInvoices]=useState({data:[]});
   const[invoicesWithOrdersStatus,setInvoicesWithOrdersStatus]=useState({data:[]});
   const[chartData,setChartData]=useState([]);
 
@@ -18,10 +19,11 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
       axios.get('http://localhost:8080/dashboard')
       .then((response)=>{
         console.log(response.data[1])
-        const [unpaidinvoices,invoiceswithordersstatus,paidoffinvoices] = [...response.data]
+        const [unpaidinvoices,invoiceswithordersstatus,paidoffinvoices,partials] = [...response.data]
         setInvoicesWithOrdersStatus({...invoicesWithOrdersStatus,data:invoiceswithordersstatus});
         setunpaidInvoices({...unpaidInvoices,data:unpaidinvoices});
         setpaidInvoices({...paidInvoices,data:paidoffinvoices})
+        setpartialInvoices({...paidInvoices,data:partials})
         setChartData((prev)=>[...prev,response.data]);
         setLoading(false);
       });
@@ -129,7 +131,7 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
       <h2 className='dashboard__message'>You have {unpaidInvoices.data ? unpaidInvoices.data.length : 0} Unpaid Invoice(s)</h2>
       <div className='dashboard__table-wrapper'>
         <div className='dashboard__table-title'>
-          <h2>Recent 3 Unpaid Invoices</h2>
+          <h2>Unpaid Invoices</h2>
           <AiFillWarning size={30}/>
         </div>
         <table className='dashboard__unpaid-invoices'>
@@ -150,7 +152,7 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
             ?  <div className="lds-default dashboard-spinnerOne"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                       
             : <React.Fragment>
-              {unpaidInvoices.data.length ? unpaidInvoicesArray.slice(-3) : <div className='empty-container'></div>}
+              {unpaidInvoices.data.length ? unpaidInvoicesArray: <div className='empty-container'></div>}
               </React.Fragment>
             }
           </tbody>
