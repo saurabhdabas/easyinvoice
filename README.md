@@ -46,7 +46,7 @@ An Invoicing platform for businesses.
 - We can browse received orders
 - We can view details for an order
 - We can download an order as a pdf<br />
-!["Orders"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Orders.png?raw=true)
+!["Orders"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/5637ace4a5208b03abcec928d74014a85aaab5b9/docs/Orders.png)
 
 ## Setup
 List of dependencies
