@@ -35,6 +35,12 @@ An Invoicing platform for businesses.
 - We can download an invoice as a pdf<br />
 !["Invoices"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/6918fa683d94ce56816c754958a6c4a15bf7ed8d/docs/Invoices.png)
 
+
+### InvoiceInfo
+
+- User can browse all the details of a particular invoice</br>
+!["Invoice Details"]()
+
 ### Orders
 - Voice search an Order
 - We can browse received orders
