@@ -37,6 +37,13 @@ const DetailedOrder = ({orderId,orderAmount,orderDate,orderDescription,customerF
       </div>
       <div className="DetailedOrder__main-wrapper">
         <div className='DetailedOrder__item-wrapper'>
+          <h3><AiFillIdcard style={{marginRight:'20'}} size={25} color='#2287E3'/>Customer Name</h3>
+          <div>
+            <img src={customerPhoto} alt='customer-photo' width='30' height='30'/>
+            <h3>{customerFirstName}</h3>
+          </div>
+        </div>
+        <div className='DetailedOrder__item-wrapper'>
           <h3><AiOutlineNumber style={{marginRight:'20'}} size={25} color='#2287E3'/>Order Id</h3>
           <h3>{`ORD-000${orderId}`}</h3>
         </div>
@@ -51,13 +58,6 @@ const DetailedOrder = ({orderId,orderAmount,orderDate,orderDescription,customerF
         <div className='DetailedOrder__item-wrapper'>
           <h3><AiFillTag style={{marginRight:'20'}} size={25} color='#2287E3'/>Order Description</h3>
           <h3>{orderDescription}</h3>
-        </div>
-        <div className='DetailedOrder__item-wrapper'>
-          <h3><AiFillIdcard style={{marginRight:'20'}} size={25} color='#2287E3'/>Customer Name</h3>
-          <div>
-            <img src={customerPhoto} alt='customer-photo' width='30' height='30'/>
-            <h3>{customerFirstName}</h3>
-          </div>
         </div>
         <div className='DetailedOrder__item-wrapper'>
           <h3><AiFillStar style={{marginRight:'20'}} size={25} color='#2287E3'/>Payment Status</h3>
