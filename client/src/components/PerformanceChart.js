@@ -5,28 +5,31 @@ import { Bar } from 'react-chartjs-2';
 const PerformaceChart = ({chartData}) => {
   console.log("chartData:",chartData);
   const dataArray={};
-  const dataset = ([unpaidInvoices,totalInvoices,paidInvoices]) => {
+  const dataset = ([unpaidInvoices,totalInvoices,paidInvoices,partials]) => {
     dataArray['paidInvoices'] = paidInvoices.length;
     dataArray['unpaidInvoices'] = unpaidInvoices.length;
+    dataArray['partials'] = partials.length;
     dataArray['totalInvoices'] = totalInvoices.length;
     return dataArray;
   }
   dataset([...chartData[0]]);
   
   const data = {
-    labels: ['Total Invoices', 'Paid Invoices', 'UnpaidInvoices'],
+    labels: ['Total Invoices', 'Paid Invoices','Partial Invoices','Unpaid Invoices'],
     datasets: [
       {
       label: 'Performance Statistics',
-      data: [dataArray.totalInvoices,dataArray.paidInvoices,dataArray.unpaidInvoices],
+      data: [dataArray.totalInvoices,dataArray.paidInvoices,dataArray.partials,dataArray.unpaidInvoices],
       backgroundColor: [
       'rgb(34, 135, 227,0.5)',
       'rgb(8, 113, 73,0.5)',
+      'rgb(55, 198, 142,0.5)',
       'rgb(183, 40, 33,0.5)'
       ],
       borderColor:[
       'rgb(34, 135, 227)',
       'rgb(8, 113, 73)',
+      'rgb(55, 198, 142)',
       'rgb(183, 40, 33)'
       ],
       borderWidth: 2,
@@ -42,7 +45,7 @@ const PerformaceChart = ({chartData}) => {
         ticks: {
           font: "'Quicksand', sans-serif",
           color:'#303233',
-          maxTicksLimit: 3
+          maxTicksLimit: 4
         },
         grid: {
           display: false
