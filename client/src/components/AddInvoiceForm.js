@@ -1,6 +1,7 @@
 import React, {useEffect } from 'react'
 import axios from 'axios';
 import findSubtotal from '../Helpers/findSubtotal';
+import findTotal from '../Helpers/findTotal';
 import { 
   AiOutlineIdcard,
   AiOutlineMail,
@@ -18,6 +19,8 @@ import {
   } from "react-icons/ai";
 
 const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,invoiceInputs,setInvoiceInputs,updateInvoiceId,setUpdateInvoiceId,loading,setLoading}) => {
+
+
 
   useEffect(()=>{
     setInvoiceInputs({...invoiceInputs,subtotal:findSubtotal(invoiceInputs,'tabledata')})
@@ -37,6 +40,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
         axios.put(`http://localhost:8080/invoices/${updateInvoiceId}/update`,{data:invoiceInputs,invoiceId:updateInvoiceId})
         .then((response)=>{
           setInvoices(({...invoices,list:response.data}))
+          
         })
         .then(()=>{
           setUpdateInvoiceId(0)
@@ -57,11 +61,12 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
       setLoading(false)
     },[2000])
   } 
-  console.log("invoices:",invoices)
+// console.log(invoiceInputs);
   const handleNavigation = () => {
     setShowInvoiceForm(false)
     setInvoiceInputs({
-      orderId:0,
+      orderId:'',
+      customerId:'',
       name:'',
       email:'',
       photo:'',
@@ -83,7 +88,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
       message:'Thank You for your business!',
       tabledata:{
         rOne:{
-          description:'',quantity:0,unitprice:0,total:0},
+          description:'',quantity:parseInt(0),unitprice:parseInt(0),total:parseInt(0)},
         rTwo:{
           description:'',quantity:0,unitprice:0,total:0},
         rThree:{
@@ -92,7 +97,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
     })
     setUpdateInvoiceId(0)
   }
-  
+
   return (
     <div className='form'>
       {showInvoiceForm 
@@ -107,10 +112,17 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
       <form className='invoice-info__form' onSubmit={handleSubmission}>
         <div className='invoice-info__input'>
           <span>
-            <label htmlFor='orderid'><h3>Order Id</h3></label>
+            <label htmlFor='orderId'><h3>Order Id</h3></label>
             <AiOutlineNumber color={'#2287E3'} size={20}/>
           </span>
-          <input id='orderid' type='text' name='orderid' value={invoiceInputs.orderId} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,orderId:event.target.value})} placeholder='Enter Order Id'/>
+          <input id='orderId' type='text' name='orderId' value={invoiceInputs.orderId} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,orderId:event.target.value})} placeholder='Enter Order Id'/>
+        </div>
+        <div className='invoice-info__input'>
+          <span>
+            <label htmlFor='customerId'><h3>Customer Id</h3></label>
+            <AiOutlineNumber color={'#2287E3'} size={20}/>
+          </span>
+          <input id='customerId' type='text' name='customerId' value={invoiceInputs.customerId} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,customerId:event.target.value})} placeholder='Enter Customer Id'/>
         </div>
         <div className='invoice-info__input'>
           <span>
@@ -258,7 +270,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
                 <td className='invoice-table__row'>
                   <input id='quantity' type='number' name='quantity' value={invoiceInputs.tabledata.rOne.quantity} required onChange={(event)=>{
                     setInvoiceInputs(
-                    {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rOne: { ...invoiceInputs.tabledata.rOne,quantity:event.target.value } }
+                    {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rOne: { ...invoiceInputs.tabledata.rOne,quantity:parseInt(event.target.value) } }
                     })
                     
                   }} placeholder='Enter quantity'/>
@@ -266,18 +278,13 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
                 <td className='invoice-table__row'>
                   <input id='unitprice' type='number' name='unitprice' value={invoiceInputs.tabledata.rOne.unitprice} required onChange={(event)=>{
                     setInvoiceInputs(
-                    {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rOne:{ ...invoiceInputs.tabledata.rOne,unitprice:event.target.value } }
+                    {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rOne:{ ...invoiceInputs.tabledata.rOne,unitprice:parseInt(event.target.value) } }
                     })
                     
                   }} placeholder='Enter unit price'/>
                 </td>
                 <td className='invoice-table__row'>
-                  <input id='total' type='number' name='total' value={invoiceInputs.tabledata.rOne.total} required onChange={(event) => {    
-                    setInvoiceInputs(
-                    {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rOne: { ...invoiceInputs.tabledata.rOne,total:event.target.value } }
-                    })
-                    }}
-                    placeholder='Enter total'/>
+                    {findTotal(invoiceInputs.tabledata,'rOne')}
                 </td>
               </tr>
               <tr>
@@ -304,12 +311,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
                   }} placeholder='Enter unit price'/>
                 </td>
                 <td className='invoice-table__row'>
-                  <input id='total' type='number' min='0' name='total' value={invoiceInputs.tabledata.rTwo.total} required onChange={(event) => {    
-                    setInvoiceInputs(
-                    {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rTwo: { ...invoiceInputs.tabledata.rTwo,total:event.target.value } }
-                    })
-                    }}
-                    placeholder='Enter total'/>
+                    {findTotal(invoiceInputs.tabledata,'rTwo')}
                 </td>
               </tr>
               <tr>
@@ -336,12 +338,7 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
                   }} placeholder='Enter unit price'/>
                 </td>
                 <td className='invoice-table__row'>
-                  <input id='total' type='number' name='total' value={invoiceInputs.tabledata.rThree.total} required onChange={(event) => {    
-                    setInvoiceInputs(
-                    {...invoiceInputs,tabledata:{...invoiceInputs.tabledata,rThree: { ...invoiceInputs.tabledata.rThree,total:event.target.value } }
-                    })
-                    }}
-                    placeholder='Enter total'/>
+                    {findTotal(invoiceInputs.tabledata,'rThree')}
                 </td>
               </tr>
             </tbody>

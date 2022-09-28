@@ -9,7 +9,8 @@ const AddInvoice = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,inv
         <div className='invoices__AddInvoice'>
           <AiOutlinePlusCircle size={50} onClick={()=>{
             setInvoiceInputs({
-              orderId:0,
+              orderId:'',
+              customerId:'',
               name:'',
               email:'',
               photo:'',
@@ -26,6 +27,7 @@ const AddInvoice = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm,inv
               date:'',
               duedate:'',
               notes:'',
+              total:0,
               subtotal:0,
               balance:0,
               message:'Thank You for your business!',

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-const Invoice = ({orderId,name,photo,logo,company,invoiceId,setInvoiceId,setState,date,balance,setShowInvoiceForm,setDeleteInvoiceId,setUpdateInvoiceId}) => {
+const Invoice = ({orderId,customerId,name,photo,logo,company,invoiceId,setInvoiceId,setState,date,balance,setShowInvoiceForm,setDeleteInvoiceId,setUpdateInvoiceId}) => {
   const navigate = useNavigate();
   
   return (
@@ -26,11 +26,13 @@ const Invoice = ({orderId,name,photo,logo,company,invoiceId,setInvoiceId,setStat
           <p>$&nbsp;{balance}</p>
         </div>
       </div>
-      {/* <div className='invoice__main'>
+      <div className='invoice__main'>
         <div className='invoice__number'>
-          <p className='invoice__orderId'>Associated OrderId | 000{orderId}</p>
+          <p className='invoice__customerId'>Customer # 000{customerId}</p>
+          &emsp;|&emsp;
+          <p className='invoice__orderId'>Order # 000{orderId}</p>
         </div>
-      </div> */}
+      </div>
       <div className='invoice__footer'>
         <div className='invoice__footer-btns'>
           <button className='invoice__edit' type='submit' id={invoiceId} onClick={

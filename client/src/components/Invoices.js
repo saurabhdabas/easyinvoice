@@ -11,7 +11,8 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
   const [deleteInvoiceId,setDeleteInvoiceId] = useState(0);
   const [updateInvoiceId,setUpdateInvoiceId] = useState(0);
   const [invoiceInputs,setInvoiceInputs]=useState({
-    orderId:0,
+    orderId:'',
+    customerId:'',
     name:'',
     email:'',
     photo:'',
@@ -70,12 +71,13 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
 
   useEffect(()=>{
     if(updateInvoiceId){
+      console.log("invoices:",invoices.list)
       const updatedInvoice = invoices.list.find((invoice)=>invoice.invoice_id == updateInvoiceId);
       setInvoiceInputs({...updatedInvoice})
       setShowInvoiceForm(true)
     }
   },[updateInvoiceId])
-
+  
   return(
   <div className='invoices'>
     {invoices.list.length ?
@@ -91,6 +93,7 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
                 key={invoice.invoice_id}
                 invoiceId={invoice.invoice_id}
                 orderId={invoice.orderid}
+                customerId={invoice.customerid}
                 setInvoiceId={setInvoiceId}
                 state={state} 
                 setState={setState}
@@ -107,11 +110,12 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
             )} 
           </React.Fragment> : 
           <React.Fragment>
-            {invoices.list.map((invoice)=>
+            {invoices.list.length ? invoices.list.map((invoice)=>
               <Invoice 
               key={invoice.invoice_id}
               invoiceId={invoice.invoice_id}
               orderId={invoice.orderid}
+              customerId={invoice.customerid}
               setInvoiceId={setInvoiceId}
               state={state} 
               setState={setState} 
@@ -125,7 +129,7 @@ const Invoices = ({state,setState,setInvoiceId, loading,setLoading}) => {
               setDeleteInvoiceId={setDeleteInvoiceId}
               setUpdateInvoiceId={setUpdateInvoiceId}
             />
-            )} 
+            ):<React.Fragment/>} 
           </React.Fragment>}
         </div>
       </div>
