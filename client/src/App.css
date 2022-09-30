@@ -1147,7 +1147,10 @@ hr{
   left:170px;
   top:80px;
 }
-
+.orderdetails-spinner{
+  left:400px;
+  top:160px;
+}
 .lds-default div {
   position: absolute;
   width: 6px;

@@ -116,6 +116,10 @@ const Orders = ({setState,loading,setLoading}) => {
             : <></>
           }
         </div>
+        {loading 
+          ? <div className="lds-default orderdetails-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
+          : <></>
+        }
       </React.Fragment>
       }
     </div> 
