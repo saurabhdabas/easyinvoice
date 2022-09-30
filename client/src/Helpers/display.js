@@ -24,7 +24,7 @@ const display = (component,setState,invoiceId,setInvoiceId,loading,setLoading,cu
       "DetailedCustomer":
        return <DetailedCustomer state={component} customerId={customerId} setState={setState}/>  
     default: 
-    return <Dashboard loading={loading} setLoading={setLoading} setInvoiceId={setInvoiceId} setState={setState}/>  
+    return <Dashboard loading={loading} setLoading={setLoading} setInvoiceId={setInvoiceId} setState={setState} setCustomerId={setCustomerId}/>  
   }
 }
 

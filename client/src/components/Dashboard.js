@@ -4,7 +4,7 @@ import { AiFillLayout,AiOutlineLink, AiFillFund, AiFillSnippets, AiFillWarning }
 import getNumberOfDays from '../Helpers/dueDaysCalculator';
 import PerformaceChart from './PerformanceChart';
 import { useNavigate } from 'react-router-dom';
-const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
+const Dashboard = ({setState,loading,setLoading,setInvoiceId,setCustomerId}) => {
 
   const[unpaidInvoices,setunpaidInvoices]=useState({data:[]});
   const[paidInvoices,setpaidInvoices]=useState({data:[]});
@@ -34,20 +34,30 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
 
   const unpaidInvoicesArray = unpaidInvoices.data.map((dataset)=>{ 
     const dueBydays = getNumberOfDays(dataset.date,dataset.duedate);
-    const handleNavigation = () => {
+    const handleInvoiceNavigation = () => {
       setInvoiceId(dataset.invoice_id)
       setState(['DetailedInvoice']);
       navigate(`/invoices/${dataset.invoice_id}`)
+    }
+    const handleCustomerNavigation = () => {
+      setCustomerId(dataset.id)
+      setState(['DetailedCustomer']);
+      navigate(`/customers/${dataset.id}`)
     }
     return (
       <tr key={dataset.phonenumber}>
         <td>          
           <span className='dashboard__invoice-number'>
           <h3>INV-000{dataset.invoice_id}</h3>
-          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleNavigation} style={{cursor:'pointer'}}/>
+          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleInvoiceNavigation} style={{cursor:'pointer'}}/>
           </span>
         </td>
-        <td>CUS-000{dataset.id}</td>
+        <td>
+          <span className='dashboard__invoice-number'>
+          <h3>CUS-000{dataset.id}</h3>
+          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleCustomerNavigation} style={{cursor:'pointer'}}/>
+          </span>
+        </td>
         <td><div><img src={dataset.photo} width='30'/>&emsp;{dataset.name}</div></td>
         <td>{dataset.phonenumber}</td>
         <td>
@@ -63,20 +73,30 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
   
   const invoicesWithOrdersStatusArray = invoicesWithOrdersStatus.data.map((dataset)=>{
 
-    const handleNavigation = () => {
+    const handleInvoiceNavigation = () => {
       setInvoiceId(dataset.invoice_id)
       setState(['DetailedInvoice']);
       navigate(`/invoices/${dataset.invoice_id}`)
+    }
+    const handleCustomerNavigation = () => {
+      setCustomerId(dataset.id)
+      setState(['DetailedCustomer']);
+      navigate(`/customers/${dataset.id}`)
     }
     return (
       <tr>
         <td>
           <span className='dashboard__invoice-number'>
           <h3>INV-000{dataset.invoice_id}</h3>
-          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleNavigation} style={{cursor:'pointer'}}/>
+          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleInvoiceNavigation} style={{cursor:'pointer'}}/>
           </span>
-          </td>
-        <td><div>CUS-000{dataset.id}</div></td>
+        </td>
+        <td>          
+          <span className='dashboard__invoice-number'>
+          <h3>CUS-000{dataset.id}</h3>
+          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleCustomerNavigation} style={{cursor:'pointer'}}/>
+          </span>
+        </td>
         <td><div><img src={dataset.photo} width='30'/>&emsp;{dataset.name}</div></td>
         <td>{dataset.duedate}</td>
         <td>

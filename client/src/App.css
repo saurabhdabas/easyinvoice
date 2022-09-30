@@ -257,7 +257,7 @@ body {
 }
 .dashboard__tables{
   display:grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: 0.80fr 1.20fr;
   grid-template-rows: repeat(1,1fr);
   grid-column-gap:20px;
   margin: 10px 0 40px 0;  
@@ -644,7 +644,7 @@ td > button:hover{
   font-size: large;
   width:100%;
   height:96%;
-  background-color: #f4CC54;
+  background-color: #F7F7F7;
   border:none;
 }
 .search__input::placeholder{
@@ -669,10 +669,11 @@ td > button:hover{
   align-items: center;
   position: relative;
 }
+
 .blinking {
   position:absolute;
   animation:1s blink ease 5;
-  left:1px;
+  /* left:0.5px; */
   top:-29px
 }
 @keyframes blink {
