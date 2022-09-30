@@ -1,6 +1,6 @@
 -- -- --seeds/03_invoices.sql
 -- -- --invoices
-INSERT INTO invoices (orderid,customerid, name,photo, logo, email, country, street, city, province, zipcode, company, taxnumber, phone, title, date, duedate, notes, subtotal, balance, message,tabledata) VALUES (1,1,'Jackson','https://i.pravatar.cc/150?img=6','https://www.computronix.com/wp-content/uploads/2017/08/cx-icon@2x.png', 'jacksonwilton@gmail.com','Canada', '56 ST NW', 'Calgary', 'Alberta','T3N 0P3', 'Computronix', '063-8765','645-271-0840','Website redesign', '2022-09-17','2022-10-17','Pay by the earliest!',4350,4350,'Thank you','{
+INSERT INTO invoices (orderid,customerid, name,photo, logo, email, country, street, city, province, zipcode, company, taxnumber, phone, title, date, duedate, notes, subtotal, balance, message,tabledata) VALUES (1,1,'Jackson','https://i.pravatar.cc/150?img=6','https://i.pinimg.com/736x/15/a7/92/15a7927a228b1e25f2db48e98dcde4a0--pepsi-logo-brand-identity.jpg', 'jacksonwilton@gmail.com','Canada', '56 ST NW', 'Calgary', 'Alberta','T3N 0P3', 'Pepsi', '063-8765','645-271-0840','Website redesign', '2022-09-17','2022-10-17','Pay by the earliest!',4350,4350,'Thank you','{
     "rOne": {
       "description": "Website Redesign",
       "quantity": 1,
