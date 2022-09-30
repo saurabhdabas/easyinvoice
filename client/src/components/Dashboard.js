@@ -33,6 +33,7 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId,setCustomerId}) => 
   const navigate = useNavigate();
 
   const unpaidInvoicesArray = unpaidInvoices.data.map((dataset)=>{ 
+    console.log("dataset:",dataset);
     const dueBydays = getNumberOfDays(dataset.date,dataset.duedate);
     const handleInvoiceNavigation = () => {
       setInvoiceId(dataset.invoice_id)
@@ -44,6 +45,17 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId,setCustomerId}) => 
       setState(['DetailedCustomer']);
       navigate(`/customers/${dataset.id}`)
     }
+
+    const handleEmail = () => {
+      window.location.href = `
+      mailto:${dataset.email}
+      ?subject=Unpaid Invoice INV-000${dataset.invoice_id}
+      &body=Hello%20${dataset.name},%20
+      %0D%0A
+      Kindly pay for your order as soon as possible. Your balance is:${dataset.subtotal - dataset.payment_amount}.00 CAD.
+      `;
+    }
+
     return (
       <tr key={dataset.phonenumber}>
         <td>          
@@ -66,7 +78,7 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId,setCustomerId}) => 
         </td>
         <td>{dataset.duedate}</td>
         <td>${dataset.balance}</td>
-        <td><button type='submit'>Send Reminder</button></td>
+        <td><button type='submit' onClick={handleEmail}>Send Reminder</button></td>
       </tr>
     )}
   );
