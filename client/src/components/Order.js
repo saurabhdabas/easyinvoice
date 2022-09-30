@@ -1,19 +1,12 @@
 import React,{useState,useEffect} from 'react';
-import DetailedOrder from './DetailedOrder';
+
 
 import { AiFillTag } from 'react-icons/ai';
 const Order = ({orders,orderDate,orderDescription,orderAmount,paymentStatus,orderId,setOrderId,customerPhoto,customerFirstName,setDetailedOrder}) => {
-  
-  const [toggle,setToggle] = useState(false);
-  
-  // setDetailedOrder([filteredOrder])
-  // console.log(orders.list.filter((order)=>order.orderid === value));
+    
   useEffect(()=>{
-    if(orders.list.length){
-      const filteredOrder = orders.list.find((order)=>order.order_id == Number(orderId));
-      setDetailedOrder([filteredOrder])
-    }
-  },[toggle])
+    if(orders.list.length && orderId === 1) setDetailedOrder([orders.list.find((order)=>order.order_id === 1)])
+  },[])
   
   
   return (
@@ -47,7 +40,8 @@ const Order = ({orders,orderDate,orderDescription,orderAmount,paymentStatus,orde
           <button id={orderId} className='order__details' onClick={
             (event)=>{
             setOrderId(event.target.id)
-            setToggle(!toggle)
+            const filteredOrder = orders.list.find((order)=>order.order_id === Number(orderId));
+            setDetailedOrder([filteredOrder])
             }}>
             Details
           </button>

@@ -4,7 +4,7 @@ import Order from './Order';
 import OrdersSearchBar from './OrdersSearchBar';
 import DetailedOrder from './DetailedOrder';
 const Orders = ({setState,loading,setLoading}) => {
-  
+
   const [orders,setOrders] = useState({list:[]});
   const [orderId,setOrderId] = useState(1);
   const [detailedOrder,setDetailedOrder] = useState([]);
@@ -20,16 +20,17 @@ const Orders = ({setState,loading,setLoading}) => {
       axios.get('http://localhost:8080/orders')
       .then((response)=> {
         if(response.status === 200){
-          setOrders(({...orders,list:response.data}))        
+          setOrders(({...orders,list:response.data}))       
         }
       })
       .then(()=>setLoading(false))
       .catch((err)=>`The Error is:${err}`);
     },[400])
-  },[orders.list.length])
+  },[])
+
   console.log("orderId:",orderId);
   const ordersArray = orders.list.map((order)=>{
-    
+
     return (
       <Order
       key={order.order_id}
@@ -112,7 +113,8 @@ const Orders = ({setState,loading,setLoading}) => {
           <OrdersSearchBar/>
           {loading 
             ? <div className="lds-default order-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> 
-            : <></>}
+            : <></>
+          }
         </div>
       </React.Fragment>
       }
