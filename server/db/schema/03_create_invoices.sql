@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS invoices CASCADE;
 -- CREATE Invoices
 CREATE TABLE invoices (
   invoice_id SERIAL PRIMARY KEY,
-  orderId INTEGER REFERENCES Orders(order_id) ON DELETE CASCADE,
-  customerId INTEGER REFERENCES customers(id) ON DELETE CASCADE,
+  orderid INTEGER REFERENCES Orders(order_id) ON DELETE CASCADE,
+  customerid INTEGER REFERENCES customers(id) ON DELETE CASCADE,
   name VARCHAR(255) NOT NULL,
   photo VARCHAR(255) NOT NULL,
   logo VARCHAR(255) NOT NULL,

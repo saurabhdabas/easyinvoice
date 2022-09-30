@@ -94,7 +94,7 @@ app.put('/customers/:id/delete',(req, res) => {
 
 //Update the client
 app.put('/customers/:id/update',(req, res) => {
-  console.log("req.body.data:",req.body.data);
+  // console.log("req.body.data:",req.body.data);
   let formData = {
     customerId:req.params.id,
     companyid:req.body.data.companyid,
@@ -127,9 +127,9 @@ Promise.all([updateCustomersQuery,updateCompaniesQuery])
 });
 // Add the Invoice
 app.post('/invoices/add',(req,res)=>{
-  // console.log("request.body.data:",req.body.data)
+  console.log("request.body.data:",req.body.data)
   let formData = {
-    orderId:req.body.data.orderId,
+    orderId:req.body.data.orderid,
     customerId:req.body.data.customerid,
     name:req.body.data.name,
     email:req.body.data.email,
@@ -153,7 +153,7 @@ app.post('/invoices/add',(req,res)=>{
     tabledata:req.body.data.tabledata
   }
   db.query(
-    `INSERT INTO invoices (orderId,customerId,name,email,photo,logo,country,street,city,province,zipcode,company,taxnumber,date,duedate,notes,phone,title,subtotal,balance,message,tabledata)
+    `INSERT INTO invoices (orderid,customerid,name,email,photo,logo,country,street,city,province,zipcode,company,taxnumber,date,duedate,notes,phone,title,subtotal,balance,message,tabledata)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING *`,
     [formData.orderId,formData.customerId,formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
   .then((response) => {
@@ -181,8 +181,8 @@ app.put('/invoices/:id/delete',(req, res) => {
 //Update the invoice
 app.put('/invoices/:id/update',(req, res) => {
   let formData = {
-    orderId:req.body.data.orderId,
-    customerId:req.body.data.customerId,
+    orderId:req.body.data.orderid,
+    customerId:req.body.data.customerid,
     name:req.body.data.name,
     email:req.body.data.email,
     photo:req.body.data.photo,
@@ -202,8 +202,8 @@ app.put('/invoices/:id/update',(req, res) => {
     message:req.body.data.message,
     tabledata:req.body.data.tabledata
   }
-  console.log("Data:",formData.orderId);
-  db.query(`UPDATE invoices SET orderId=$2, customerId=$3, name=$4, email=$5, photo=$6, logo=$7, country=$8, street=$9, city=$10, province=$11, zipcode=$12, company=$13, taxnumber=$14, date=$15, duedate=$16, notes=$17, phone=$18, title=$19, message=$20, tabledata=$21
+  console.log("Data:",formData);
+  db.query(`UPDATE invoices SET orderid=$2, customerid=$3, name=$4, email=$5, photo=$6, logo=$7, country=$8, street=$9, city=$10, province=$11, zipcode=$12, company=$13, taxnumber=$14, date=$15, duedate=$16, notes=$17, phone=$18, title=$19, message=$20, tabledata=$21
   WHERE invoice_id = ($1) RETURNING *;`, [req.params.id,formData.orderId,formData.customerId,formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.message,formData.tabledata])
     .then((response) => {
       // console.log(response);

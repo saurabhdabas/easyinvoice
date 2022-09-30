@@ -65,8 +65,8 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
   const handleNavigation = () => {
     setShowInvoiceForm(false)
     setInvoiceInputs({
-      orderId:'',
-      customerId:'',
+      orderid:'',
+      customerid:'',
       name:'',
       email:'',
       photo:'',
@@ -112,17 +112,17 @@ const AddInvoiceForm = ({invoices,setInvoices,showInvoiceForm,setShowInvoiceForm
       <form className='invoice-info__form' onSubmit={handleSubmission}>
         <div className='invoice-info__input'>
           <span>
-            <label htmlFor='orderId'><h3>Order Id</h3></label>
+            <label htmlFor='orderid'><h3>Order Id</h3></label>
             <AiOutlineNumber color={'#2287E3'} size={20}/>
           </span>
-          <input id='orderId' type='text' name='orderId' value={invoiceInputs.orderId} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,orderId:event.target.value})} placeholder='Enter Order Id'/>
+          <input id='orderid' type='text' name='orderid' value={invoiceInputs.orderid} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,orderid:event.target.value})} placeholder='Enter Order Id'/>
         </div>
         <div className='invoice-info__input'>
           <span>
-            <label htmlFor='customerId'><h3>Customer Id</h3></label>
+            <label htmlFor='customerid'><h3>Customer Id</h3></label>
             <AiOutlineNumber color={'#2287E3'} size={20}/>
           </span>
-          <input id='customerId' type='text' name='customerId' value={invoiceInputs.customerId} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,customerId:event.target.value})} placeholder='Enter Customer Id'/>
+          <input id='customerid' type='text' name='customerid' value={invoiceInputs.customerid} required onChange={(event)=>setInvoiceInputs({...invoiceInputs,customerid:event.target.value})} placeholder='Enter Customer Id'/>
         </div>
         <div className='invoice-info__input'>
           <span>
