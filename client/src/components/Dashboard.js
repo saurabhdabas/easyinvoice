@@ -34,9 +34,20 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
 
   const unpaidInvoicesArray = unpaidInvoices.data.map((dataset)=>{ 
     const dueBydays = getNumberOfDays(dataset.date,dataset.duedate);
+    const handleNavigation = () => {
+      setInvoiceId(dataset.invoice_id)
+      setState(['DetailedInvoice']);
+      navigate(`/invoices/${dataset.invoice_id}`)
+    }
     return (
       <tr key={dataset.phonenumber}>
-        <td><h3>CUS-000{dataset.id}</h3></td>
+        <td>          
+          <span className='dashboard__invoice-number'>
+          <h3>INV-000{dataset.invoice_id}</h3>
+          <AiOutlineLink color={'#2287E3'} size={20} onClick={handleNavigation} style={{cursor:'pointer'}}/>
+          </span>
+        </td>
+        <td>CUS-000{dataset.id}</td>
         <td><div><img src={dataset.photo} width='30'/>&emsp;{dataset.name}</div></td>
         <td>{dataset.phonenumber}</td>
         <td>
@@ -65,11 +76,8 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
           <AiOutlineLink color={'#2287E3'} size={20} onClick={handleNavigation} style={{cursor:'pointer'}}/>
           </span>
           </td>
-        <td>
-         
-        <div>CUS-000{dataset.id}</div>
-          
-        </td>
+        <td><div>CUS-000{dataset.id}</div></td>
+        <td><div><img src={dataset.photo} width='30'/>&emsp;{dataset.name}</div></td>
         <td>{dataset.duedate}</td>
         <td>
           <h5 
@@ -109,10 +117,11 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
             <thead>
               <tr>
                 <th>#</th>
+                <th>Client #</th>
                 <th>Client</th>
                 <th>Due Date</th>
                 <th>Status</th>
-                <th>Amount Paid (CAD)</th>
+                <th>Amount Paid(CAD)</th>
               </tr>
             </thead>
             <tbody>
@@ -138,6 +147,7 @@ const Dashboard = ({setState,loading,setLoading,setInvoiceId}) => {
           <thead>
             <tr>
               <th>#</th>
+              <th>Client #</th>
               <th>Client</th>
               <th>Phone Number</th>
               <th>Invoice Date</th>
