@@ -54,7 +54,7 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
       lastname:'',
       phonenumber:'',
       email:'',
-      date:'',
+      customersince:'',
       company_name:'',
       company_logo:'',
       taxnumber:'',
@@ -102,10 +102,14 @@ const AddCustomerForm = ({customers,setCustomers,showForm,setShowForm,inputs,set
         </div>
         <div className='customer-info__input'>
           <span>
-            <label htmlFor='date'><h3>Customer Since</h3></label>
+            <label htmlFor='customersince'><h3>Customer Since</h3></label>
             <AiOutlineCalendar color={'#2287E3'} size={20}/>
           </span>
-          <input id='date' type='date' name='date' value={inputs.date} required onChange={(event)=>setInputs({...inputs,date:event.target.value})}/>
+          <input id='customersince' type='date' name='customersince' value={inputs.customersince} required 
+          onChange={(event)=>{
+            console.log("date:",event.target.value)
+            setInputs({...inputs,customersince:event.target.value})
+            }}/>
         </div>
         <div className='customer-info__input'>
           <span>

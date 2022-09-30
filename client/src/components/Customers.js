@@ -15,7 +15,7 @@ const Customers = ({setState,setCustomerId,loading,setLoading}) => {
     lastname:'',
     phonenumber:'',
     email:'',
-    date:'',
+    customersince:'',
     company_name:'',
     company_logo:'',
     taxnumber:'',

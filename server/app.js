@@ -7,8 +7,8 @@ const db = require('./configs/db.config');
 
 const addToCustomers = require('./db/queries/addToCustomers');
 const addToCompanies = require('./db/queries/addToCompanies');
-const updateCustomers = require('./db/queries/updateCustomers');
-const updateCompanies = require('./db/queries/updateCompanies');
+const updateListOfCustomers = require('./db/queries/updateCustomers');
+const updateListOfCompanies = require('./db/queries/updateCompanies');
 const customers = require('./db/queries/getAllCustomers');
 const customerWithId = require('./db/queries/getCustomerById');
 const ordersPerCustomer = require('./db/queries/getOrdersPerCustomer');
@@ -48,14 +48,14 @@ app.post('/user-data',(req,res)=>{
 })
 // Add the client
 app.post('/customers/add',(req,res)=>{
-  console.log(req.body.data)
+  
   let formData = {
     photo:req.body.data.photo,
     firstname:req.body.data.firstname,
     lastname:req.body.data.lastname,
     phonenumber:req.body.data.phonenumber,
     email:req.body.data.email,
-    customersince:req.body.data.date,
+    customersince:req.body.data.customersince,
     company_name:req.body.data.company_name,
     company_logo:req.body.data.company_logo,
     taxnumber:req.body.data.taxnumber,
@@ -65,6 +65,7 @@ app.post('/customers/add',(req,res)=>{
     province:req.body.data.province,
     country:req.body.data.country
   }
+  
   const customersQuery=addToCustomers.addToCustomers(formData);
   const companiesQuery=addToCompanies.addToCompanies(formData);
   Promise.all([customersQuery,companiesQuery])
@@ -93,16 +94,16 @@ app.put('/customers/:id/delete',(req, res) => {
 
 //Update the client
 app.put('/customers/:id/update',(req, res) => {
-  
+  console.log("req.body.data:",req.body.data);
   let formData = {
-    customerId:req.body.customerId,
-    companyId:req.body.customerId,
+    customerId:req.params.id,
+    companyid:req.body.data.companyid,
     photo:req.body.data.photo,
     firstname:req.body.data.firstname,
     lastname:req.body.data.lastname,
     phonenumber:req.body.data.phonenumber,
     email:req.body.data.email,
-    customersince:req.body.data.date,
+    customersince:req.body.data.customersince,
     company_name:req.body.data.company_name,
     company_logo:req.body.data.company_logo,
     taxnumber:req.body.data.taxnumber,
@@ -112,8 +113,8 @@ app.put('/customers/:id/update',(req, res) => {
     province:req.body.data.province,
     country:req.body.data.country
   }
-const updateCustomersQuery=updateCustomers.updateCustomers(formData);
-const updateCompaniesQuery=updateCompanies.updateCompanies(formData);
+const updateCustomersQuery=updateListOfCustomers.updateCustomers(formData);
+const updateCompaniesQuery=updateListOfCompanies.updateCompanies(formData);
 Promise.all([updateCustomersQuery,updateCompaniesQuery])
 .then(()=>{
   customers.getAllCustomers().then(data => {
@@ -126,7 +127,7 @@ Promise.all([updateCustomersQuery,updateCompaniesQuery])
 });
 // Add the Invoice
 app.post('/invoices/add',(req,res)=>{
-  console.log("request.body.data:",req.body.data)
+  // console.log("request.body.data:",req.body.data)
   let formData = {
     orderId:req.body.data.orderId,
     customerId:req.body.data.customerid,
@@ -156,7 +157,7 @@ app.post('/invoices/add',(req,res)=>{
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22) RETURNING *`,
     [formData.orderId,formData.customerId,formData.name,formData.email,formData.photo,formData.logo,formData.country,formData.street,formData.city,formData.province,formData.zipcode,formData.company,formData.taxnumber,formData.date,formData.duedate,formData.notes,formData.phone,formData.title,formData.subtotal,formData.balance,formData.message,formData.tabledata])
   .then((response) => {
-    console.log("response:",response);
+    // console.log("response:",response);
     res.send(response)
   })
   .catch((error) => res.send(error));

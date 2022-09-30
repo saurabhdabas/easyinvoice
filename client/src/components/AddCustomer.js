@@ -14,7 +14,7 @@ const AddCustomer = ({customers,setCustomers,showForm,setShowForm,inputs,setInpu
               lastname:'',
               phonenumber:'',
               email:'',
-              date:'',
+              customersince:'',
               company_name:'',
               company_logo:'',
               taxnumber:'',
