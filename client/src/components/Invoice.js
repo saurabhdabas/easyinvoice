@@ -29,7 +29,7 @@ const Invoice = ({orderId,customerId,name,photo,logo,company,invoiceId,setInvoic
       <div className='invoice__main'>
         <div className='invoice__number'>
           <p className='invoice__customerId'>Customer # 000{customerId}</p>
-          &emsp;|&emsp;
+          &nbsp;|&nbsp;
           <p className='invoice__orderId'>Order # 000{orderId}</p>
         </div>
       </div>
