@@ -47,9 +47,9 @@ INSERT INTO invoices (orderid,customerid, name,photo, logo, email, country, stre
 INSERT INTO invoices (orderid,customerid, name,photo, logo, email, country, street, city, province, zipcode, company, taxnumber, phone, title, date, duedate, notes, subtotal, balance, message,tabledata) VALUES (5,2,'Eleanor','https://i.pravatar.cc/150?img=5','https://avatars.githubusercontent.com/u/6154722?s=280&v=4', 'eleanormartine@gmail.com','Canada', '56 ST NW', 'Calgary', 'Alberta','T3N 0P3', 'Microsoft', '063-8765','645-271-0040','New Website', '2022-09-17','2022-10-17','Pay by the earliest!',4350,4350,'Thank you','{
     "rOne": {
       "description": "New Website",
-      "quantity": 0,
-      "unitprice": 0,
-      "total": 0
+      "quantity": 1,
+      "unitprice": 4350,
+      "total": 4350
     },
     "rTwo": { "description": "None", "quantity": 0, "unitprice": 0,"total":0},
     "rThree": { "description": "None", "quantity": 0, "unitprice": 0,"total":0}
