@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AiOutlineArrowLeft,AiOutlineDownload } from "react-icons/ai";
+import { AiOutlineArrowLeft,AiOutlineDownload, AiOutlineSend } from "react-icons/ai";
 import axios from 'axios';
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
@@ -24,6 +24,10 @@ const DetailedInvoice = ({state,setState,invoiceId,setInvoiceId}) => {
   },[invoiceId])
   console.log("detailedInvoice:",detailedInvoice.list.invoice_id);
 
+  const handleSend = () => {
+
+  }
+
   const handleNavigation = () => {
     setState(['Invoices']);
     navigate('/invoices');
@@ -44,6 +48,10 @@ const DetailedInvoice = ({state,setState,invoiceId,setInvoiceId}) => {
         <div className='DetailedInvoice__back-btn' onClick={handleNavigation}>
           <AiOutlineArrowLeft size={20} style={{marginRight:'5'}}/>
           <span>Back to Invoices</span>
+        </div>
+        <div className='DetailedInvoice__send' onClick={handleSend}>
+          <AiOutlineSend size={20} color={'#F7F7F7'} />
+          <span>Send</span>
         </div>
         <div className='DetailedInvoice__download' onClick={handleDownload}>
           <AiOutlineDownload size={20} color={'#F7F7F7'} />

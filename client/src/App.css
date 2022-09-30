@@ -957,7 +957,7 @@ td > button:hover{
 
 .invoice__footer-btns{
   display:grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(3,1fr);
   grid-gap:10px
 }
 .invoice__footer button{
@@ -979,8 +979,18 @@ td > button:hover{
   padding:1px 6px;
 }
 .invoice__details:hover{
-  background-color: #2287E3;
-  
+  background-color: #2287E3;  
+}
+.invoice__send{
+  text-decoration: none;
+  font: inherit;
+  border:2px solid #bdb9b7;
+  border-radius:5px;
+  cursor: pointer;
+  font: inherit;
+  background-color: #f4CC54;
+  color:#F9F9F9;
+  padding:1px 6px;
 }
 .invoice__edit{
   color:#F9F9F9;
@@ -1024,13 +1034,13 @@ td > button:hover{
 .DetailedInvoice__action-btns{
   display:grid;
   grid-auto-flow: column;
-  grid-template-columns: 1fr 0.10fr;
+  grid-template-columns: 1fr 0.10fr 0.10fr;
 }
 
-.DetailedInvoice__download span{
+.DetailedInvoice__download span,.DetailedInvoice__send span{
   margin-left: 5px;
 }
-.DetailedInvoice__download{
+.DetailedInvoice__download,.DetailedInvoice__send{
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -1038,8 +1048,12 @@ td > button:hover{
   color:#F7F7F7;
   background-color: #2287E3;
   padding:4px;
+  justify-content: center;
 }
-.DetailedInvoice__download:hover{
+.DetailedInvoice__send{
+  margin-right: 10px;
+}
+.DetailedInvoice__download:hover,.DetailedInvoice__send:hover{
   background-color: #303233;
 }
 .DetailedInvoice__address-wrapper{
