@@ -28,7 +28,7 @@ const Orders = ({setState,loading,setLoading}) => {
     },[400])
   },[])
 
-  console.log("orderId:",orderId);
+  // console.log("orderId:",orderId);
   const ordersArray = orders.list.map((order)=>{
 
     return (
@@ -42,8 +42,8 @@ const Orders = ({setState,loading,setLoading}) => {
       orders={orders}
       setOrderId={setOrderId}
       setOrders={setOrders}
-      customerPhoto={order.photo}
-      customerFirstName={order.firstname}
+      customerPhoto={order.customerphoto}
+      customerFirstName={order.customername}
       paymentStatus={order.payment_status}
       setDetailedOrder={setDetailedOrder}
       />
@@ -71,8 +71,8 @@ const Orders = ({setState,loading,setLoading}) => {
                 orders={orders}
                 setOrderId={setOrderId}
                 setOrders={setOrders}
-                customerPhoto={order.photo}
-                customerFirstName={order.firstname}
+                customerPhoto={order.customerphoto}
+                customerFirstName={order.customername}
                 paymentStatus={order.payment_status}
                 setDetailedOrder={setDetailedOrder}
                 />
@@ -97,8 +97,8 @@ const Orders = ({setState,loading,setLoading}) => {
             orders={orders}
             setOrderId={setOrderId}
             setOrders={setOrders}
-            customerPhoto={order.photo}
-            customerFirstName={order.firstname}
+            customerPhoto={order.customerphoto}
+            customerFirstName={order.customername}
             paymentStatus={order.payment_status}
             paymentMethod={order.payment_method}
             paymentDate={order.payment_date}

@@ -1,9 +1,9 @@
 -- seeds/05_orders.sql
 -- users orders
-INSERT INTO orders ( order_date, order_description,order_amount,customer_id) VALUES ('Aug 18, 2022','Website Redesign',4350,1);
-INSERT INTO orders ( order_date, order_description,order_amount,customer_id) VALUES ('Sep 18, 2022','Website Security',1350,2);
-INSERT INTO orders ( order_date, order_description,order_amount,customer_id) VALUES ('Sep 18, 2022','Website Maintenance',3350,3);
-INSERT INTO orders ( order_date, order_description,order_amount,customer_id) VALUES ('Oct 18, 2022','Website Redesign',2350,4);
-INSERT INTO orders ( order_date, order_description,order_amount,customer_id) VALUES ('Nov 18, 2022','New Website',4350,2);
-INSERT INTO orders ( order_date, order_description,order_amount,customer_id) VALUES ('Nov 18, 2022','Website Security',1350,3);
+INSERT INTO orders ( order_date, order_description,order_amount,customer_id,customername,customerphoto,payment_id,payment_date,payment_method,payment_amount,payment_status) VALUES ('Aug 18, 2022','Website Redesign',4350,1,'Jackson','https://i.pravatar.cc/150?img=6',1,'Sep 18, 2022','Debit card',150,'Partial');
+INSERT INTO orders ( order_date, order_description,order_amount,customer_id,customername,customerphoto,payment_id,payment_date,payment_method,payment_amount,payment_status) VALUES ('Sep 18, 2022','Website Security',1350,2,'Eleanor','https://i.pravatar.cc/150?img=5',2,'Sep 18, 2022','Debit card',0,'UnPaid');
+INSERT INTO orders ( order_date, order_description,order_amount,customer_id,customername,customerphoto,payment_id,payment_date,payment_method,payment_amount,payment_status) VALUES ('Sep 18, 2022','Website Maintenance',3350,3,'Enrique','https://i.pravatar.cc/150?img=11',3,'Sep 18, 2022','Demand Draft',2100,'Paid');
+INSERT INTO orders ( order_date, order_description,order_amount,customer_id,customername,customerphoto,payment_id,payment_date,payment_method,payment_amount,payment_status) VALUES ('Oct 18, 2022','Website Redesign',2350,4,'Oliver','https://i.pravatar.cc/150?img=8',4,'Sep 18, 2022','Debit card',0,'UnPaid');
+INSERT INTO orders ( order_date, order_description,order_amount,customer_id,customername,customerphoto,payment_id,payment_date,payment_method,payment_amount,payment_status) VALUES ('Nov 18, 2022','New Website',4350,2,'Eleanor','https://i.pravatar.cc/150?img=5',5,'Sep 18, 2022','Cheque',2100,'Paid');
+INSERT INTO orders ( order_date, order_description,order_amount,customer_id,customername,customerphoto,payment_id,payment_date,payment_method,payment_amount,payment_status) VALUES ('Nov 18, 2022','Website Security',1350,3,'Enrique','https://i.pravatar.cc/150?img=11',6,'Sep 18, 2022','Debit card',850,'Partial');
 

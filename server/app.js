@@ -87,8 +87,11 @@ app.get('/customers/:id',(req,res)=>{
 })
 //Remove the client
 app.put('/customers/:id/delete',(req, res) => {
-  db.query(`DELETE FROM customers WHERE id = $1;`, [req.body.customerId])
-    .then((response) => res.send(response))
+  console.log(req.body)
+  db.query(`DELETE FROM customers WHERE id = $1;`, [req.params.id])
+    .then((response) => {
+      res.send(response)
+    })
     .catch((error) => res.send(error));
 });
 

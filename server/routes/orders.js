@@ -6,6 +6,7 @@ module.exports = (db) => {
   
   router.get('/', (req, res) => {
     orders.getAllOrders().then(data => {
+      console.log(data);
       res.json(data);
     })
   });
