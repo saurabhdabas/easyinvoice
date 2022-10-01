@@ -33,7 +33,7 @@ An Invoicing platform for businesses.
 - We add invoices to database via a form
 - We can edit and delete invoice from database
 - We can download an invoice as a pdf<br />
-!["Invoices"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/6918fa683d94ce56816c754958a6c4a15bf7ed8d/docs/Invoices.png)
+!["Invoices"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/4df57e040066ed61d2c150b0104648968a265fcf/docs/Invoices.png)
 
 
 ### InvoiceInfo

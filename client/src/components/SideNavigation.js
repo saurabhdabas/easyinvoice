@@ -72,11 +72,11 @@ const SideNavigation = ({state,setState,history}) => {
       </div>
       <div className="sideNavigation__account">
         <div className="sideNavigation__userImage" to="/" onClick={clearLocalStorage}>
-          <img src={JSON.parse(localStorage.getItem('user')).avatar} alt='avatar' width='50' height='50'/>
+          <img src={JSON.parse(localStorage.getItem('user')).avatar} alt='avatar' width='40' height='40'/>
 	      </div>
         <div className="sideNavigation__account-description">
-          <h3>Account&nbsp;<AiFillCaretDown/></h3>
-          <h4>{JSON.parse(localStorage.getItem('user')).email}</h4>
+          <h4>Account&nbsp;<AiFillCaretDown/></h4>
+          <h5>{JSON.parse(localStorage.getItem('user')).email}</h5>
           <Link className="sideNavigation__logout" to="/" onClick={clearLocalStorage}>
           <h4>Logout</h4>
 	      </Link>

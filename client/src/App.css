@@ -229,13 +229,14 @@ body {
   border:5px solid #f4CC54;
   border-radius: 50px;
   margin-right: 10px;
+  padding:3px;
 }
-.sideNavigation__account-description h3{
+.sideNavigation__account-description h4{
   margin: 0;
   display: flex;
   align-items: center;
 }
-.sideNavigation__account-description h4{
+.sideNavigation__account-description h5{
   margin:0;
 }
 .sideNavigation__logout{
@@ -283,9 +284,9 @@ body {
   display:flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f4CC54;
+  background-color: #bdb9b7;
   border-radius:5px;
-  padding:5px;
+  padding:5px 10px;
   margin-bottom:15px;
 }
 .dashboard__table-title > h2{
@@ -340,6 +341,7 @@ td > h5{
   padding:30px 5px;
   text-align: center;
   border-radius: 5px;
+  border:2px solid rgb(183, 40, 33);
   color:rgb(183, 40, 33);
 }
 .empty-container{
@@ -381,6 +383,7 @@ td > button:hover{
   background-color:#E7E7E7;
   grid-template-rows:0.10fr 1fr ;
   align-items: start;
+  padding:0px 10px;
 
 }
 .customers__list{
@@ -400,7 +403,7 @@ td > button:hover{
   flex-direction: column;
   height:150px;
   background-color: #D4E2F2;
-  border:2px solid #2287E3;
+  border-left:8px solid #2287E3;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
@@ -502,7 +505,7 @@ td > button:hover{
 .customer{
   display:grid;
   height:120px;
-  border:2px solid #F7F7F7;
+  border-left:8px solid #bdb9b7;
   background-color:#F7F7F7;
   border-radius: 5px;
   padding:5px;
@@ -510,7 +513,9 @@ td > button:hover{
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   cursor:pointer;
 }
-
+.customer:hover{
+  border-left:8px solid #303233;
+}
 .customer__header{
   display:flex;
   color:#000;
@@ -631,7 +636,7 @@ td > button:hover{
   align-items: center;
   justify-content: space-evenly;
   margin:10px;
-  background-color: #f4CC54;
+  background-color: #303233;
   border-radius: 5px;
   padding:0px 3px;
   height:70%;
@@ -673,8 +678,8 @@ td > button:hover{
 .blinking {
   position:absolute;
   animation:1s blink ease 5;
-  /* left:0.5px; */
-  top:-29px
+  left:-22px;
+  top:-45px
 }
 @keyframes blink {
   from, to {
@@ -700,6 +705,7 @@ td > button:hover{
   background-color:#E7E7E7;
   grid-template-rows:0.10fr 1fr ;
   align-items: start;
+  padding:0px 10px;
   /* margin: 10px 10px 0 10px;
   border-top:3px solid #bdb9b7; */
 }
@@ -720,7 +726,7 @@ td > button:hover{
   flex-direction: column;
   height:150px;
   background-color: #D4E2F2;
-  border:2px solid #2287E3;
+  border-left:8px solid #2287E3;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
@@ -791,17 +797,20 @@ td > button:hover{
   width:100%;
 }
 .invoice-table__header > th{
-  background-color: #f4CC54;
+  color:#F7F7F7;
+  background-color: #2287E3;
 }
 .invoice-table__footer > td{
   border:2px solid #F7F7F7;
 }
 .invoice-table__footer > td:nth-child(3),.invoice-table__footer > td:nth-child(4){
-  background-color: #f4CC54;
+  color:#F7F7F7;
+  background-color: #2287E3;
 }
 .invoice-table__row{
+  color:#F7F7F7;
   border:2px solid #E7E7E7;
-  background-color: #f4CC54;
+  background-color: #2287E3;
   padding:0;
 }
 .invoice-info__input-table input{
@@ -876,9 +885,12 @@ td > button:hover{
   border-radius: 5px;
   padding:5px;
   margin:10px;
-  border:2px solid #F7F7F7;
+  border-left:8px solid #bdb9b7;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   cursor:pointer;
+}
+.invoice:hover{
+  border-left:8px solid #303233;
 }
 .invoice__header{
   display:flex;
@@ -1101,14 +1113,14 @@ hr{
 }
 .DetailedInvoice__table-header > th{
   padding:5px 0;
-  background-color: #f4CC54;
+  background-color: #bdb9b7;
 }
 .DetailedInvoice__table-footer > td{
   border:2px solid #F7F7F7;
 }
 .DetailedInvoice__table-footer > td:nth-child(3),.DetailedInvoice__table-footer > td:nth-child(4){
   padding:5px 0;
-  background-color: #f4CC54;
+  background-color: #bdb9b7;
 }
 .DetailedInvoice__row{
   border:2px solid #F7F7F7;
@@ -1333,7 +1345,7 @@ hr{
   align-items: flex-start;
   background-color: #F7F7F7;
   margin-bottom:20px;
-  /* padding:5px; */
+  padding:5px;
 }
 .detailedCustomer__stats-header h2{
   margin:0;
@@ -1342,11 +1354,11 @@ hr{
   display:grid;
   grid-template-rows: 0.25fr 0.50fr;
   /* border-radius: 5px; */
-  background-color: #f4CC54;
+  background-color: #bdb9b7;
   /* border:10px solid #F9F9F9; */
   align-content: space-between;
   height:80px;
-  color:#b72821;
+  /* color:#b72821; */
   /* border-radius:10px; */
   /* padding:5px 0; */
 }
@@ -1404,6 +1416,7 @@ hr{
   background-color:#E7E7E7;
   grid-template-rows:0.10fr 1fr ;
   align-items: start;
+  padding:0px 10px;
 
 }
 .orders__list{
@@ -1421,13 +1434,16 @@ hr{
 .order{
   display:grid;
   height:120px;
-  border:2px solid #F7F7F7;
+  border-left:8px solid #bdb9b7;
   background-color:#F7F7F7;
   border-radius: 5px;
   padding:5px;
   margin:10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   cursor:pointer;
+}
+.order:hover{
+  border-left:8px solid #303233;
 }
 .order__header{
   display:flex;
@@ -1581,7 +1597,7 @@ hr{
 /***************************************** Confirm Card ***********************************/
 .card {
   height:120px;
-  border: 2px solid #EE5253;
+  border-left: 8px solid #EE5253;
   background-color: #FEE6E6 ;
   border-radius: 5px;
   padding:5px;
