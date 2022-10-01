@@ -1,10 +1,20 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import DeleteCustomerConfirmation from './DeleteCustomerConfirmation';
 const Customer = ({firstname,lastname,company,logo,taxnumber,businessLocation,photo,setState,setShowForm,setDeleteCustomerId,setUpdateCustomerId,customerId,setCustomerId}) => {
   const navigate = useNavigate();
+  const [confirm, setConfirm] = useState(false);
 
   return (
+    <React.Fragment>
+      {
+      confirm ?
+      <DeleteCustomerConfirmation 
+      setConfirm={setConfirm} 
+      customerId={customerId}
+      setDeleteCustomerId={setDeleteCustomerId}
+      />
+      :
     <div className='customer'>
       <div className='customer__header'>
         <div className='customer__name'>
@@ -36,8 +46,9 @@ const Customer = ({firstname,lastname,company,logo,taxnumber,businessLocation,ph
             }}>Edit</button>
           <button className='customer__delete' type='submit' id={customerId} onClick={
             (event)=>{
-              setDeleteCustomerId(event.currentTarget.id)
+              // setDeleteCustomerId(event.currentTarget.id)
               setShowForm(false)
+              setConfirm(true)
             }
             }>Delete</button>
         </div>
@@ -51,6 +62,8 @@ const Customer = ({firstname,lastname,company,logo,taxnumber,businessLocation,ph
         id={customerId}>Details</button>
       </div>
     </div>
+    }
+    </React.Fragment>
   )
 }
 
