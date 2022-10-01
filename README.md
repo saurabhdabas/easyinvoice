@@ -26,7 +26,7 @@ An Invoicing platform for businesses.
 ### CustomerInfo
 
 - User can browse all the details of a particular customer</br>
-!["Customer Details"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/5e038ce7ea581f8524a96d8f1cb7d5e1dfdf284e/docs/CustomerInfo.png)
+!["Customer Details"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/CustomerInfo.png?raw=true)
 
 ### Invoices 
 - Voice search an invoice
