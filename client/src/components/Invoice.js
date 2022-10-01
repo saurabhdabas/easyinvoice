@@ -1,12 +1,22 @@
-import React from 'react';
-
+import React,{ useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import DeleteInvoiceConfirmation from './DeleteInvoiceConfirmation';
 
 const Invoice = ({orderId,customerId,name,photo,logo,company,invoiceId,setInvoiceId,setState,date,balance,setShowInvoiceForm,setDeleteInvoiceId,setUpdateInvoiceId}) => {
   const navigate = useNavigate();
-  
+  const [invoiceDeletionConfirm, setInvoiceDeletionConfirm] = useState(false);
   return (
-    <div className='invoice'>
+    <React.Fragment>
+      {
+      invoiceDeletionConfirm ?
+      <DeleteInvoiceConfirmation 
+      invoiceDeletionConfirm={invoiceDeletionConfirm} 
+      setInvoiceDeletionConfirm={setInvoiceDeletionConfirm} 
+      invoiceId={invoiceId}
+      setDeleteInvoiceId={setDeleteInvoiceId}
+      />
+      : 
+      <div className='invoice'>
       <div className='invoice__header'>
         <div className='invoice__name'>
           <img src={photo} alt="customer-image" width="30" height="30"/>
@@ -42,7 +52,9 @@ const Invoice = ({orderId,customerId,name,photo,logo,company,invoiceId,setInvoic
             }}>Edit</button>
           <button className='invoice__delete' type='submit' id={invoiceId} onClick={
             (event)=>{
-              setDeleteInvoiceId(event.currentTarget.id)
+              // setDeleteInvoiceId(event.currentTarget.id)
+              setInvoiceDeletionConfirm(true)
+              setShowInvoiceForm(false)
             }
             }>Delete</button>
         </div>
@@ -56,6 +68,8 @@ const Invoice = ({orderId,customerId,name,photo,logo,company,invoiceId,setInvoic
         }} >Details</button>
       </div>
     </div>
+      }
+    </React.Fragment>
   )
 }
 
