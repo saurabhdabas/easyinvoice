@@ -876,6 +876,7 @@ td > button:hover{
   border-radius: 5px;
   padding:5px;
   margin:10px;
+  border:2px solid #F7F7F7;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   cursor:pointer;
 }
@@ -887,6 +888,7 @@ td > button:hover{
   background-color: #F7F7F7;
   border-top-left-radius: 5px;
   border-top-right-radius:5px;
+  padding:0px 5px;
 }
 
 .invoice__footer{
@@ -917,6 +919,9 @@ td > button:hover{
   grid-template-columns:0.25fr 0.50fr;
   justify-content: space-around;
   align-items: center;
+}
+.invoice__logos img{
+  margin-right: 5px;
 }
 
 .invoice__name{
@@ -1571,4 +1576,36 @@ hr{
 .DetailedOrder__item-wrapper img {
   border-radius:20px;
   margin-right: 10px;
+}
+
+/***************************************** Confirm Card ***********************************/
+.card {
+  height:120px;
+  border: 2px solid #EE5253;
+  background-color: #FEE6E6 ;
+  border-radius: 5px;
+  padding:5px;
+  margin:10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  
+}
+.card h3{
+  color:#EE5253;
+  text-align: center;
+}
+.card__actions{
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.card__actions button{
+  color:#EE5253;
+  border-radius: 5px;
+  background-color:#FEE6E6;
+  border: 2px solid #EE5253;
+  padding:2px 6px;
+}
+.card__actions button:hover{
+  background-color: #F7F7F7;
+  cursor:pointer;
 }
