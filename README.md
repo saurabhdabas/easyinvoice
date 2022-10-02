@@ -2,7 +2,9 @@
 
 ## Overview
 An Invoicing platform for businesses.
+!["Dashboard Overview"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/fb48dc5cd6a8473e427b2542d11db6cd00eac721/docs/Dashboard.gif)
 
+!["Customers Overview"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/fb48dc5cd6a8473e427b2542d11db6cd00eac721/docs/Customers.gif)
 ## User Stories
 
 ### Login (username: easyinvoice@gmail.com : password: 1234)
