@@ -35,7 +35,7 @@ An Invoicing platform for businesses.
 - We add invoices to database via a form
 - We can edit and delete invoice from database
 - We can download an invoice as a pdf<br />
-!["Invoices"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/4df57e040066ed61d2c150b0104648968a265fcf/docs/Invoices.png)
+!["Invoices"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Invoices.gif?raw=true)
 
 
 ### InvoiceInfo
@@ -48,7 +48,7 @@ An Invoicing platform for businesses.
 - We can browse received orders
 - We can view details for an order
 - We can download an order as a pdf<br />
-!["Orders"](https://github.com/saurabhdabas/easyinvoice/blob/master/docs/Orders.png?raw=true)
+!["Orders"](https://raw.githubusercontent.com/saurabhdabas/easyinvoice/a6da20499643d6579d6db9803b207f6020042fec/docs/Orders.gif)
 
 ## Setup
 List of dependencies
